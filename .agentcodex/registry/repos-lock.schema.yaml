@@ -1,0 +1,64 @@
+version: 0.1.0
+kind: repos-lock-schema
+purpose: define the local file format for .agentcodex/registry/repos-lock.yaml
+
+document:
+  required:
+    - version
+    - entries
+  fields:
+    version:
+      type: string
+      description: schema or file format version for the lock document
+    description:
+      type: string
+      required: false
+      description: optional human-readable summary of the lock file purpose
+    entries:
+      type: sequence
+      description: observed state for each tracked upstream source
+      item_required:
+        - source_id
+        - observed_ref
+        - observed_at
+        - update_status
+        - notes
+
+entry:
+  source_id:
+    type: string
+    description: stable source identifier that should match the source registry id
+    example: openai-agents-python
+  observed_ref:
+    type: string
+    description: observed immutable or near-immutable upstream reference such as commit SHA, tag, or release identifier
+    example: main@a1b2c3d4
+  observed_at:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp describing when the upstream reference was observed
+    example: 2026-04-22T18:30:00Z
+  update_status:
+    type: string
+    allowed:
+      - pending
+      - synced
+      - drifted
+      - blocked
+      - ignored
+    description: current local interpretation of the upstream sync state
+  notes:
+    type: string
+    description: short operational note about why the source is locked, drifted, blocked, or intentionally unchanged
+    example: waiting for kb summary refresh before apply
+
+example:
+  version: 0.1.0
+  description: observed upstream repository state for trusted public sources used by AgentCodex
+  entries:
+    - source_id: openai-agents-python
+      observed_ref: main@a1b2c3d4
+      observed_at: 2026-04-22T18:30:00Z
+      update_status: pending
+      notes: initial observation captured before kb ingestion
+

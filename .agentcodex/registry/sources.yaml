@@ -1,0 +1,177 @@
+version: 0.1.0
+sources:
+  - id: openai-agents-python
+    name: OpenAI Agents Python
+    repo: https://github.com/openai/openai-agents-python
+    category: agents
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: mcp-servers
+    name: Model Context Protocol Servers
+    repo: https://github.com/modelcontextprotocol/servers
+    category: mcp
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: commit-watch
+  - id: llama-index
+    name: LlamaIndex
+    repo: https://github.com/run-llama/llama_index
+    category: rag
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: unstructured
+    name: Unstructured
+    repo: https://github.com/Unstructured-IO/unstructured
+    category: parsing
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: qdrant
+    name: Qdrant
+    repo: https://github.com/qdrant/qdrant
+    category: vector-db
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: qdrant-mcp-server
+    name: Qdrant MCP Server
+    repo: https://github.com/qdrant/mcp-server-qdrant
+    category: mcp
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: commit-watch
+  - id: airbyte
+    name: Airbyte
+    repo: https://github.com/airbytehq/airbyte
+    category: ingestion
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: dbt-core
+    name: dbt Core
+    repo: https://github.com/dbt-labs/dbt-core
+    category: dbt
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: snowflake-mcp
+    name: Snowflake MCP
+    repo: https://github.com/Snowflake-Labs/mcp
+    category: snowflake
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: commit-watch
+  - id: azure-sdk-python
+    name: Azure SDK for Python
+    repo: https://github.com/Azure/azure-sdk-for-python
+    category: azure
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: azure-search-openai-demo
+    name: Azure Search OpenAI Demo
+    repo: https://github.com/Azure-Samples/azure-search-openai-demo
+    category: azure
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: commit-watch
+  - id: databricks-bundle-examples
+    name: Databricks Bundle Examples
+    repo: https://github.com/databricks/bundle-examples
+    category: databricks
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: commit-watch
+  - id: unity-catalog
+    name: Unity Catalog
+    repo: https://github.com/unitycatalog/unitycatalog
+    category: governance
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: openmetadata
+    name: OpenMetadata
+    repo: https://github.com/open-metadata/OpenMetadata
+    category: governance
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: openlineage
+    name: OpenLineage
+    repo: https://github.com/OpenLineage/OpenLineage
+    category: lineage
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: marquez
+    name: Marquez
+    repo: https://github.com/MarquezProject/marquez
+    category: lineage
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: phoenix
+    name: Phoenix
+    repo: https://github.com/Arize-ai/phoenix
+    category: observability
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: langfuse
+    name: Langfuse
+    repo: https://github.com/langfuse/langfuse
+    category: observability
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: opentelemetry-specification
+    name: OpenTelemetry Specification
+    repo: https://github.com/open-telemetry/opentelemetry-specification
+    category: observability
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: opa
+    name: Open Policy Agent
+    repo: https://github.com/open-policy-agent/opa
+    category: access-control
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: openapi-specification
+    name: OpenAPI Specification
+    repo: https://github.com/OAI/OpenAPI-Specification
+    category: data-contracts
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: asyncapi-spec
+    name: AsyncAPI Specification
+    repo: https://github.com/asyncapi/spec
+    category: data-contracts
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: protobuf
+    name: Protocol Buffers
+    repo: https://github.com/protocolbuffers/protobuf
+    category: data-contracts
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: json-schema-spec
+    name: JSON Schema Specification
+    repo: https://github.com/json-schema-org/json-schema-spec
+    category: data-contracts
+    trust: official
+    ingest_mode: metadata-first
+    update_strategy: release-driven
+  - id: soda-core
+    name: Soda Core
+    repo: https://github.com/sodadata/soda-core
+    category: governance
+    trust: public-trusted
+    ingest_mode: metadata-first
+    update_strategy: release-driven

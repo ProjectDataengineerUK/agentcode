@@ -1,0 +1,256 @@
+{
+  "version": "0.2.0",
+  "name": "Maturity 5 Project Baseline",
+  "description": "Executable baseline profiles for projects that should be born with high DataOps and LLMOps maturity under AgentCodex.",
+  "default_profile": "data-platform",
+  "scaffold_root": "example-project-standard",
+  "profiles": [
+    {
+      "id": "data-platform",
+      "name": "Maturity 5 Data Platform",
+      "description": "High-maturity baseline for data platform, analytics engineering, and governed pipeline delivery.",
+      "dimensions": [
+        {
+          "id": "dataops-foundation",
+          "required_blocks": [
+            "contexto",
+            "arquitetura",
+            "dados",
+            "execucao",
+            "deploy"
+          ],
+          "required_control_checks": [],
+          "required_feature_paths": [
+            "definition/problem.md",
+            "design/architecture.md",
+            "data/storage.md",
+            "execution/orchestration.md",
+            "deploy/ci-cd.md"
+          ],
+          "required_repo_paths": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "id": "governance-and-risk",
+          "required_blocks": [
+            "governanca",
+            "lineage",
+            "access control",
+            "data contracts",
+            "compliance"
+          ],
+          "required_control_checks": [
+            "security"
+          ],
+          "required_feature_paths": [
+            "controls/governance.md",
+            "metadata/lineage.md",
+            "security/access-control.md",
+            "contracts/compatibility.md",
+            "compliance/audit.md"
+          ],
+          "required_repo_paths": []
+        },
+        {
+          "id": "reliability-and-operations",
+          "required_blocks": [
+            "validacao",
+            "observabilidade",
+            "monitoramento sentinela",
+            "operacao",
+            "custo"
+          ],
+          "required_control_checks": [
+            "cost",
+            "token"
+          ],
+          "required_feature_paths": [
+            "validation/data-quality.md",
+            "operations/observability/metrics.md",
+            "operations/sentinel/architecture.md",
+            "operations/cost/cost-model.md",
+            "kb/decisions/README.md"
+          ],
+          "required_repo_paths": []
+        },
+        {
+          "id": "automation-and-gates",
+          "required_blocks": [
+            "contexto",
+            "validacao",
+            "deploy"
+          ],
+          "required_control_checks": [
+            "multi-agent",
+            "token",
+            "cost",
+            "security"
+          ],
+          "required_feature_paths": [
+            "CHECKLIST.md"
+          ],
+          "required_repo_paths": [
+            ".agentcodex/project-standard.json",
+            ".agentcodex/routing/routing.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "agentic-llm",
+      "name": "Maturity 5 Agentic LLMOps",
+      "description": "High-maturity baseline for agentic systems, LLM runtime governance, observability, and supervised autonomy.",
+      "dimensions": [
+        {
+          "id": "agent-runtime-controls",
+          "required_blocks": [
+            "observabilidade",
+            "monitoramento sentinela",
+            "access control",
+            "data contracts"
+          ],
+          "conditional_blocks": [
+            "agentes definidos (se houver)"
+          ],
+          "required_control_checks": [
+            "multi-agent",
+            "token",
+            "security"
+          ],
+          "required_feature_paths": [
+            "operations/agentic-llm/model-policy.md",
+            "operations/sentinel/knowledge-feed.md",
+            "operations/sentinel/supervision.md",
+            "operations/sentinel/quarantine.md",
+            "security/access-control.md",
+            "contracts/api-contracts/README.md"
+          ],
+          "required_repo_paths": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "id": "operational-feedback-loop",
+          "required_blocks": [
+            "validacao",
+            "observabilidade",
+            "operacao",
+            "custo"
+          ],
+          "required_control_checks": [
+            "cost",
+            "token"
+          ],
+          "required_feature_paths": [
+            "validation/rules.md",
+            "operations/observability/logs.md",
+            "operations/sentinel/runbooks.md",
+            "operations/cost/optimization.md"
+          ],
+          "required_repo_paths": [
+            ".agentcodex/routing/routing.json"
+          ]
+        },
+        {
+          "id": "governed-change-management",
+          "required_blocks": [
+            "contexto",
+            "arquitetura",
+            "governanca",
+            "compliance"
+          ],
+          "required_control_checks": [
+            "security"
+          ],
+          "required_feature_paths": [
+            "definition/scope.md",
+            "design/decisions/README.md",
+            "controls/governance.md",
+            "compliance/regulations.md"
+          ],
+          "required_repo_paths": [
+            ".agentcodex/project-standard.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regulated-enterprise",
+      "name": "Maturity 5 Regulated Enterprise",
+      "description": "High-maturity baseline for strongly governed, auditable, security- and compliance-heavy enterprise delivery.",
+      "dimensions": [
+        {
+          "id": "regulated-governance-core",
+          "required_blocks": [
+            "governanca",
+            "lineage",
+            "access control",
+            "compliance",
+            "data contracts"
+          ],
+          "required_control_checks": [
+            "security"
+          ],
+          "required_feature_paths": [
+            "controls/classification.md",
+            "metadata/impact-analysis.md",
+            "security/permissions.md",
+            "compliance/audit.md",
+            "contracts/versioning.md"
+          ],
+          "required_repo_paths": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "id": "auditable-operations",
+          "required_blocks": [
+            "validacao",
+            "observabilidade",
+            "monitoramento sentinela",
+            "deploy",
+            "custo"
+          ],
+          "required_control_checks": [
+            "cost",
+            "security"
+          ],
+          "required_feature_paths": [
+            "validation/data-quality.md",
+            "operations/observability/alerts.md",
+            "operations/sentinel/supervision.md",
+            "deploy/environments.md",
+            "operations/cost/cost-model.md"
+          ],
+          "required_repo_paths": [
+            ".agentcodex/routing/routing.json"
+          ]
+        },
+        {
+          "id": "enterprise-control-plane",
+          "required_blocks": [
+            "contexto",
+            "arquitetura",
+            "operacao"
+          ],
+          "required_control_checks": [
+            "multi-agent",
+            "token",
+            "cost",
+            "security"
+          ],
+          "required_feature_paths": [
+            "CHECKLIST.md",
+            "design/architecture.md",
+            "kb/decisions/README.md"
+          ],
+          "required_repo_paths": [
+            ".agentcodex/project-standard.json",
+            ".agentcodex/maturity/maturity5-baseline.json"
+          ]
+        }
+      ]
+    }
+  ]
+}

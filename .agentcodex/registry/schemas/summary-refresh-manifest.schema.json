@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentcodex.local/schemas/summary-refresh-manifest.schema.json",
+  "title": "AgentCodex Summary Refresh Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["generated_at", "apply", "sources"],
+  "properties": {
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "apply": {
+      "type": "boolean"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "domain", "files"],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "domain": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]*$"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^\\.agentcodex/cache/summaries/.+\\.md$"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

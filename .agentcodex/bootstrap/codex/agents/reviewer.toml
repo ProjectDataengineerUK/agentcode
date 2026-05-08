@@ -1,0 +1,9 @@
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Review for correctness, regression risk, and missing verification.
+Lead with real findings.
+Ignore style-only commentary unless it hides a functional problem.
+"""

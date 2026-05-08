@@ -1,0 +1,26 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+web_search = "live"
+
+persistent_instructions = "Follow AGENTS.md and the local .agentcodex workflow artifacts."
+
+[features]
+multi_agent = true
+
+[agents]
+max_threads = 6
+max_depth = 1
+
+[agents.explorer]
+description = "Read-only explorer for evidence gathering and dependency tracing."
+config_file = "agents/explorer.toml"
+
+[agents.reviewer]
+description = "Reviewer focused on bugs, regressions, and missing tests."
+config_file = "agents/reviewer.toml"
+
+[agents.domain_researcher]
+description = "Domain researcher for validating data-engineering choices against local KB guidance."
+config_file = "agents/domain-researcher.toml"

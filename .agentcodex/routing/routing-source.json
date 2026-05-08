@@ -1,0 +1,595 @@
+{
+  "version": "0.1.0",
+  "workflow_phase_routing": [
+    {
+      "situation": "idea is vague, options need comparison",
+      "preferred_role": "workflow-brainstormer"
+    },
+    {
+      "situation": "requirements are unclear or incomplete",
+      "preferred_role": "workflow-definer"
+    },
+    {
+      "situation": "architecture or file manifest is needed",
+      "preferred_role": "workflow-designer"
+    },
+    {
+      "situation": "implementation should start from a defined design",
+      "preferred_role": "workflow-builder"
+    },
+    {
+      "situation": "work is ready for closure and archival",
+      "preferred_role": "workflow-shipper"
+    },
+    {
+      "situation": "existing workflow artifacts are stale and need propagation",
+      "preferred_role": "workflow-iterator"
+    }
+  ],
+  "data_engineering_routing": [
+    {
+      "task_shape": "initial evidence gathering before domain, platform, or control routing is clear",
+      "preferred_role": "explorer"
+    },
+    {
+      "task_shape": "final bug, regression, test, or implementation risk inspection after meaningful change",
+      "preferred_role": "reviewer"
+    },
+    {
+      "task_shape": "feature planning, implementation sequencing, phased refactor plan",
+      "preferred_role": "planner"
+    },
+    {
+      "task_shape": "meeting notes, transcript synthesis, decision extraction, action item consolidation",
+      "preferred_role": "meeting-analyst"
+    },
+    {
+      "task_shape": "kb creation, kb audit, domain structure, knowledge organization",
+      "preferred_role": "kb-architect"
+    },
+    {
+      "task_shape": "repo exploration, architecture walkthrough, onboarding, codebase mapping",
+      "preferred_role": "codebase-explorer"
+    },
+    {
+      "task_shape": "explicit code review, regression inspection, security and maintainability review",
+      "preferred_role": "code-reviewer"
+    },
+    {
+      "task_shape": "security-focused review, auth risk, injection, secrets, unsafe input handling",
+      "preferred_role": "security-reviewer"
+    },
+    {
+      "task_shape": "build failure, type errors, compiler breakage, import or config errors",
+      "preferred_role": "build-error-resolver"
+    },
+    {
+      "task_shape": "high-level system architecture, technical trade-offs, scalability and boundary decisions",
+      "preferred_role": "architect"
+    },
+    {
+      "task_shape": "feature implementation architecture, file blueprint, dependency-aware code structure",
+      "preferred_role": "code-architect"
+    },
+    {
+      "task_shape": "context reduction, token budget, response depth, compacting or resuming long sessions",
+      "preferred_role": "context-optimizer"
+    },
+    {
+      "task_shape": "dead code cleanup, duplicate consolidation, post-refactor cleanup",
+      "preferred_role": "refactor-cleaner"
+    },
+    {
+      "task_shape": "documentation refresh, codemap maintenance, readme and guide updates",
+      "preferred_role": "doc-updater"
+    },
+    {
+      "task_shape": "library docs lookup, current api usage, framework reference questions",
+      "preferred_role": "docs-lookup"
+    },
+    {
+      "task_shape": "code documentation, readme authoring, api docs, module docs, docstrings",
+      "preferred_role": "code-documenter"
+    },
+    {
+      "task_shape": "test-first workflow, red-green-refactor, verification-led implementation",
+      "preferred_role": "tdd-guide"
+    },
+    {
+      "task_shape": "test generation after implementation, fixture creation, coverage expansion",
+      "preferred_role": "test-generator"
+    },
+    {
+      "task_shape": "pr test coverage review, behavioral test gap analysis, weak assertions review",
+      "preferred_role": "pr-test-analyzer"
+    },
+    {
+      "task_shape": "python implementation, typed parsers, python utility or data module work",
+      "preferred_role": "python-developer"
+    },
+    {
+      "task_shape": "lightweight prompt or mini-spec creation for quick tasks",
+      "preferred_role": "prompt-crafter"
+    },
+    {
+      "task_shape": "prompt optimization, structured llm outputs, validation-aware llm implementation",
+      "preferred_role": "llm-specialist"
+    },
+    {
+      "task_shape": "performance bottlenecks, bundle size, runtime optimization, query or render performance",
+      "preferred_role": "performance-optimizer"
+    },
+    {
+      "task_shape": "swallowed errors, silent fallbacks, weak propagation, hidden runtime failures",
+      "preferred_role": "silent-failure-hunter"
+    },
+    {
+      "task_shape": "orchestration, dags, task dependencies",
+      "preferred_role": "pipeline-architect"
+    },
+    {
+      "task_shape": "rag, embeddings, vector databases, feature stores, text-to-sql",
+      "preferred_role": "ai-data-engineer"
+    },
+    {
+      "task_shape": "mcp protocol boundary, tool-server selection, remote capability exposure, external tool routing",
+      "preferred_role": "docs-lookup"
+    },
+    {
+      "task_shape": "multi-agent ai systems, llm orchestration, rag architecture, agent memory and guardrails",
+      "preferred_role": "genai-architect"
+    },
+    {
+      "task_shape": "memory architecture, semantic memory, episodic memory, procedural memory, agent memory design",
+      "preferred_role": "memory-architect"
+    },
+    {
+      "task_shape": "memory retention, memory access policy, memory governance, memory ownership, sensitivity and audit rules",
+      "preferred_role": "memory-governance-engineer"
+    },
+    {
+      "task_shape": "memory telemetry, memory tracing, hit rate analysis, backend failures, access denials, memory health metrics",
+      "preferred_role": "memory-observability-engineer"
+    },
+    {
+      "task_shape": "production sentinel supervision, quarantine design, approval boundaries, supervised multi-agent monitoring",
+      "preferred_role": "sentinel-supervisor"
+    },
+    {
+      "task_shape": "runtime watcher design, compute monitoring, environment monitoring, feature-health watcher coverage",
+      "preferred_role": "sentinel-runtime-watcher"
+    },
+    {
+      "task_shape": "security watcher design, suspicious access monitoring, secrets misuse detection, security quarantine triggers",
+      "preferred_role": "sentinel-security-watcher"
+    },
+    {
+      "task_shape": "incident diagnosis from watcher outputs, anomaly chain analysis, trend regression, delta analysis",
+      "preferred_role": "sentinel-analyzer"
+    },
+    {
+      "task_shape": "production incident interpretation, recommended action synthesis, severity and confidence explanation",
+      "preferred_role": "sentinel-interpreter"
+    },
+    {
+      "task_shape": "governance operating model, stewardship boundaries, control evidence, policy-to-artifact mapping",
+      "preferred_role": "data-governance-architect"
+    },
+    {
+      "task_shape": "metadata operating model, catalog architecture, glossary, ownership, metadata propagation",
+      "preferred_role": "metadata-platform-engineer"
+    },
+    {
+      "task_shape": "lineage mapping, dependency tracing, downstream impact analysis, lineage evidence quality",
+      "preferred_role": "lineage-analyst"
+    },
+    {
+      "task_shape": "data observability, runtime signals, freshness detection, silent failure monitoring",
+      "preferred_role": "data-observability-engineer"
+    },
+    {
+      "task_shape": "data security architecture, trust boundaries, encryption, network and privileged-path design",
+      "preferred_role": "data-security-architect"
+    },
+    {
+      "task_shape": "platform access model, grants, service principals, least-privilege role boundaries",
+      "preferred_role": "platform-access-engineer"
+    },
+    {
+      "task_shape": "schema governance, compatibility policy, versioning rules, producer-consumer schema control",
+      "preferred_role": "schema-governance-engineer"
+    },
+    {
+      "task_shape": "cross-platform data platform selection, warehouse vs lakehouse, cost-aware platform strategy",
+      "preferred_role": "data-platform-engineer"
+    },
+    {
+      "task_shape": "azure platform architecture, azure-native ai, azure identity and search-oriented ai design",
+      "preferred_role": "azure-ai-architect"
+    },
+    {
+      "task_shape": "databricks platform architecture, unity catalog boundaries, jobs, bundles, lakehouse deployment",
+      "preferred_role": "databricks-architect"
+    },
+    {
+      "task_shape": "mosaic ai workflows, databricks ai implementation, retrieval and serving flows on databricks",
+      "preferred_role": "mosaic-ai-engineer"
+    },
+    {
+      "task_shape": "snowflake workload design, warehouse-centric serving, governed object and role strategy",
+      "preferred_role": "snowflake-architect"
+    },
+    {
+      "task_shape": "aws data platform, lambda, glue, s3, redshift, mwaa",
+      "preferred_role": "aws-data-architect"
+    },
+    {
+      "task_shape": "gcp data platform, bigquery, pubsub, dataflow, composer",
+      "preferred_role": "gcp-data-architect"
+    },
+    {
+      "task_shape": "airflow dag authoring, scheduling, retries",
+      "preferred_role": "airflow-specialist"
+    },
+    {
+      "task_shape": "microsoft fabric workload selection, onelake, warehouse, eventhouse",
+      "preferred_role": "fabric-architect"
+    },
+    {
+      "task_shape": "star schema, dimensional modeling, grain",
+      "preferred_role": "schema-designer"
+    },
+    {
+      "task_shape": "dbt models, tests, macros, incremental logic",
+      "preferred_role": "dbt-specialist"
+    },
+    {
+      "task_shape": "analytical sql performance, joins, deduplication",
+      "preferred_role": "sql-optimizer"
+    },
+    {
+      "task_shape": "lakehouse zones, storage layout, bronze silver gold",
+      "preferred_role": "lakehouse-architect"
+    },
+    {
+      "task_shape": "lakeflow, dlt, databricks medallion pipeline architecture",
+      "preferred_role": "lakeflow-architect"
+    },
+    {
+      "task_shape": "medallion layering, promotion rules, curation boundaries",
+      "preferred_role": "medallion-architect"
+    },
+    {
+      "task_shape": "spark jobs, partitioning, distributed transforms",
+      "preferred_role": "spark-engineer"
+    },
+    {
+      "task_shape": "stream processing, event pipelines, near-real-time ingestion",
+      "preferred_role": "streaming-engineer"
+    },
+    {
+      "task_shape": "terraform modules, state, provisioning, cloud infrastructure as code",
+      "preferred_role": "terraform-specialist"
+    },
+    {
+      "task_shape": "data contracts, odcs, slas, schema governance, breaking change policy",
+      "preferred_role": "data-contracts-engineer"
+    },
+    {
+      "task_shape": "validation rules, expectations, trust checks",
+      "preferred_role": "data-quality-analyst"
+    },
+    {
+      "task_shape": "domain uncertainty requiring local knowledge validation",
+      "preferred_role": "domain-researcher"
+    }
+  ],
+  "domain_routing": [
+    {
+      "domain": "governance",
+      "preferred_role": "data-governance-architect",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "lineage",
+      "preferred_role": "lineage-analyst",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "observability",
+      "preferred_role": "data-observability-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "sentinel",
+      "preferred_role": "sentinel-supervisor",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "access-control",
+      "preferred_role": "platform-access-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "security-reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "data-contracts",
+      "preferred_role": "schema-governance-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "mcp",
+      "preferred_role": "docs-lookup",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "domain": "memory",
+      "preferred_role": "memory-architect",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    }
+  ],
+  "platform_routing": [
+    {
+      "platform": "azure",
+      "preferred_role": "azure-ai-architect",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "platform": "databricks",
+      "preferred_role": "databricks-architect",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "platform": "snowflake",
+      "preferred_role": "snowflake-architect",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    }
+  ],
+  "control_routing": [
+    {
+      "control": "governance",
+      "preferred_role": "data-governance-architect",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "lineage",
+      "preferred_role": "lineage-analyst",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "observability",
+      "preferred_role": "data-observability-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "access-control",
+      "preferred_role": "platform-access-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "security-reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "data-contracts",
+      "preferred_role": "schema-governance-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "memory-governance",
+      "preferred_role": "memory-governance-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "memory-observability",
+      "preferred_role": "memory-observability-engineer",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "sentinel-supervision",
+      "preferred_role": "sentinel-supervisor",
+      "explore_first_with": "explorer",
+      "review_with": "reviewer",
+      "research_with": "domain-researcher"
+    },
+    {
+      "control": "sentinel-security",
+      "preferred_role": "sentinel-security-watcher",
+      "explore_first_with": "explorer",
+      "review_with": "security-reviewer",
+      "research_with": "domain-researcher"
+    }
+  ],
+  "file_pattern_hints": [
+    {
+      "pattern": "models/**/*.sql",
+      "preferred_role": "dbt-specialist"
+    },
+    {
+      "pattern": "contracts/**/*",
+      "preferred_role": "data-contracts-engineer"
+    },
+    {
+      "pattern": ".agentcodex/kb/**/*",
+      "preferred_role": "kb-architect"
+    },
+    {
+      "pattern": ".agentcodex/memory/**/*",
+      "preferred_role": "memory-architect"
+    },
+    {
+      "pattern": ".agentcodex/cache/memory/**/*",
+      "preferred_role": "memory-observability-engineer"
+    },
+    {
+      "pattern": ".agentcodex/reports/memory/**/*",
+      "preferred_role": "memory-observability-engineer"
+    },
+    {
+      "pattern": ".agentcodex/history/**/*",
+      "preferred_role": "context-optimizer"
+    },
+    {
+      "pattern": "tsconfig*.json",
+      "preferred_role": "build-error-resolver"
+    },
+    {
+      "pattern": "package.json",
+      "preferred_role": "build-error-resolver"
+    },
+    {
+      "pattern": "*.py",
+      "preferred_role": "python-developer"
+    },
+    {
+      "pattern": "README.md",
+      "preferred_role": "code-documenter"
+    },
+    {
+      "pattern": "tests/**/*",
+      "preferred_role": "test-generator"
+    },
+    {
+      "pattern": "docs/**/*.md",
+      "preferred_role": "doc-updater"
+    },
+    {
+      "pattern": "src/**/*",
+      "preferred_role": "code-architect"
+    },
+    {
+      "pattern": "README.md",
+      "preferred_role": "doc-updater"
+    },
+    {
+      "pattern": "notes/**/*",
+      "preferred_role": "meeting-analyst"
+    },
+    {
+      "pattern": "transcripts/**/*",
+      "preferred_role": "meeting-analyst"
+    },
+    {
+      "pattern": "rag/**/*",
+      "preferred_role": "ai-data-engineer"
+    },
+    {
+      "pattern": "agents/**/*",
+      "preferred_role": "genai-architect"
+    },
+    {
+      "pattern": "prompts/**/*",
+      "preferred_role": "llm-specialist"
+    },
+    {
+      "pattern": "embeddings/**/*",
+      "preferred_role": "ai-data-engineer"
+    },
+    {
+      "pattern": "terraform/**/*.tf",
+      "preferred_role": "terraform-specialist"
+    },
+    {
+      "pattern": "infra/**/*.tf",
+      "preferred_role": "terraform-specialist"
+    },
+    {
+      "pattern": "dags/**/*.py",
+      "preferred_role": "airflow-specialist"
+    },
+    {
+      "pattern": "jobs/**/*.py",
+      "preferred_role": "spark-engineer"
+    },
+    {
+      "pattern": "lakeflow/**/*",
+      "preferred_role": "lakeflow-architect"
+    },
+    {
+      "pattern": "fabric/**/*",
+      "preferred_role": "fabric-architect"
+    },
+    {
+      "pattern": "streaming/**/*.py",
+      "preferred_role": "streaming-engineer"
+    },
+    {
+      "pattern": "schemas/**/*",
+      "preferred_role": "schema-designer"
+    },
+    {
+      "pattern": "sql/**/*.sql",
+      "preferred_role": "sql-optimizer"
+    },
+    {
+      "pattern": "tests/data/**/*",
+      "preferred_role": "data-quality-analyst"
+    },
+    {
+      "pattern": ".agentcodex/kb/controls/governance/**/*",
+      "preferred_role": "data-governance-architect"
+    },
+    {
+      "pattern": ".agentcodex/kb/metadata/lineage/**/*",
+      "preferred_role": "lineage-analyst"
+    },
+    {
+      "pattern": ".agentcodex/kb/operations/observability/**/*",
+      "preferred_role": "data-observability-engineer"
+    },
+    {
+      "pattern": ".agentcodex/kb/controls/access-control/**/*",
+      "preferred_role": "platform-access-engineer"
+    },
+    {
+      "pattern": ".agentcodex/kb/controls/data-contracts/**/*",
+      "preferred_role": "schema-governance-engineer"
+    },
+    {
+      "pattern": ".agentcodex/kb/platforms/azure/**/*",
+      "preferred_role": "azure-ai-architect"
+    },
+    {
+      "pattern": ".agentcodex/kb/platforms/databricks/**/*",
+      "preferred_role": "databricks-architect"
+    },
+    {
+      "pattern": ".agentcodex/kb/platforms/snowflake/**/*",
+      "preferred_role": "snowflake-architect"
+    },
+    {
+      "pattern": ".agentcodex/kb/patterns/mcp/**/*",
+      "preferred_role": "docs-lookup"
+    }
+  ]
+}

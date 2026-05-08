@@ -1,0 +1,315 @@
+{
+  "version": "0.1.0",
+  "source": {
+    "name": "AgentSpec workflow contracts",
+    "contract": ".agentcodex/imports/agentspec/sdd/architecture/WORKFLOW_CONTRACTS.yaml"
+  },
+  "phases": {
+    "brainstorm": {
+      "source_refs": [
+        ".agentcodex/imports/agentspec/commands/workflow/brainstorm.md",
+        ".agentcodex/imports/agentspec/agents/workflow/brainstorm-agent.md",
+        ".agentcodex/imports/agentspec/sdd/templates/BRAINSTORM_TEMPLATE.md"
+      ],
+      "surfaces": [
+        {
+          "path": "docs/commands/brainstorm.md",
+          "required_markers": [
+            "Ask Discovery Questions",
+            "minimum 3 discovery questions",
+            "sample collection question asked",
+            "Apply YAGNI",
+            "minimum 2 validation checkpoints"
+          ]
+        },
+        {
+          "path": ".agentcodex/commands/brainstorm.md",
+          "required_markers": [
+            "Ask Discovery Questions",
+            "minimum 3 discovery questions",
+            "sample collection question asked",
+            "Apply YAGNI",
+            "minimum 2 validation checkpoints"
+          ]
+        },
+        {
+          "path": "docs/roles/workflow-brainstormer.md",
+          "required_markers": [
+            "minimum 3 discovery questions",
+            "sample data question asked",
+            "YAGNI applied",
+            "one question at a time"
+          ]
+        },
+        {
+          "path": ".agentcodex/templates/BRAINSTORM_TEMPLATE.md",
+          "required_markers": [
+            "## Discovery Questions & Answers",
+            "## Sample Data Inventory",
+            "## Selected Approach",
+            "## Features Removed (YAGNI)",
+            "## Incremental Validations",
+            "## Suggested Requirements for Define",
+            "Minimum Questions",
+            "Minimum Validations"
+          ]
+        }
+      ]
+    },
+    "define": {
+      "source_refs": [
+        ".agentcodex/imports/agentspec/commands/workflow/define.md",
+        ".agentcodex/imports/agentspec/agents/workflow/define-agent.md",
+        ".agentcodex/imports/agentspec/sdd/templates/DEFINE_TEMPLATE.md"
+      ],
+      "surfaces": [
+        {
+          "path": "docs/commands/define.md",
+          "required_markers": [
+            "Input Classification",
+            "preserve its chosen approach",
+            "12/15",
+            "Ask targeted clarification",
+            "Data Contract"
+          ]
+        },
+        {
+          "path": ".agentcodex/commands/define.md",
+          "required_markers": [
+            "Input Classification",
+            "preserve its chosen approach",
+            "12/15",
+            "Ask targeted clarification",
+            "Data Contract"
+          ]
+        },
+        {
+          "path": "docs/roles/workflow-definer.md",
+          "required_markers": [
+            "12/15",
+            "Block design",
+            "clarity score"
+          ]
+        },
+        {
+          "path": ".agentcodex/templates/DEFINE_TEMPLATE.md",
+          "required_markers": [
+            "## Input Classification",
+            "## Acceptance Tests",
+            "## Technical Context",
+            "## Data Contract (if applicable)",
+            "## Assumptions",
+            "## Clarity Score Breakdown",
+            "Minimum to proceed"
+          ]
+        }
+      ]
+    },
+    "design": {
+      "source_refs": [
+        ".agentcodex/imports/agentspec/commands/workflow/design.md",
+        ".agentcodex/imports/agentspec/agents/workflow/design-agent.md",
+        ".agentcodex/imports/agentspec/sdd/templates/DESIGN_TEMPLATE.md"
+      ],
+      "surfaces": [
+        {
+          "path": "docs/commands/design.md",
+          "required_markers": [
+            "KB patterns loaded",
+            "architecture diagram",
+            "complete file manifest",
+            "role assignment rationale",
+            "security considerations",
+            "observability"
+          ]
+        },
+        {
+          "path": ".agentcodex/commands/design.md",
+          "required_markers": [
+            "KB patterns loaded",
+            "architecture diagram",
+            "complete file manifest",
+            "role assignment rationale",
+            "security considerations",
+            "observability"
+          ]
+        },
+        {
+          "path": "docs/roles/workflow-designer.md",
+          "required_markers": [
+            "KB patterns",
+            "complete file manifest",
+            "role assignment",
+            "security and observability",
+            "pipeline architecture"
+          ]
+        },
+        {
+          "path": ".agentcodex/templates/DESIGN_TEMPLATE.md",
+          "required_markers": [
+            "## KB Patterns Loaded",
+            "## Architecture Overview",
+            "## Components",
+            "## Key Decisions",
+            "## File Manifest",
+            "## Agent Assignment Rationale",
+            "## Security Considerations",
+            "## Observability",
+            "## Pipeline Architecture (if applicable)"
+          ]
+        }
+      ]
+    },
+    "build": {
+      "source_refs": [
+        ".agentcodex/imports/agentspec/commands/workflow/build.md",
+        ".agentcodex/imports/agentspec/agents/workflow/build-agent.md"
+      ],
+      "surfaces": [
+        {
+          "path": "docs/commands/build.md",
+          "required_markers": [
+            "complete file manifest",
+            "Verify Incrementally",
+            "Verification Commands",
+            "acceptance tests",
+            "deviations from design",
+            "residual risks"
+          ]
+        },
+        {
+          "path": ".agentcodex/commands/build.md",
+          "required_markers": [
+            "complete file manifest",
+            "Verify Incrementally",
+            "Verification Commands",
+            "acceptance tests",
+            "deviations from design",
+            "residual risks"
+          ]
+        },
+        {
+          "path": "docs/roles/workflow-builder.md",
+          "required_markers": [
+            "design-first",
+            "file manifest",
+            "role attribution",
+            "data-quality checks"
+          ]
+        },
+        {
+          "path": ".agentcodex/templates/BUILD_REPORT_TEMPLATE.md",
+          "required_markers": [
+            "## Build Order",
+            "## Task Execution with Agent Attribution",
+            "## Verification Commands",
+            "## Verification Results",
+            "## Deviations from Design",
+            "## Acceptance Test Verification",
+            "## Security Review",
+            "## Data Quality Results (if applicable)",
+            "## Residual Risks"
+          ]
+        }
+      ]
+    },
+    "ship": {
+      "source_refs": [
+        ".agentcodex/imports/agentspec/commands/workflow/ship.md",
+        ".agentcodex/imports/agentspec/agents/workflow/ship-agent.md",
+        ".agentcodex/imports/agentspec/sdd/templates/SHIPPED_TEMPLATE.md"
+      ],
+      "surfaces": [
+        {
+          "path": "docs/commands/ship.md",
+          "required_markers": [
+            "readiness-report",
+            "ship-gate",
+            "archive",
+            "artifacts copied",
+            "residual risk",
+            "follow-up"
+          ]
+        },
+        {
+          "path": ".agentcodex/commands/ship.md",
+          "required_markers": [
+            "readiness-report",
+            "ship-gate",
+            "archive",
+            "artifacts copied",
+            "residual risk",
+            "follow-up"
+          ]
+        },
+        {
+          "path": "docs/roles/workflow-shipper.md",
+          "required_markers": [
+            "Completion Verification",
+            "Archive Creation",
+            "Lessons Learned",
+            "When Not to Ship"
+          ]
+        },
+        {
+          "path": ".agentcodex/templates/SHIPPED_TEMPLATE.md",
+          "required_markers": [
+            "## Ship Readiness",
+            "## Timeline",
+            "## Metrics",
+            "## What Was Built",
+            "## Success Criteria Verification",
+            "## Lessons Learned",
+            "## Archived Artifacts"
+          ]
+        }
+      ]
+    },
+    "iterate": {
+      "source_refs": [
+        ".agentcodex/imports/agentspec/commands/workflow/iterate.md",
+        ".agentcodex/imports/agentspec/agents/workflow/iterate-agent.md"
+      ],
+      "surfaces": [
+        {
+          "path": "docs/commands/iterate.md",
+          "required_markers": [
+            "Classify the Change",
+            "Analyze Cascade Impact",
+            "Choose Cascade Handling",
+            "Revision History",
+            "Do not patch code directly"
+          ]
+        },
+        {
+          "path": ".agentcodex/commands/iterate.md",
+          "required_markers": [
+            "Classify the Change",
+            "Analyze Cascade Impact",
+            "Choose Cascade Handling",
+            "Revision History",
+            "Do not patch code directly"
+          ]
+        },
+        {
+          "path": "docs/roles/workflow-iterator.md",
+          "required_markers": [
+            "Change Classification",
+            "Cascade Matrix",
+            "revision history",
+            "Never edit code directly"
+          ]
+        },
+        {
+          "path": "docs/workflow/iterate.md",
+          "required_markers": [
+            "Change Classification",
+            "Cascade Rules",
+            "Version Tracking",
+            "design updated before any rebuild"
+          ]
+        }
+      ]
+    }
+  }
+}

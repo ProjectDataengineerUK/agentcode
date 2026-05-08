@@ -1,0 +1,216 @@
+version: 0.1.0
+areas:
+  - id: foundations
+    purpose: base concepts, shared architecture language, and default reference domains
+  - id: platforms
+    purpose: cloud, warehouse, lakehouse, and runtime platform domains
+  - id: patterns
+    purpose: reusable implementation and architecture patterns
+  - id: controls
+    purpose: governance, security, quality, and contract enforcement domains
+  - id: metadata
+    purpose: catalog, lineage, semantic structure, and descriptive system context
+  - id: operations
+    purpose: delivery, orchestration, monitoring, and runtime management
+  - id: integrations
+    purpose: external interfaces, protocols, connectors, and agent/runtime interop
+
+domains:
+  - id: ai-data-engineering
+    area: foundations
+    status: active
+    purpose: AI-oriented data system design including retrieval, embeddings, feature pipelines, and evaluation-aware data workflows
+    related_to:
+      - rag
+      - mcp
+      - observability
+      - governance
+
+  - id: rag
+    area: foundations
+    status: planned
+    purpose: retrieval-augmented generation architecture, retrieval quality, chunking, grounding, and answer synthesis
+    related_to:
+      - ai-data-engineering
+      - vector-db
+      - mcp
+      - observability
+
+  - id: mcp
+    area: integrations
+    status: planned
+    purpose: Model Context Protocol usage, server selection, tool boundaries, and external capability surfaces
+    related_to:
+      - rag
+      - observability
+      - governance
+
+  - id: azure
+    area: platforms
+    status: planned
+    purpose: Azure-native data, identity, AI, and analytics platform guidance
+    related_to:
+      - databricks
+      - snowflake
+      - access-control
+      - governance
+
+  - id: databricks
+    area: platforms
+    status: planned
+    purpose: Databricks platform design including Lakeflow, Unity Catalog, DABs, and lakehouse operations
+    related_to:
+      - lakeflow
+      - lakehouse
+      - medallion
+      - spark
+      - governance
+
+  - id: snowflake
+    area: platforms
+    status: planned
+    purpose: Snowflake warehouse architecture, governance, and workload design
+    related_to:
+      - governance
+      - observability
+      - data-contracts
+
+  - id: dbt
+    area: patterns
+    status: active
+    purpose: dbt model design, testing, incremental strategy, and analytics engineering structure
+    related_to:
+      - data-quality
+      - data-contracts
+      - lineage
+
+  - id: spark
+    area: patterns
+    status: active
+    purpose: distributed processing, partitioning, and Spark job design
+    related_to:
+      - databricks
+      - streaming
+      - lakehouse
+      - observability
+
+  - id: orchestration
+    area: operations
+    status: active
+    purpose: workflow coordination, dependencies, retries, and operational scheduling
+    related_to:
+      - observability
+      - governance
+      - lineage
+
+  - id: lakehouse
+    area: platforms
+    status: active
+    purpose: storage boundaries, table formats, promotion paths, and platform layout
+    related_to:
+      - medallion
+      - databricks
+      - spark
+      - governance
+
+  - id: medallion
+    area: patterns
+    status: active
+    purpose: bronze-silver-gold layering, curation boundaries, and promotion rules
+    related_to:
+      - lakehouse
+      - data-quality
+      - lineage
+
+  - id: streaming
+    area: patterns
+    status: active
+    purpose: event pipelines, replay, lateness handling, and streaming contracts
+    related_to:
+      - spark
+      - orchestration
+      - observability
+      - data-contracts
+
+  - id: governance
+    area: controls
+    status: planned
+    purpose: policy, stewardship, lifecycle control, and decision accountability across data systems
+    related_to:
+      - access-control
+      - lineage
+      - observability
+      - data-contracts
+
+  - id: lineage
+    area: metadata
+    status: planned
+    purpose: asset flow, dependency tracking, data movement visibility, and change impact analysis
+    related_to:
+      - governance
+      - observability
+      - dbt
+      - orchestration
+
+  - id: observability
+    area: operations
+    status: planned
+    purpose: monitoring, tracing, runtime diagnostics, and evidence of health for pipelines and AI systems
+    related_to:
+      - lineage
+      - governance
+      - orchestration
+      - ai-data-engineering
+
+  - id: access-control
+    area: controls
+    status: planned
+    purpose: identity, authorization, role boundaries, and policy enforcement for data and platform access
+    related_to:
+      - governance
+      - azure
+      - snowflake
+      - databricks
+
+  - id: data-contracts
+    area: controls
+    status: planned
+    purpose: schema guarantees, SLA policy, producer-consumer expectations, and controlled change management
+    related_to:
+      - data-quality
+      - governance
+      - dbt
+      - streaming
+
+  - id: data-quality
+    area: controls
+    status: active
+    purpose: validation, trust checks, freshness, integrity, and observability of correctness
+    related_to:
+      - data-contracts
+      - dbt
+      - medallion
+      - observability
+
+summary:
+  core_path:
+    - ai-data-engineering
+    - rag
+    - mcp
+  platform_path:
+    - azure
+    - databricks
+    - snowflake
+    - lakehouse
+  delivery_path:
+    - orchestration
+    - streaming
+    - spark
+    - dbt
+  trust_path:
+    - governance
+    - access-control
+    - lineage
+    - observability
+    - data-contracts
+    - data-quality

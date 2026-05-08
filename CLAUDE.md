@@ -1,8 +1,29 @@
 # agentcode — Unified Claude Code Agent Plugin
 
 agentcode is a Claude Code plugin that fuses agentspec + ECC + data-agents + agentcodex + mempalace
-into a single installable plugin providing 119+ agents, 31+ KB domains, and cross-harness support
+into a single installable plugin providing 117+ agents, 40+ KB domains, and cross-harness support
 for Claude Code, Cursor, and Codex.
+
+## Mandatory Project Standard
+
+**Every project built with agentcode must satisfy the AgentCodex Project Standard.**
+See `.agentcodex/project-standard.json` — 15 required blocks across define/design/build/ship phases.
+
+> Do not treat the project as complete until all required blocks are implemented or explicitly justified as not applicable.
+
+Run `/preflight` at any time to check which blocks are complete or missing.
+Run `/start` to scaffold all required artifacts for a new project.
+
+### Required Blocks
+
+| Phase | Block |
+|-------|-------|
+| define | contexto (problem, scope, stakeholders, domain, glossary) |
+| design | arquitetura, dados, governanca, lineage, access control, data contracts |
+| build | execucao, validacao, **observabilidade**, **monitoramento sentinela** |
+| ship | operacao, deploy, custo, compliance |
+
+For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/maturity5-baseline.json`.
 
 ## Plugin Structure
 
@@ -57,6 +78,37 @@ for Claude Code, Cursor, and Codex.
 | `/pipeline` | `@fabric-pipeline-expert` | Pipeline design and orchestration |
 | `/workflow` | `@doma-supervisor` | Multi-domain DOMA orchestration |
 | `/party` | `@doma-supervisor` | Multi-perspective parallel analysis |
+| `/preflight` | `@doma-supervisor` | Project standard readiness check (15 blocks) |
+
+## AgentCodex Framework (.agentcodex/)
+
+The `.agentcodex/` directory contains the AgentCodex project management framework:
+
+```
+.agentcodex/
+├── project-standard.json          ← 15 mandatory blocks (THE COMPLETION RULE)
+├── maturity/maturity5-baseline.json  ← DataOps + LLMOps maturity profiles
+├── bootstrap/
+│   ├── PROJECT_STANDARD_FEATURE/  ← Full project scaffold (copy per feature)
+│   └── MATURITY_PROFILE_OVERLAYS/ ← data-platform, agentic-llm, regulated-enterprise
+├── commands/                      ← 47 agentcodex procedure commands
+├── templates/                     ← 19 artifact templates
+├── roles/roles.yaml               ← Agent role → KB domain mapping
+├── routing/routing.json           ← Workflow phase routing rules
+├── observability/integrations/    ← OpenTelemetry, Phoenix, Langfuse targets
+└── registry/                      ← Domain, source, and schema registry
+```
+
+### Sentinel System
+
+The AgentCodex Project Standard requires a **Sentinel monitoring layer** in every project:
+
+- **Watcher crew**: pipeline watcher, quality watcher, freshness watcher, medallion watcher
+- **Analyzer crew**: z-score detector, trend regressor, pattern matcher, diff analyzer
+- **Interpreter crew**: context builder, genai interpreter, reporter, dispatcher
+- **Knowledge layer**: explanations, suggested actions, severity, confidence, KB auto-update
+
+See `kb/operations/observability/observability-baseline.md` and scaffold at `.agentcodex/bootstrap/PROJECT_STANDARD_FEATURE/operations/sentinel/`.
 
 ## Updating agentspec Components
 

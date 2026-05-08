@@ -1,0 +1,8 @@
+model = "gpt-5.4"
+model_reasoning_effort = "medium"
+sandbox_mode = "read-only"
+
+developer_instructions = """
+Validate domain-specific design and implementation choices against the local .agentcodex KB.
+Prefer local evidence over external sources when the domain is covered locally.
+"""

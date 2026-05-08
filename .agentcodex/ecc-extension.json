@@ -1,0 +1,4450 @@
+{
+  "version": "0.1.0",
+  "source": {
+    "name": "Everything-Claude-Code",
+    "root": ".agentcodex/imports/ecc",
+    "policy": "Reference the imported ECC source from AgentCodex extension manifests; do not duplicate files into active command or role directories unless explicitly ported."
+  },
+  "counts": {
+    "commands": 79,
+    "agents": 48,
+    "skills": 183,
+    "rules": 87,
+    "docs": 750,
+    "docs_pt_br": 47,
+    "schemas": 10,
+    "ci_validators": 10,
+    "components": 53,
+    "modules": 20,
+    "profiles": 5,
+    "codex_runtime_files": 5,
+    "active_command_name_matches": 1,
+    "active_role_name_matches": 47,
+    "active_codex_agents": 3
+  },
+  "codex_runtime_reference": [
+    ".agentcodex/imports/ecc/codex/AGENTS.md",
+    ".agentcodex/imports/ecc/codex/agents/docs-researcher.toml",
+    ".agentcodex/imports/ecc/codex/agents/explorer.toml",
+    ".agentcodex/imports/ecc/codex/agents/reviewer.toml",
+    ".agentcodex/imports/ecc/codex/config.toml"
+  ],
+  "profiles": {
+    "core": {
+      "description": "Minimal harness baseline with commands, hooks, platform configs, and quality workflow support.",
+      "modules": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "hooks-runtime",
+        "platform-configs",
+        "workflow-quality"
+      ]
+    },
+    "developer": {
+      "description": "Default engineering profile for most ECC users working across app codebases.",
+      "modules": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "hooks-runtime",
+        "platform-configs",
+        "workflow-quality",
+        "framework-language",
+        "database",
+        "orchestration"
+      ]
+    },
+    "security": {
+      "description": "Security-heavy setup with baseline runtime support and security-specific guidance.",
+      "modules": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "hooks-runtime",
+        "platform-configs",
+        "workflow-quality",
+        "security"
+      ]
+    },
+    "research": {
+      "description": "Research and content-oriented setup for investigation, synthesis, and publishing workflows.",
+      "modules": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "hooks-runtime",
+        "platform-configs",
+        "workflow-quality",
+        "research-apis",
+        "business-content",
+        "social-distribution"
+      ]
+    },
+    "full": {
+      "description": "Complete ECC install with all currently classified modules.",
+      "modules": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "hooks-runtime",
+        "platform-configs",
+        "framework-language",
+        "database",
+        "workflow-quality",
+        "security",
+        "research-apis",
+        "business-content",
+        "operator-workflows",
+        "social-distribution",
+        "media-generation",
+        "orchestration",
+        "swift-apple",
+        "agentic-patterns",
+        "devops-infra",
+        "supply-chain-domain",
+        "document-processing"
+      ]
+    }
+  },
+  "components": [
+    {
+      "id": "agent:architect",
+      "family": "agent",
+      "description": "System design and architecture agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:build-error-resolver",
+      "family": "agent",
+      "description": "Build error resolution agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:code-reviewer",
+      "family": "agent",
+      "description": "Code review agent for quality and security checks.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:doc-updater",
+      "family": "agent",
+      "description": "Documentation update agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:e2e-runner",
+      "family": "agent",
+      "description": "Playwright E2E testing agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:planner",
+      "family": "agent",
+      "description": "Feature implementation planning agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:refactor-cleaner",
+      "family": "agent",
+      "description": "Dead code cleanup and refactoring agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:security-reviewer",
+      "family": "agent",
+      "description": "Security vulnerability analysis agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "agent:tdd-guide",
+      "family": "agent",
+      "description": "Test-driven development guidance agent.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "baseline:agents",
+      "family": "baseline",
+      "description": "Baseline agent definitions and shared AGENTS guidance.",
+      "modules": [
+        "agents-core"
+      ]
+    },
+    {
+      "id": "baseline:commands",
+      "family": "baseline",
+      "description": "Core command library and workflow command docs.",
+      "modules": [
+        "commands-core"
+      ]
+    },
+    {
+      "id": "baseline:hooks",
+      "family": "baseline",
+      "description": "Hook runtime configs and hook helper scripts.",
+      "modules": [
+        "hooks-runtime"
+      ]
+    },
+    {
+      "id": "baseline:platform",
+      "family": "baseline",
+      "description": "Platform configs, package-manager setup, and MCP catalog defaults.",
+      "modules": [
+        "platform-configs"
+      ]
+    },
+    {
+      "id": "baseline:rules",
+      "family": "baseline",
+      "description": "Core shared rules and supported language rule packs.",
+      "modules": [
+        "rules-core"
+      ]
+    },
+    {
+      "id": "baseline:workflow",
+      "family": "baseline",
+      "description": "Evaluation, TDD, verification, and compaction workflow support.",
+      "modules": [
+        "workflow-quality"
+      ]
+    },
+    {
+      "id": "capability:agentic",
+      "family": "capability",
+      "description": "Agentic engineering, autonomous loops, and LLM pipeline optimization.",
+      "modules": [
+        "agentic-patterns"
+      ]
+    },
+    {
+      "id": "capability:content",
+      "family": "capability",
+      "description": "Business, writing, market, investor communication, and reusable voice-system skills.",
+      "modules": [
+        "business-content"
+      ]
+    },
+    {
+      "id": "capability:database",
+      "family": "capability",
+      "description": "Database and persistence-oriented skills.",
+      "modules": [
+        "database"
+      ]
+    },
+    {
+      "id": "capability:devops",
+      "family": "capability",
+      "description": "Deployment, Docker, and infrastructure patterns.",
+      "modules": [
+        "devops-infra"
+      ]
+    },
+    {
+      "id": "capability:documents",
+      "family": "capability",
+      "description": "Document processing, conversion, and translation skills.",
+      "modules": [
+        "document-processing"
+      ]
+    },
+    {
+      "id": "capability:media",
+      "family": "capability",
+      "description": "Media generation, technical explainers, and AI-assisted editing skills.",
+      "modules": [
+        "media-generation"
+      ]
+    },
+    {
+      "id": "capability:operators",
+      "family": "capability",
+      "description": "Connected-app operator workflows for setup audits, billing operations, program tracking, Google Workspace, and network optimization.",
+      "modules": [
+        "operator-workflows"
+      ]
+    },
+    {
+      "id": "capability:orchestration",
+      "family": "capability",
+      "description": "Worktree and tmux orchestration runtime and workflow docs.",
+      "modules": [
+        "orchestration"
+      ]
+    },
+    {
+      "id": "capability:research",
+      "family": "capability",
+      "description": "Research and API-integration skills for deep investigations and external tooling.",
+      "modules": [
+        "research-apis"
+      ]
+    },
+    {
+      "id": "capability:security",
+      "family": "capability",
+      "description": "Security review and security-focused framework guidance.",
+      "modules": [
+        "security"
+      ]
+    },
+    {
+      "id": "capability:social",
+      "family": "capability",
+      "description": "Social publishing and distribution skills.",
+      "modules": [
+        "social-distribution"
+      ]
+    },
+    {
+      "id": "capability:supply-chain",
+      "family": "capability",
+      "description": "Supply chain, logistics, procurement, and manufacturing domain skills.",
+      "modules": [
+        "supply-chain-domain"
+      ]
+    },
+    {
+      "id": "framework:django",
+      "family": "framework",
+      "description": "Django-focused engineering guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "framework:laravel",
+      "family": "framework",
+      "description": "Laravel patterns, TDD, verification, and security guidance. Resolves through framework-language and security modules.",
+      "modules": [
+        "framework-language",
+        "security"
+      ]
+    },
+    {
+      "id": "framework:nextjs",
+      "family": "framework",
+      "description": "Next.js-focused engineering guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "framework:react",
+      "family": "framework",
+      "description": "React-focused engineering guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "framework:springboot",
+      "family": "framework",
+      "description": "Spring Boot-focused engineering guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:c",
+      "family": "language",
+      "description": "C engineering guidance using the shared C/C++ standards and testing stack. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:cpp",
+      "family": "language",
+      "description": "C++ coding standards and testing guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:csharp",
+      "family": "language",
+      "description": "C# coding standards and patterns guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:go",
+      "family": "language",
+      "description": "Go-focused coding and testing guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:java",
+      "family": "language",
+      "description": "Java and Spring application guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:kotlin",
+      "family": "language",
+      "description": "Kotlin, Ktor, Exposed, Coroutines, and Compose Multiplatform guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:perl",
+      "family": "language",
+      "description": "Modern Perl patterns, testing, and security guidance. Currently resolves through framework-language and security modules.",
+      "modules": [
+        "framework-language",
+        "security"
+      ]
+    },
+    {
+      "id": "lang:python",
+      "family": "language",
+      "description": "Python and Django-oriented engineering guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:rust",
+      "family": "language",
+      "description": "Rust patterns and testing guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "lang:swift",
+      "family": "language",
+      "description": "Swift, SwiftUI, and Apple platform engineering guidance.",
+      "modules": [
+        "swift-apple"
+      ]
+    },
+    {
+      "id": "lang:typescript",
+      "family": "language",
+      "description": "TypeScript and frontend/backend application-engineering guidance. Currently resolves through the shared framework-language module.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "skill:backend-patterns",
+      "family": "skill",
+      "description": "API design, database, and backend engineering patterns.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "skill:coding-standards",
+      "family": "skill",
+      "description": "Language-agnostic coding standards and best practices.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "skill:continuous-learning",
+      "family": "skill",
+      "description": "Legacy v1 Stop-hook session pattern extraction skill; prefer continuous-learning-v2 for new installs.",
+      "modules": [
+        "workflow-quality"
+      ]
+    },
+    {
+      "id": "skill:deep-research",
+      "family": "skill",
+      "description": "Deep research and investigation workflows.",
+      "modules": [
+        "research-apis"
+      ]
+    },
+    {
+      "id": "skill:eval-harness",
+      "family": "skill",
+      "description": "Evaluation harness for AI regression testing.",
+      "modules": [
+        "workflow-quality"
+      ]
+    },
+    {
+      "id": "skill:frontend-patterns",
+      "family": "skill",
+      "description": "React and frontend engineering patterns.",
+      "modules": [
+        "framework-language"
+      ]
+    },
+    {
+      "id": "skill:security-review",
+      "family": "skill",
+      "description": "Security review checklist and vulnerability analysis.",
+      "modules": [
+        "security"
+      ]
+    },
+    {
+      "id": "skill:strategic-compact",
+      "family": "skill",
+      "description": "Strategic context compaction for long sessions.",
+      "modules": [
+        "workflow-quality"
+      ]
+    },
+    {
+      "id": "skill:tdd-workflow",
+      "family": "skill",
+      "description": "Test-driven development workflow skill.",
+      "modules": [
+        "workflow-quality"
+      ]
+    },
+    {
+      "id": "skill:verification-loop",
+      "family": "skill",
+      "description": "Verification loop for code quality assurance.",
+      "modules": [
+        "workflow-quality"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "agentic-patterns",
+      "kind": "skills",
+      "description": "Agentic engineering, autonomous loops, agent harness construction, and LLM pipeline optimization skills.",
+      "paths": [
+        "skills/agent-harness-construction",
+        "skills/agentic-engineering",
+        "skills/ai-first-engineering",
+        "skills/autonomous-loops",
+        "skills/blueprint",
+        "skills/claude-devfleet",
+        "skills/content-hash-cache-pattern",
+        "skills/continuous-agent-loop",
+        "skills/cost-aware-llm-pipeline",
+        "skills/data-scraper-agent",
+        "skills/enterprise-agent-ops",
+        "skills/nanoclaw-repl",
+        "skills/prompt-optimizer",
+        "skills/ralphinho-rfc-pipeline",
+        "skills/regex-vs-llm-structured-text",
+        "skills/search-first",
+        "skills/token-budget-advisor",
+        "skills/team-builder"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "agents-core",
+      "kind": "agents",
+      "description": "Agent definitions and project-level agent guidance.",
+      "paths": [
+        ".agents",
+        "agents",
+        "AGENTS.md"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "business-content",
+      "kind": "skills",
+      "description": "Business, writing, market, and investor communication skills.",
+      "paths": [
+        "skills/article-writing",
+        "skills/brand-voice",
+        "skills/content-engine",
+        "skills/investor-materials",
+        "skills/investor-outreach",
+        "skills/lead-intelligence",
+        "skills/product-capability",
+        "skills/social-graph-ranker",
+        "skills/seo",
+        "skills/market-research"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "stable"
+    },
+    {
+      "id": "commands-core",
+      "kind": "commands",
+      "description": "Core slash-command library and command docs.",
+      "paths": [
+        "commands"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "database",
+      "kind": "skills",
+      "description": "Database and persistence-focused skills.",
+      "paths": [
+        "skills/clickhouse-io",
+        "skills/database-migrations",
+        "skills/jpa-patterns",
+        "skills/postgres-patterns"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "devops-infra",
+      "kind": "skills",
+      "description": "Deployment workflows, Docker patterns, and infrastructure skills.",
+      "paths": [
+        "skills/deployment-patterns",
+        "skills/docker-patterns"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "document-processing",
+      "kind": "skills",
+      "description": "Document processing, conversion, and translation skills.",
+      "paths": [
+        "skills/nutrient-document-processing",
+        "skills/visa-doc-translate"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "framework-language",
+      "kind": "skills",
+      "description": "Core framework, language, and application-engineering skills.",
+      "paths": [
+        "skills/android-clean-architecture",
+        "skills/api-design",
+        "skills/backend-patterns",
+        "skills/coding-standards",
+        "skills/compose-multiplatform-patterns",
+        "skills/csharp-testing",
+        "skills/cpp-coding-standards",
+        "skills/cpp-testing",
+        "skills/dart-flutter-patterns",
+        "skills/django-patterns",
+        "skills/django-tdd",
+        "skills/django-verification",
+        "skills/dotnet-patterns",
+        "skills/frontend-design",
+        "skills/frontend-patterns",
+        "skills/frontend-slides",
+        "skills/golang-patterns",
+        "skills/golang-testing",
+        "skills/java-coding-standards",
+        "skills/kotlin-coroutines-flows",
+        "skills/kotlin-exposed-patterns",
+        "skills/kotlin-ktor-patterns",
+        "skills/kotlin-patterns",
+        "skills/kotlin-testing",
+        "skills/laravel-plugin-discovery",
+        "skills/laravel-patterns",
+        "skills/laravel-tdd",
+        "skills/laravel-verification",
+        "skills/mcp-server-patterns",
+        "skills/nestjs-patterns",
+        "skills/perl-patterns",
+        "skills/perl-testing",
+        "skills/python-patterns",
+        "skills/python-testing",
+        "skills/rust-patterns",
+        "skills/rust-testing",
+        "skills/springboot-patterns",
+        "skills/springboot-tdd",
+        "skills/springboot-verification"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "hooks-runtime",
+      "kind": "hooks",
+      "description": "Runtime hook configs and hook script helpers.",
+      "paths": [
+        "hooks",
+        "scripts/hooks",
+        "scripts/lib"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "media-generation",
+      "kind": "skills",
+      "description": "Media generation, technical explainers, and AI-assisted editing skills.",
+      "paths": [
+        "skills/fal-ai-media",
+        "skills/manim-video",
+        "skills/remotion-video-creation",
+        "skills/ui-demo",
+        "skills/video-editing",
+        "skills/videodb"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "beta"
+    },
+    {
+      "id": "operator-workflows",
+      "kind": "skills",
+      "description": "Connected-app operator workflows for setup audits, billing operations, program tracking, Google Workspace, and network optimization.",
+      "paths": [
+        "skills/automation-audit-ops",
+        "skills/api-connector-builder",
+        "skills/connections-optimizer",
+        "skills/customer-billing-ops",
+        "skills/dashboard-builder",
+        "skills/ecc-tools-cost-audit",
+        "skills/email-ops",
+        "skills/finance-billing-ops",
+        "skills/github-ops",
+        "skills/google-workspace-ops",
+        "skills/jira-integration",
+        "skills/knowledge-ops",
+        "skills/messages-ops",
+        "skills/project-flow-ops",
+        "skills/terminal-ops",
+        "skills/unified-notifications-ops",
+        "skills/workspace-surface-audit"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "beta"
+    },
+    {
+      "id": "orchestration",
+      "kind": "orchestration",
+      "description": "Worktree/tmux orchestration runtime and workflow docs.",
+      "paths": [
+        "commands/multi-workflow.md",
+        "commands/orchestrate.md",
+        "commands/sessions.md",
+        "scripts/lib/orchestration-session.js",
+        "scripts/lib/tmux-worktree-orchestrator.js",
+        "scripts/orchestrate-codex-worker.sh",
+        "scripts/orchestrate-worktrees.js",
+        "scripts/orchestration-status.js",
+        "skills/dmux-workflows"
+      ],
+      "targets": [
+        "claude",
+        "codex",
+        "opencode"
+      ],
+      "dependencies": [
+        "commands-core",
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "beta"
+    },
+    {
+      "id": "platform-configs",
+      "kind": "platform",
+      "description": "Baseline platform configs, package-manager setup, and MCP catalog.",
+      "paths": [
+        ".claude-plugin",
+        ".codex",
+        ".cursor",
+        ".gemini",
+        ".opencode",
+        "mcp-configs",
+        "scripts/setup-package-manager.js"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "gemini",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "research-apis",
+      "kind": "skills",
+      "description": "Research and API integration skills for deep investigations and model integrations.",
+      "paths": [
+        "skills/claude-api",
+        "skills/deep-research",
+        "skills/exa-search",
+        "skills/research-ops"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "rules-core",
+      "kind": "rules",
+      "description": "Shared and language rules for supported harness targets.",
+      "paths": [
+        "rules"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "security",
+      "kind": "skills",
+      "description": "Security review and security-focused framework guidance.",
+      "paths": [
+        "skills/defi-amm-security",
+        "skills/django-security",
+        "skills/healthcare-phi-compliance",
+        "skills/hipaa-compliance",
+        "skills/laravel-security",
+        "skills/llm-trading-agent-security",
+        "skills/nodejs-keccak256",
+        "skills/perl-security",
+        "skills/security-review",
+        "skills/security-scan",
+        "skills/security-bounty-hunter",
+        "skills/springboot-security",
+        "skills/evm-token-decimals",
+        "the-security-guide.md"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "workflow-quality"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "social-distribution",
+      "kind": "skills",
+      "description": "Social publishing and distribution skills.",
+      "paths": [
+        "skills/crosspost",
+        "skills/x-api"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "business-content"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "supply-chain-domain",
+      "kind": "skills",
+      "description": "Supply chain, logistics, procurement, and manufacturing domain skills.",
+      "paths": [
+        "skills/carrier-relationship-management",
+        "skills/customs-trade-compliance",
+        "skills/energy-procurement",
+        "skills/inventory-demand-planning",
+        "skills/logistics-exception-management",
+        "skills/production-scheduling",
+        "skills/quality-nonconformance",
+        "skills/returns-reverse-logistics"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "stable"
+    },
+    {
+      "id": "swift-apple",
+      "kind": "skills",
+      "description": "Swift, SwiftUI, and Apple platform skills including concurrency, persistence, and design patterns.",
+      "paths": [
+        "skills/foundation-models-on-device",
+        "skills/liquid-glass-design",
+        "skills/swift-actor-persistence",
+        "skills/swift-concurrency-6-2",
+        "skills/swift-protocol-di-testing",
+        "skills/swiftui-patterns"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "workflow-quality",
+      "kind": "skills",
+      "description": "Evaluation, TDD, verification, compaction, and learning skills, including the legacy continuous-learning v1 path.",
+      "paths": [
+        "skills/agent-sort",
+        "skills/agent-introspection-debugging",
+        "skills/ai-regression-testing",
+        "skills/configure-ecc",
+        "skills/code-tour",
+        "skills/continuous-learning",
+        "skills/continuous-learning-v2",
+        "skills/council",
+        "skills/e2e-testing",
+        "skills/eval-harness",
+        "skills/hookify-rules",
+        "skills/iterative-retrieval",
+        "skills/plankton-code-quality",
+        "skills/skill-stocktake",
+        "skills/strategic-compact",
+        "skills/tdd-workflow",
+        "skills/verification-loop"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": true,
+      "cost": "medium",
+      "stability": "stable"
+    }
+  ],
+  "codex_or_opencode_modules": [
+    {
+      "id": "agentic-patterns",
+      "kind": "skills",
+      "description": "Agentic engineering, autonomous loops, agent harness construction, and LLM pipeline optimization skills.",
+      "paths": [
+        "skills/agent-harness-construction",
+        "skills/agentic-engineering",
+        "skills/ai-first-engineering",
+        "skills/autonomous-loops",
+        "skills/blueprint",
+        "skills/claude-devfleet",
+        "skills/content-hash-cache-pattern",
+        "skills/continuous-agent-loop",
+        "skills/cost-aware-llm-pipeline",
+        "skills/data-scraper-agent",
+        "skills/enterprise-agent-ops",
+        "skills/nanoclaw-repl",
+        "skills/prompt-optimizer",
+        "skills/ralphinho-rfc-pipeline",
+        "skills/regex-vs-llm-structured-text",
+        "skills/search-first",
+        "skills/token-budget-advisor",
+        "skills/team-builder"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "agents-core",
+      "kind": "agents",
+      "description": "Agent definitions and project-level agent guidance.",
+      "paths": [
+        ".agents",
+        "agents",
+        "AGENTS.md"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "business-content",
+      "kind": "skills",
+      "description": "Business, writing, market, and investor communication skills.",
+      "paths": [
+        "skills/article-writing",
+        "skills/brand-voice",
+        "skills/content-engine",
+        "skills/investor-materials",
+        "skills/investor-outreach",
+        "skills/lead-intelligence",
+        "skills/product-capability",
+        "skills/social-graph-ranker",
+        "skills/seo",
+        "skills/market-research"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "stable"
+    },
+    {
+      "id": "commands-core",
+      "kind": "commands",
+      "description": "Core slash-command library and command docs.",
+      "paths": [
+        "commands"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "database",
+      "kind": "skills",
+      "description": "Database and persistence-focused skills.",
+      "paths": [
+        "skills/clickhouse-io",
+        "skills/database-migrations",
+        "skills/jpa-patterns",
+        "skills/postgres-patterns"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "devops-infra",
+      "kind": "skills",
+      "description": "Deployment workflows, Docker patterns, and infrastructure skills.",
+      "paths": [
+        "skills/deployment-patterns",
+        "skills/docker-patterns"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "document-processing",
+      "kind": "skills",
+      "description": "Document processing, conversion, and translation skills.",
+      "paths": [
+        "skills/nutrient-document-processing",
+        "skills/visa-doc-translate"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "framework-language",
+      "kind": "skills",
+      "description": "Core framework, language, and application-engineering skills.",
+      "paths": [
+        "skills/android-clean-architecture",
+        "skills/api-design",
+        "skills/backend-patterns",
+        "skills/coding-standards",
+        "skills/compose-multiplatform-patterns",
+        "skills/csharp-testing",
+        "skills/cpp-coding-standards",
+        "skills/cpp-testing",
+        "skills/dart-flutter-patterns",
+        "skills/django-patterns",
+        "skills/django-tdd",
+        "skills/django-verification",
+        "skills/dotnet-patterns",
+        "skills/frontend-design",
+        "skills/frontend-patterns",
+        "skills/frontend-slides",
+        "skills/golang-patterns",
+        "skills/golang-testing",
+        "skills/java-coding-standards",
+        "skills/kotlin-coroutines-flows",
+        "skills/kotlin-exposed-patterns",
+        "skills/kotlin-ktor-patterns",
+        "skills/kotlin-patterns",
+        "skills/kotlin-testing",
+        "skills/laravel-plugin-discovery",
+        "skills/laravel-patterns",
+        "skills/laravel-tdd",
+        "skills/laravel-verification",
+        "skills/mcp-server-patterns",
+        "skills/nestjs-patterns",
+        "skills/perl-patterns",
+        "skills/perl-testing",
+        "skills/python-patterns",
+        "skills/python-testing",
+        "skills/rust-patterns",
+        "skills/rust-testing",
+        "skills/springboot-patterns",
+        "skills/springboot-tdd",
+        "skills/springboot-verification"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "rules-core",
+        "agents-core",
+        "commands-core",
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "hooks-runtime",
+      "kind": "hooks",
+      "description": "Runtime hook configs and hook script helpers.",
+      "paths": [
+        "hooks",
+        "scripts/hooks",
+        "scripts/lib"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "media-generation",
+      "kind": "skills",
+      "description": "Media generation, technical explainers, and AI-assisted editing skills.",
+      "paths": [
+        "skills/fal-ai-media",
+        "skills/manim-video",
+        "skills/remotion-video-creation",
+        "skills/ui-demo",
+        "skills/video-editing",
+        "skills/videodb"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "beta"
+    },
+    {
+      "id": "operator-workflows",
+      "kind": "skills",
+      "description": "Connected-app operator workflows for setup audits, billing operations, program tracking, Google Workspace, and network optimization.",
+      "paths": [
+        "skills/automation-audit-ops",
+        "skills/api-connector-builder",
+        "skills/connections-optimizer",
+        "skills/customer-billing-ops",
+        "skills/dashboard-builder",
+        "skills/ecc-tools-cost-audit",
+        "skills/email-ops",
+        "skills/finance-billing-ops",
+        "skills/github-ops",
+        "skills/google-workspace-ops",
+        "skills/jira-integration",
+        "skills/knowledge-ops",
+        "skills/messages-ops",
+        "skills/project-flow-ops",
+        "skills/terminal-ops",
+        "skills/unified-notifications-ops",
+        "skills/workspace-surface-audit"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "beta"
+    },
+    {
+      "id": "orchestration",
+      "kind": "orchestration",
+      "description": "Worktree/tmux orchestration runtime and workflow docs.",
+      "paths": [
+        "commands/multi-workflow.md",
+        "commands/orchestrate.md",
+        "commands/sessions.md",
+        "scripts/lib/orchestration-session.js",
+        "scripts/lib/tmux-worktree-orchestrator.js",
+        "scripts/orchestrate-codex-worker.sh",
+        "scripts/orchestrate-worktrees.js",
+        "scripts/orchestration-status.js",
+        "skills/dmux-workflows"
+      ],
+      "targets": [
+        "claude",
+        "codex",
+        "opencode"
+      ],
+      "dependencies": [
+        "commands-core",
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "beta"
+    },
+    {
+      "id": "platform-configs",
+      "kind": "platform",
+      "description": "Baseline platform configs, package-manager setup, and MCP catalog.",
+      "paths": [
+        ".claude-plugin",
+        ".codex",
+        ".cursor",
+        ".gemini",
+        ".opencode",
+        "mcp-configs",
+        "scripts/setup-package-manager.js"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "gemini",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [],
+      "defaultInstall": true,
+      "cost": "light",
+      "stability": "stable"
+    },
+    {
+      "id": "research-apis",
+      "kind": "skills",
+      "description": "Research and API integration skills for deep investigations and model integrations.",
+      "paths": [
+        "skills/claude-api",
+        "skills/deep-research",
+        "skills/exa-search",
+        "skills/research-ops"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "security",
+      "kind": "skills",
+      "description": "Security review and security-focused framework guidance.",
+      "paths": [
+        "skills/defi-amm-security",
+        "skills/django-security",
+        "skills/healthcare-phi-compliance",
+        "skills/hipaa-compliance",
+        "skills/laravel-security",
+        "skills/llm-trading-agent-security",
+        "skills/nodejs-keccak256",
+        "skills/perl-security",
+        "skills/security-review",
+        "skills/security-scan",
+        "skills/security-bounty-hunter",
+        "skills/springboot-security",
+        "skills/evm-token-decimals",
+        "the-security-guide.md"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "workflow-quality"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "social-distribution",
+      "kind": "skills",
+      "description": "Social publishing and distribution skills.",
+      "paths": [
+        "skills/crosspost",
+        "skills/x-api"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "business-content"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "supply-chain-domain",
+      "kind": "skills",
+      "description": "Supply chain, logistics, procurement, and manufacturing domain skills.",
+      "paths": [
+        "skills/carrier-relationship-management",
+        "skills/customs-trade-compliance",
+        "skills/energy-procurement",
+        "skills/inventory-demand-planning",
+        "skills/logistics-exception-management",
+        "skills/production-scheduling",
+        "skills/quality-nonconformance",
+        "skills/returns-reverse-logistics"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "heavy",
+      "stability": "stable"
+    },
+    {
+      "id": "swift-apple",
+      "kind": "skills",
+      "description": "Swift, SwiftUI, and Apple platform skills including concurrency, persistence, and design patterns.",
+      "paths": [
+        "skills/foundation-models-on-device",
+        "skills/liquid-glass-design",
+        "skills/swift-actor-persistence",
+        "skills/swift-concurrency-6-2",
+        "skills/swift-protocol-di-testing",
+        "skills/swiftui-patterns"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": false,
+      "cost": "medium",
+      "stability": "stable"
+    },
+    {
+      "id": "workflow-quality",
+      "kind": "skills",
+      "description": "Evaluation, TDD, verification, compaction, and learning skills, including the legacy continuous-learning v1 path.",
+      "paths": [
+        "skills/agent-sort",
+        "skills/agent-introspection-debugging",
+        "skills/ai-regression-testing",
+        "skills/configure-ecc",
+        "skills/code-tour",
+        "skills/continuous-learning",
+        "skills/continuous-learning-v2",
+        "skills/council",
+        "skills/e2e-testing",
+        "skills/eval-harness",
+        "skills/hookify-rules",
+        "skills/iterative-retrieval",
+        "skills/plankton-code-quality",
+        "skills/skill-stocktake",
+        "skills/strategic-compact",
+        "skills/tdd-workflow",
+        "skills/verification-loop"
+      ],
+      "targets": [
+        "claude",
+        "cursor",
+        "antigravity",
+        "codex",
+        "opencode",
+        "codebuddy"
+      ],
+      "dependencies": [
+        "platform-configs"
+      ],
+      "defaultInstall": true,
+      "cost": "medium",
+      "stability": "stable"
+    }
+  ],
+  "commands": [
+    {
+      "id": "agent-sort",
+      "source_path": ".agentcodex/imports/ecc/commands/agent-sort.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "aside",
+      "source_path": ".agentcodex/imports/ecc/commands/aside.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "build-fix",
+      "source_path": ".agentcodex/imports/ecc/commands/build-fix.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "checkpoint",
+      "source_path": ".agentcodex/imports/ecc/commands/checkpoint.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "claw",
+      "source_path": ".agentcodex/imports/ecc/commands/claw.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "code-review",
+      "source_path": ".agentcodex/imports/ecc/commands/code-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "context-budget",
+      "source_path": ".agentcodex/imports/ecc/commands/context-budget.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "cpp-build",
+      "source_path": ".agentcodex/imports/ecc/commands/cpp-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "cpp-review",
+      "source_path": ".agentcodex/imports/ecc/commands/cpp-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "cpp-test",
+      "source_path": ".agentcodex/imports/ecc/commands/cpp-test.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "devfleet",
+      "source_path": ".agentcodex/imports/ecc/commands/devfleet.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "docs",
+      "source_path": ".agentcodex/imports/ecc/commands/docs.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "e2e",
+      "source_path": ".agentcodex/imports/ecc/commands/e2e.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "eval",
+      "source_path": ".agentcodex/imports/ecc/commands/eval.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "evolve",
+      "source_path": ".agentcodex/imports/ecc/commands/evolve.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "feature-dev",
+      "source_path": ".agentcodex/imports/ecc/commands/feature-dev.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "flutter-build",
+      "source_path": ".agentcodex/imports/ecc/commands/flutter-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "flutter-review",
+      "source_path": ".agentcodex/imports/ecc/commands/flutter-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "flutter-test",
+      "source_path": ".agentcodex/imports/ecc/commands/flutter-test.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "gan-build",
+      "source_path": ".agentcodex/imports/ecc/commands/gan-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "gan-design",
+      "source_path": ".agentcodex/imports/ecc/commands/gan-design.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "go-build",
+      "source_path": ".agentcodex/imports/ecc/commands/go-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "go-review",
+      "source_path": ".agentcodex/imports/ecc/commands/go-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "go-test",
+      "source_path": ".agentcodex/imports/ecc/commands/go-test.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "gradle-build",
+      "source_path": ".agentcodex/imports/ecc/commands/gradle-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "harness-audit",
+      "source_path": ".agentcodex/imports/ecc/commands/harness-audit.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "hookify-configure",
+      "source_path": ".agentcodex/imports/ecc/commands/hookify-configure.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "hookify-help",
+      "source_path": ".agentcodex/imports/ecc/commands/hookify-help.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "hookify-list",
+      "source_path": ".agentcodex/imports/ecc/commands/hookify-list.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "hookify",
+      "source_path": ".agentcodex/imports/ecc/commands/hookify.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "instinct-export",
+      "source_path": ".agentcodex/imports/ecc/commands/instinct-export.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "instinct-import",
+      "source_path": ".agentcodex/imports/ecc/commands/instinct-import.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "instinct-status",
+      "source_path": ".agentcodex/imports/ecc/commands/instinct-status.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "jira",
+      "source_path": ".agentcodex/imports/ecc/commands/jira.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "kotlin-build",
+      "source_path": ".agentcodex/imports/ecc/commands/kotlin-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "kotlin-review",
+      "source_path": ".agentcodex/imports/ecc/commands/kotlin-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "kotlin-test",
+      "source_path": ".agentcodex/imports/ecc/commands/kotlin-test.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "learn-eval",
+      "source_path": ".agentcodex/imports/ecc/commands/learn-eval.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "learn",
+      "source_path": ".agentcodex/imports/ecc/commands/learn.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "loop-start",
+      "source_path": ".agentcodex/imports/ecc/commands/loop-start.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "loop-status",
+      "source_path": ".agentcodex/imports/ecc/commands/loop-status.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "model-route",
+      "source_path": ".agentcodex/imports/ecc/commands/model-route.md",
+      "active_agentcodex_command": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "multi-backend",
+      "source_path": ".agentcodex/imports/ecc/commands/multi-backend.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "multi-execute",
+      "source_path": ".agentcodex/imports/ecc/commands/multi-execute.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "multi-frontend",
+      "source_path": ".agentcodex/imports/ecc/commands/multi-frontend.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "multi-plan",
+      "source_path": ".agentcodex/imports/ecc/commands/multi-plan.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "multi-workflow",
+      "source_path": ".agentcodex/imports/ecc/commands/multi-workflow.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "orchestrate",
+      "source_path": ".agentcodex/imports/ecc/commands/orchestrate.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "plan",
+      "source_path": ".agentcodex/imports/ecc/commands/plan.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "pm2",
+      "source_path": ".agentcodex/imports/ecc/commands/pm2.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "projects",
+      "source_path": ".agentcodex/imports/ecc/commands/projects.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "promote",
+      "source_path": ".agentcodex/imports/ecc/commands/promote.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prompt-optimize",
+      "source_path": ".agentcodex/imports/ecc/commands/prompt-optimize.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prp-commit",
+      "source_path": ".agentcodex/imports/ecc/commands/prp-commit.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prp-implement",
+      "source_path": ".agentcodex/imports/ecc/commands/prp-implement.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prp-plan",
+      "source_path": ".agentcodex/imports/ecc/commands/prp-plan.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prp-pr",
+      "source_path": ".agentcodex/imports/ecc/commands/prp-pr.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prp-prd",
+      "source_path": ".agentcodex/imports/ecc/commands/prp-prd.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "prune",
+      "source_path": ".agentcodex/imports/ecc/commands/prune.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "python-review",
+      "source_path": ".agentcodex/imports/ecc/commands/python-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "quality-gate",
+      "source_path": ".agentcodex/imports/ecc/commands/quality-gate.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "refactor-clean",
+      "source_path": ".agentcodex/imports/ecc/commands/refactor-clean.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "resume-session",
+      "source_path": ".agentcodex/imports/ecc/commands/resume-session.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "review-pr",
+      "source_path": ".agentcodex/imports/ecc/commands/review-pr.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "rules-distill",
+      "source_path": ".agentcodex/imports/ecc/commands/rules-distill.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "rust-build",
+      "source_path": ".agentcodex/imports/ecc/commands/rust-build.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "rust-review",
+      "source_path": ".agentcodex/imports/ecc/commands/rust-review.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "rust-test",
+      "source_path": ".agentcodex/imports/ecc/commands/rust-test.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "santa-loop",
+      "source_path": ".agentcodex/imports/ecc/commands/santa-loop.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "save-session",
+      "source_path": ".agentcodex/imports/ecc/commands/save-session.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "sessions",
+      "source_path": ".agentcodex/imports/ecc/commands/sessions.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "setup-pm",
+      "source_path": ".agentcodex/imports/ecc/commands/setup-pm.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "skill-create",
+      "source_path": ".agentcodex/imports/ecc/commands/skill-create.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "skill-health",
+      "source_path": ".agentcodex/imports/ecc/commands/skill-health.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "tdd",
+      "source_path": ".agentcodex/imports/ecc/commands/tdd.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "test-coverage",
+      "source_path": ".agentcodex/imports/ecc/commands/test-coverage.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "update-codemaps",
+      "source_path": ".agentcodex/imports/ecc/commands/update-codemaps.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "update-docs",
+      "source_path": ".agentcodex/imports/ecc/commands/update-docs.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    },
+    {
+      "id": "verify",
+      "source_path": ".agentcodex/imports/ecc/commands/verify.md",
+      "active_agentcodex_command": false,
+      "activation": "reference-only"
+    }
+  ],
+  "agents": [
+    {
+      "id": "a11y-architect",
+      "source_path": ".agentcodex/imports/ecc/agents/a11y-architect.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "architect",
+      "source_path": ".agentcodex/imports/ecc/agents/architect.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "build-error-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/build-error-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "chief-of-staff",
+      "source_path": ".agentcodex/imports/ecc/agents/chief-of-staff.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "code-architect",
+      "source_path": ".agentcodex/imports/ecc/agents/code-architect.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "code-explorer",
+      "source_path": ".agentcodex/imports/ecc/agents/code-explorer.md",
+      "active_agentcodex_role": false,
+      "activation": "extension-role"
+    },
+    {
+      "id": "code-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/code-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "code-simplifier",
+      "source_path": ".agentcodex/imports/ecc/agents/code-simplifier.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "comment-analyzer",
+      "source_path": ".agentcodex/imports/ecc/agents/comment-analyzer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "conversation-analyzer",
+      "source_path": ".agentcodex/imports/ecc/agents/conversation-analyzer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "cpp-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/cpp-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "cpp-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/cpp-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "csharp-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/csharp-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "dart-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/dart-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "database-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/database-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "doc-updater",
+      "source_path": ".agentcodex/imports/ecc/agents/doc-updater.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "docs-lookup",
+      "source_path": ".agentcodex/imports/ecc/agents/docs-lookup.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "e2e-runner",
+      "source_path": ".agentcodex/imports/ecc/agents/e2e-runner.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "flutter-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/flutter-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "gan-evaluator",
+      "source_path": ".agentcodex/imports/ecc/agents/gan-evaluator.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "gan-generator",
+      "source_path": ".agentcodex/imports/ecc/agents/gan-generator.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "gan-planner",
+      "source_path": ".agentcodex/imports/ecc/agents/gan-planner.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "go-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/go-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "go-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/go-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "harness-optimizer",
+      "source_path": ".agentcodex/imports/ecc/agents/harness-optimizer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "healthcare-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/healthcare-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "java-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/java-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "java-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/java-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "kotlin-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/kotlin-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "kotlin-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/kotlin-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "loop-operator",
+      "source_path": ".agentcodex/imports/ecc/agents/loop-operator.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "opensource-forker",
+      "source_path": ".agentcodex/imports/ecc/agents/opensource-forker.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "opensource-packager",
+      "source_path": ".agentcodex/imports/ecc/agents/opensource-packager.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "opensource-sanitizer",
+      "source_path": ".agentcodex/imports/ecc/agents/opensource-sanitizer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "performance-optimizer",
+      "source_path": ".agentcodex/imports/ecc/agents/performance-optimizer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "planner",
+      "source_path": ".agentcodex/imports/ecc/agents/planner.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "pr-test-analyzer",
+      "source_path": ".agentcodex/imports/ecc/agents/pr-test-analyzer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "python-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/python-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "pytorch-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/pytorch-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "refactor-cleaner",
+      "source_path": ".agentcodex/imports/ecc/agents/refactor-cleaner.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "rust-build-resolver",
+      "source_path": ".agentcodex/imports/ecc/agents/rust-build-resolver.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "rust-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/rust-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "security-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/security-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "seo-specialist",
+      "source_path": ".agentcodex/imports/ecc/agents/seo-specialist.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "silent-failure-hunter",
+      "source_path": ".agentcodex/imports/ecc/agents/silent-failure-hunter.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "tdd-guide",
+      "source_path": ".agentcodex/imports/ecc/agents/tdd-guide.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "type-design-analyzer",
+      "source_path": ".agentcodex/imports/ecc/agents/type-design-analyzer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    },
+    {
+      "id": "typescript-reviewer",
+      "source_path": ".agentcodex/imports/ecc/agents/typescript-reviewer.md",
+      "active_agentcodex_role": true,
+      "activation": "already-active"
+    }
+  ],
+  "skills": [
+    {
+      "id": "accessibility",
+      "path": ".agentcodex/imports/ecc/skills/accessibility/SKILL.md"
+    },
+    {
+      "id": "agent-eval",
+      "path": ".agentcodex/imports/ecc/skills/agent-eval/SKILL.md"
+    },
+    {
+      "id": "agent-harness-construction",
+      "path": ".agentcodex/imports/ecc/skills/agent-harness-construction/SKILL.md"
+    },
+    {
+      "id": "agent-introspection-debugging",
+      "path": ".agentcodex/imports/ecc/skills/agent-introspection-debugging/SKILL.md"
+    },
+    {
+      "id": "agent-payment-x402",
+      "path": ".agentcodex/imports/ecc/skills/agent-payment-x402/SKILL.md"
+    },
+    {
+      "id": "agent-sort",
+      "path": ".agentcodex/imports/ecc/skills/agent-sort/SKILL.md"
+    },
+    {
+      "id": "agentic-engineering",
+      "path": ".agentcodex/imports/ecc/skills/agentic-engineering/SKILL.md"
+    },
+    {
+      "id": "ai-first-engineering",
+      "path": ".agentcodex/imports/ecc/skills/ai-first-engineering/SKILL.md"
+    },
+    {
+      "id": "ai-regression-testing",
+      "path": ".agentcodex/imports/ecc/skills/ai-regression-testing/SKILL.md"
+    },
+    {
+      "id": "android-clean-architecture",
+      "path": ".agentcodex/imports/ecc/skills/android-clean-architecture/SKILL.md"
+    },
+    {
+      "id": "api-connector-builder",
+      "path": ".agentcodex/imports/ecc/skills/api-connector-builder/SKILL.md"
+    },
+    {
+      "id": "api-design",
+      "path": ".agentcodex/imports/ecc/skills/api-design/SKILL.md"
+    },
+    {
+      "id": "architecture-decision-records",
+      "path": ".agentcodex/imports/ecc/skills/architecture-decision-records/SKILL.md"
+    },
+    {
+      "id": "article-writing",
+      "path": ".agentcodex/imports/ecc/skills/article-writing/SKILL.md"
+    },
+    {
+      "id": "automation-audit-ops",
+      "path": ".agentcodex/imports/ecc/skills/automation-audit-ops/SKILL.md"
+    },
+    {
+      "id": "autonomous-agent-harness",
+      "path": ".agentcodex/imports/ecc/skills/autonomous-agent-harness/SKILL.md"
+    },
+    {
+      "id": "autonomous-loops",
+      "path": ".agentcodex/imports/ecc/skills/autonomous-loops/SKILL.md"
+    },
+    {
+      "id": "backend-patterns",
+      "path": ".agentcodex/imports/ecc/skills/backend-patterns/SKILL.md"
+    },
+    {
+      "id": "benchmark",
+      "path": ".agentcodex/imports/ecc/skills/benchmark/SKILL.md"
+    },
+    {
+      "id": "blueprint",
+      "path": ".agentcodex/imports/ecc/skills/blueprint/SKILL.md"
+    },
+    {
+      "id": "brand-voice",
+      "path": ".agentcodex/imports/ecc/skills/brand-voice/SKILL.md"
+    },
+    {
+      "id": "browser-qa",
+      "path": ".agentcodex/imports/ecc/skills/browser-qa/SKILL.md"
+    },
+    {
+      "id": "bun-runtime",
+      "path": ".agentcodex/imports/ecc/skills/bun-runtime/SKILL.md"
+    },
+    {
+      "id": "canary-watch",
+      "path": ".agentcodex/imports/ecc/skills/canary-watch/SKILL.md"
+    },
+    {
+      "id": "carrier-relationship-management",
+      "path": ".agentcodex/imports/ecc/skills/carrier-relationship-management/SKILL.md"
+    },
+    {
+      "id": "ck",
+      "path": ".agentcodex/imports/ecc/skills/ck/SKILL.md"
+    },
+    {
+      "id": "claude-api",
+      "path": ".agentcodex/imports/ecc/skills/claude-api/SKILL.md"
+    },
+    {
+      "id": "claude-devfleet",
+      "path": ".agentcodex/imports/ecc/skills/claude-devfleet/SKILL.md"
+    },
+    {
+      "id": "click-path-audit",
+      "path": ".agentcodex/imports/ecc/skills/click-path-audit/SKILL.md"
+    },
+    {
+      "id": "clickhouse-io",
+      "path": ".agentcodex/imports/ecc/skills/clickhouse-io/SKILL.md"
+    },
+    {
+      "id": "code-tour",
+      "path": ".agentcodex/imports/ecc/skills/code-tour/SKILL.md"
+    },
+    {
+      "id": "codebase-onboarding",
+      "path": ".agentcodex/imports/ecc/skills/codebase-onboarding/SKILL.md"
+    },
+    {
+      "id": "coding-standards",
+      "path": ".agentcodex/imports/ecc/skills/coding-standards/SKILL.md"
+    },
+    {
+      "id": "compose-multiplatform-patterns",
+      "path": ".agentcodex/imports/ecc/skills/compose-multiplatform-patterns/SKILL.md"
+    },
+    {
+      "id": "configure-ecc",
+      "path": ".agentcodex/imports/ecc/skills/configure-ecc/SKILL.md"
+    },
+    {
+      "id": "connections-optimizer",
+      "path": ".agentcodex/imports/ecc/skills/connections-optimizer/SKILL.md"
+    },
+    {
+      "id": "content-engine",
+      "path": ".agentcodex/imports/ecc/skills/content-engine/SKILL.md"
+    },
+    {
+      "id": "content-hash-cache-pattern",
+      "path": ".agentcodex/imports/ecc/skills/content-hash-cache-pattern/SKILL.md"
+    },
+    {
+      "id": "context-budget",
+      "path": ".agentcodex/imports/ecc/skills/context-budget/SKILL.md"
+    },
+    {
+      "id": "continuous-agent-loop",
+      "path": ".agentcodex/imports/ecc/skills/continuous-agent-loop/SKILL.md"
+    },
+    {
+      "id": "continuous-learning",
+      "path": ".agentcodex/imports/ecc/skills/continuous-learning/SKILL.md"
+    },
+    {
+      "id": "continuous-learning-v2",
+      "path": ".agentcodex/imports/ecc/skills/continuous-learning-v2/SKILL.md"
+    },
+    {
+      "id": "cost-aware-llm-pipeline",
+      "path": ".agentcodex/imports/ecc/skills/cost-aware-llm-pipeline/SKILL.md"
+    },
+    {
+      "id": "council",
+      "path": ".agentcodex/imports/ecc/skills/council/SKILL.md"
+    },
+    {
+      "id": "cpp-coding-standards",
+      "path": ".agentcodex/imports/ecc/skills/cpp-coding-standards/SKILL.md"
+    },
+    {
+      "id": "cpp-testing",
+      "path": ".agentcodex/imports/ecc/skills/cpp-testing/SKILL.md"
+    },
+    {
+      "id": "crosspost",
+      "path": ".agentcodex/imports/ecc/skills/crosspost/SKILL.md"
+    },
+    {
+      "id": "csharp-testing",
+      "path": ".agentcodex/imports/ecc/skills/csharp-testing/SKILL.md"
+    },
+    {
+      "id": "customer-billing-ops",
+      "path": ".agentcodex/imports/ecc/skills/customer-billing-ops/SKILL.md"
+    },
+    {
+      "id": "customs-trade-compliance",
+      "path": ".agentcodex/imports/ecc/skills/customs-trade-compliance/SKILL.md"
+    },
+    {
+      "id": "dart-flutter-patterns",
+      "path": ".agentcodex/imports/ecc/skills/dart-flutter-patterns/SKILL.md"
+    },
+    {
+      "id": "dashboard-builder",
+      "path": ".agentcodex/imports/ecc/skills/dashboard-builder/SKILL.md"
+    },
+    {
+      "id": "data-scraper-agent",
+      "path": ".agentcodex/imports/ecc/skills/data-scraper-agent/SKILL.md"
+    },
+    {
+      "id": "database-migrations",
+      "path": ".agentcodex/imports/ecc/skills/database-migrations/SKILL.md"
+    },
+    {
+      "id": "deep-research",
+      "path": ".agentcodex/imports/ecc/skills/deep-research/SKILL.md"
+    },
+    {
+      "id": "defi-amm-security",
+      "path": ".agentcodex/imports/ecc/skills/defi-amm-security/SKILL.md"
+    },
+    {
+      "id": "deployment-patterns",
+      "path": ".agentcodex/imports/ecc/skills/deployment-patterns/SKILL.md"
+    },
+    {
+      "id": "design-system",
+      "path": ".agentcodex/imports/ecc/skills/design-system/SKILL.md"
+    },
+    {
+      "id": "django-patterns",
+      "path": ".agentcodex/imports/ecc/skills/django-patterns/SKILL.md"
+    },
+    {
+      "id": "django-security",
+      "path": ".agentcodex/imports/ecc/skills/django-security/SKILL.md"
+    },
+    {
+      "id": "django-tdd",
+      "path": ".agentcodex/imports/ecc/skills/django-tdd/SKILL.md"
+    },
+    {
+      "id": "django-verification",
+      "path": ".agentcodex/imports/ecc/skills/django-verification/SKILL.md"
+    },
+    {
+      "id": "dmux-workflows",
+      "path": ".agentcodex/imports/ecc/skills/dmux-workflows/SKILL.md"
+    },
+    {
+      "id": "docker-patterns",
+      "path": ".agentcodex/imports/ecc/skills/docker-patterns/SKILL.md"
+    },
+    {
+      "id": "documentation-lookup",
+      "path": ".agentcodex/imports/ecc/skills/documentation-lookup/SKILL.md"
+    },
+    {
+      "id": "dotnet-patterns",
+      "path": ".agentcodex/imports/ecc/skills/dotnet-patterns/SKILL.md"
+    },
+    {
+      "id": "e2e-testing",
+      "path": ".agentcodex/imports/ecc/skills/e2e-testing/SKILL.md"
+    },
+    {
+      "id": "ecc-tools-cost-audit",
+      "path": ".agentcodex/imports/ecc/skills/ecc-tools-cost-audit/SKILL.md"
+    },
+    {
+      "id": "email-ops",
+      "path": ".agentcodex/imports/ecc/skills/email-ops/SKILL.md"
+    },
+    {
+      "id": "energy-procurement",
+      "path": ".agentcodex/imports/ecc/skills/energy-procurement/SKILL.md"
+    },
+    {
+      "id": "enterprise-agent-ops",
+      "path": ".agentcodex/imports/ecc/skills/enterprise-agent-ops/SKILL.md"
+    },
+    {
+      "id": "eval-harness",
+      "path": ".agentcodex/imports/ecc/skills/eval-harness/SKILL.md"
+    },
+    {
+      "id": "evm-token-decimals",
+      "path": ".agentcodex/imports/ecc/skills/evm-token-decimals/SKILL.md"
+    },
+    {
+      "id": "exa-search",
+      "path": ".agentcodex/imports/ecc/skills/exa-search/SKILL.md"
+    },
+    {
+      "id": "fal-ai-media",
+      "path": ".agentcodex/imports/ecc/skills/fal-ai-media/SKILL.md"
+    },
+    {
+      "id": "finance-billing-ops",
+      "path": ".agentcodex/imports/ecc/skills/finance-billing-ops/SKILL.md"
+    },
+    {
+      "id": "flutter-dart-code-review",
+      "path": ".agentcodex/imports/ecc/skills/flutter-dart-code-review/SKILL.md"
+    },
+    {
+      "id": "foundation-models-on-device",
+      "path": ".agentcodex/imports/ecc/skills/foundation-models-on-device/SKILL.md"
+    },
+    {
+      "id": "frontend-design",
+      "path": ".agentcodex/imports/ecc/skills/frontend-design/SKILL.md"
+    },
+    {
+      "id": "frontend-patterns",
+      "path": ".agentcodex/imports/ecc/skills/frontend-patterns/SKILL.md"
+    },
+    {
+      "id": "frontend-slides",
+      "path": ".agentcodex/imports/ecc/skills/frontend-slides/SKILL.md"
+    },
+    {
+      "id": "gan-style-harness",
+      "path": ".agentcodex/imports/ecc/skills/gan-style-harness/SKILL.md"
+    },
+    {
+      "id": "gateguard",
+      "path": ".agentcodex/imports/ecc/skills/gateguard/SKILL.md"
+    },
+    {
+      "id": "git-workflow",
+      "path": ".agentcodex/imports/ecc/skills/git-workflow/SKILL.md"
+    },
+    {
+      "id": "github-ops",
+      "path": ".agentcodex/imports/ecc/skills/github-ops/SKILL.md"
+    },
+    {
+      "id": "golang-patterns",
+      "path": ".agentcodex/imports/ecc/skills/golang-patterns/SKILL.md"
+    },
+    {
+      "id": "golang-testing",
+      "path": ".agentcodex/imports/ecc/skills/golang-testing/SKILL.md"
+    },
+    {
+      "id": "google-workspace-ops",
+      "path": ".agentcodex/imports/ecc/skills/google-workspace-ops/SKILL.md"
+    },
+    {
+      "id": "healthcare-cdss-patterns",
+      "path": ".agentcodex/imports/ecc/skills/healthcare-cdss-patterns/SKILL.md"
+    },
+    {
+      "id": "healthcare-emr-patterns",
+      "path": ".agentcodex/imports/ecc/skills/healthcare-emr-patterns/SKILL.md"
+    },
+    {
+      "id": "healthcare-eval-harness",
+      "path": ".agentcodex/imports/ecc/skills/healthcare-eval-harness/SKILL.md"
+    },
+    {
+      "id": "healthcare-phi-compliance",
+      "path": ".agentcodex/imports/ecc/skills/healthcare-phi-compliance/SKILL.md"
+    },
+    {
+      "id": "hexagonal-architecture",
+      "path": ".agentcodex/imports/ecc/skills/hexagonal-architecture/SKILL.md"
+    },
+    {
+      "id": "hipaa-compliance",
+      "path": ".agentcodex/imports/ecc/skills/hipaa-compliance/SKILL.md"
+    },
+    {
+      "id": "hookify-rules",
+      "path": ".agentcodex/imports/ecc/skills/hookify-rules/SKILL.md"
+    },
+    {
+      "id": "inventory-demand-planning",
+      "path": ".agentcodex/imports/ecc/skills/inventory-demand-planning/SKILL.md"
+    },
+    {
+      "id": "investor-materials",
+      "path": ".agentcodex/imports/ecc/skills/investor-materials/SKILL.md"
+    },
+    {
+      "id": "investor-outreach",
+      "path": ".agentcodex/imports/ecc/skills/investor-outreach/SKILL.md"
+    },
+    {
+      "id": "iterative-retrieval",
+      "path": ".agentcodex/imports/ecc/skills/iterative-retrieval/SKILL.md"
+    },
+    {
+      "id": "java-coding-standards",
+      "path": ".agentcodex/imports/ecc/skills/java-coding-standards/SKILL.md"
+    },
+    {
+      "id": "jira-integration",
+      "path": ".agentcodex/imports/ecc/skills/jira-integration/SKILL.md"
+    },
+    {
+      "id": "jpa-patterns",
+      "path": ".agentcodex/imports/ecc/skills/jpa-patterns/SKILL.md"
+    },
+    {
+      "id": "knowledge-ops",
+      "path": ".agentcodex/imports/ecc/skills/knowledge-ops/SKILL.md"
+    },
+    {
+      "id": "kotlin-coroutines-flows",
+      "path": ".agentcodex/imports/ecc/skills/kotlin-coroutines-flows/SKILL.md"
+    },
+    {
+      "id": "kotlin-exposed-patterns",
+      "path": ".agentcodex/imports/ecc/skills/kotlin-exposed-patterns/SKILL.md"
+    },
+    {
+      "id": "kotlin-ktor-patterns",
+      "path": ".agentcodex/imports/ecc/skills/kotlin-ktor-patterns/SKILL.md"
+    },
+    {
+      "id": "kotlin-patterns",
+      "path": ".agentcodex/imports/ecc/skills/kotlin-patterns/SKILL.md"
+    },
+    {
+      "id": "kotlin-testing",
+      "path": ".agentcodex/imports/ecc/skills/kotlin-testing/SKILL.md"
+    },
+    {
+      "id": "laravel-patterns",
+      "path": ".agentcodex/imports/ecc/skills/laravel-patterns/SKILL.md"
+    },
+    {
+      "id": "laravel-plugin-discovery",
+      "path": ".agentcodex/imports/ecc/skills/laravel-plugin-discovery/SKILL.md"
+    },
+    {
+      "id": "laravel-security",
+      "path": ".agentcodex/imports/ecc/skills/laravel-security/SKILL.md"
+    },
+    {
+      "id": "laravel-tdd",
+      "path": ".agentcodex/imports/ecc/skills/laravel-tdd/SKILL.md"
+    },
+    {
+      "id": "laravel-verification",
+      "path": ".agentcodex/imports/ecc/skills/laravel-verification/SKILL.md"
+    },
+    {
+      "id": "lead-intelligence",
+      "path": ".agentcodex/imports/ecc/skills/lead-intelligence/SKILL.md"
+    },
+    {
+      "id": "liquid-glass-design",
+      "path": ".agentcodex/imports/ecc/skills/liquid-glass-design/SKILL.md"
+    },
+    {
+      "id": "llm-trading-agent-security",
+      "path": ".agentcodex/imports/ecc/skills/llm-trading-agent-security/SKILL.md"
+    },
+    {
+      "id": "logistics-exception-management",
+      "path": ".agentcodex/imports/ecc/skills/logistics-exception-management/SKILL.md"
+    },
+    {
+      "id": "manim-video",
+      "path": ".agentcodex/imports/ecc/skills/manim-video/SKILL.md"
+    },
+    {
+      "id": "market-research",
+      "path": ".agentcodex/imports/ecc/skills/market-research/SKILL.md"
+    },
+    {
+      "id": "mcp-server-patterns",
+      "path": ".agentcodex/imports/ecc/skills/mcp-server-patterns/SKILL.md"
+    },
+    {
+      "id": "messages-ops",
+      "path": ".agentcodex/imports/ecc/skills/messages-ops/SKILL.md"
+    },
+    {
+      "id": "nanoclaw-repl",
+      "path": ".agentcodex/imports/ecc/skills/nanoclaw-repl/SKILL.md"
+    },
+    {
+      "id": "nestjs-patterns",
+      "path": ".agentcodex/imports/ecc/skills/nestjs-patterns/SKILL.md"
+    },
+    {
+      "id": "nextjs-turbopack",
+      "path": ".agentcodex/imports/ecc/skills/nextjs-turbopack/SKILL.md"
+    },
+    {
+      "id": "nodejs-keccak256",
+      "path": ".agentcodex/imports/ecc/skills/nodejs-keccak256/SKILL.md"
+    },
+    {
+      "id": "nutrient-document-processing",
+      "path": ".agentcodex/imports/ecc/skills/nutrient-document-processing/SKILL.md"
+    },
+    {
+      "id": "nuxt4-patterns",
+      "path": ".agentcodex/imports/ecc/skills/nuxt4-patterns/SKILL.md"
+    },
+    {
+      "id": "openclaw-persona-forge",
+      "path": ".agentcodex/imports/ecc/skills/openclaw-persona-forge/SKILL.md"
+    },
+    {
+      "id": "opensource-pipeline",
+      "path": ".agentcodex/imports/ecc/skills/opensource-pipeline/SKILL.md"
+    },
+    {
+      "id": "perl-patterns",
+      "path": ".agentcodex/imports/ecc/skills/perl-patterns/SKILL.md"
+    },
+    {
+      "id": "perl-security",
+      "path": ".agentcodex/imports/ecc/skills/perl-security/SKILL.md"
+    },
+    {
+      "id": "perl-testing",
+      "path": ".agentcodex/imports/ecc/skills/perl-testing/SKILL.md"
+    },
+    {
+      "id": "plankton-code-quality",
+      "path": ".agentcodex/imports/ecc/skills/plankton-code-quality/SKILL.md"
+    },
+    {
+      "id": "postgres-patterns",
+      "path": ".agentcodex/imports/ecc/skills/postgres-patterns/SKILL.md"
+    },
+    {
+      "id": "product-capability",
+      "path": ".agentcodex/imports/ecc/skills/product-capability/SKILL.md"
+    },
+    {
+      "id": "product-lens",
+      "path": ".agentcodex/imports/ecc/skills/product-lens/SKILL.md"
+    },
+    {
+      "id": "production-scheduling",
+      "path": ".agentcodex/imports/ecc/skills/production-scheduling/SKILL.md"
+    },
+    {
+      "id": "project-flow-ops",
+      "path": ".agentcodex/imports/ecc/skills/project-flow-ops/SKILL.md"
+    },
+    {
+      "id": "prompt-optimizer",
+      "path": ".agentcodex/imports/ecc/skills/prompt-optimizer/SKILL.md"
+    },
+    {
+      "id": "python-patterns",
+      "path": ".agentcodex/imports/ecc/skills/python-patterns/SKILL.md"
+    },
+    {
+      "id": "python-testing",
+      "path": ".agentcodex/imports/ecc/skills/python-testing/SKILL.md"
+    },
+    {
+      "id": "pytorch-patterns",
+      "path": ".agentcodex/imports/ecc/skills/pytorch-patterns/SKILL.md"
+    },
+    {
+      "id": "quality-nonconformance",
+      "path": ".agentcodex/imports/ecc/skills/quality-nonconformance/SKILL.md"
+    },
+    {
+      "id": "ralphinho-rfc-pipeline",
+      "path": ".agentcodex/imports/ecc/skills/ralphinho-rfc-pipeline/SKILL.md"
+    },
+    {
+      "id": "regex-vs-llm-structured-text",
+      "path": ".agentcodex/imports/ecc/skills/regex-vs-llm-structured-text/SKILL.md"
+    },
+    {
+      "id": "remotion-video-creation",
+      "path": ".agentcodex/imports/ecc/skills/remotion-video-creation/SKILL.md"
+    },
+    {
+      "id": "repo-scan",
+      "path": ".agentcodex/imports/ecc/skills/repo-scan/SKILL.md"
+    },
+    {
+      "id": "research-ops",
+      "path": ".agentcodex/imports/ecc/skills/research-ops/SKILL.md"
+    },
+    {
+      "id": "returns-reverse-logistics",
+      "path": ".agentcodex/imports/ecc/skills/returns-reverse-logistics/SKILL.md"
+    },
+    {
+      "id": "rules-distill",
+      "path": ".agentcodex/imports/ecc/skills/rules-distill/SKILL.md"
+    },
+    {
+      "id": "rust-patterns",
+      "path": ".agentcodex/imports/ecc/skills/rust-patterns/SKILL.md"
+    },
+    {
+      "id": "rust-testing",
+      "path": ".agentcodex/imports/ecc/skills/rust-testing/SKILL.md"
+    },
+    {
+      "id": "safety-guard",
+      "path": ".agentcodex/imports/ecc/skills/safety-guard/SKILL.md"
+    },
+    {
+      "id": "santa-method",
+      "path": ".agentcodex/imports/ecc/skills/santa-method/SKILL.md"
+    },
+    {
+      "id": "search-first",
+      "path": ".agentcodex/imports/ecc/skills/search-first/SKILL.md"
+    },
+    {
+      "id": "security-bounty-hunter",
+      "path": ".agentcodex/imports/ecc/skills/security-bounty-hunter/SKILL.md"
+    },
+    {
+      "id": "security-review",
+      "path": ".agentcodex/imports/ecc/skills/security-review/SKILL.md"
+    },
+    {
+      "id": "security-scan",
+      "path": ".agentcodex/imports/ecc/skills/security-scan/SKILL.md"
+    },
+    {
+      "id": "seo",
+      "path": ".agentcodex/imports/ecc/skills/seo/SKILL.md"
+    },
+    {
+      "id": "skill-comply",
+      "path": ".agentcodex/imports/ecc/skills/skill-comply/SKILL.md"
+    },
+    {
+      "id": "skill-stocktake",
+      "path": ".agentcodex/imports/ecc/skills/skill-stocktake/SKILL.md"
+    },
+    {
+      "id": "social-graph-ranker",
+      "path": ".agentcodex/imports/ecc/skills/social-graph-ranker/SKILL.md"
+    },
+    {
+      "id": "springboot-patterns",
+      "path": ".agentcodex/imports/ecc/skills/springboot-patterns/SKILL.md"
+    },
+    {
+      "id": "springboot-security",
+      "path": ".agentcodex/imports/ecc/skills/springboot-security/SKILL.md"
+    },
+    {
+      "id": "springboot-tdd",
+      "path": ".agentcodex/imports/ecc/skills/springboot-tdd/SKILL.md"
+    },
+    {
+      "id": "springboot-verification",
+      "path": ".agentcodex/imports/ecc/skills/springboot-verification/SKILL.md"
+    },
+    {
+      "id": "strategic-compact",
+      "path": ".agentcodex/imports/ecc/skills/strategic-compact/SKILL.md"
+    },
+    {
+      "id": "swift-actor-persistence",
+      "path": ".agentcodex/imports/ecc/skills/swift-actor-persistence/SKILL.md"
+    },
+    {
+      "id": "swift-concurrency-6-2",
+      "path": ".agentcodex/imports/ecc/skills/swift-concurrency-6-2/SKILL.md"
+    },
+    {
+      "id": "swift-protocol-di-testing",
+      "path": ".agentcodex/imports/ecc/skills/swift-protocol-di-testing/SKILL.md"
+    },
+    {
+      "id": "swiftui-patterns",
+      "path": ".agentcodex/imports/ecc/skills/swiftui-patterns/SKILL.md"
+    },
+    {
+      "id": "tdd-workflow",
+      "path": ".agentcodex/imports/ecc/skills/tdd-workflow/SKILL.md"
+    },
+    {
+      "id": "team-builder",
+      "path": ".agentcodex/imports/ecc/skills/team-builder/SKILL.md"
+    },
+    {
+      "id": "terminal-ops",
+      "path": ".agentcodex/imports/ecc/skills/terminal-ops/SKILL.md"
+    },
+    {
+      "id": "token-budget-advisor",
+      "path": ".agentcodex/imports/ecc/skills/token-budget-advisor/SKILL.md"
+    },
+    {
+      "id": "ui-demo",
+      "path": ".agentcodex/imports/ecc/skills/ui-demo/SKILL.md"
+    },
+    {
+      "id": "unified-notifications-ops",
+      "path": ".agentcodex/imports/ecc/skills/unified-notifications-ops/SKILL.md"
+    },
+    {
+      "id": "verification-loop",
+      "path": ".agentcodex/imports/ecc/skills/verification-loop/SKILL.md"
+    },
+    {
+      "id": "video-editing",
+      "path": ".agentcodex/imports/ecc/skills/video-editing/SKILL.md"
+    },
+    {
+      "id": "videodb",
+      "path": ".agentcodex/imports/ecc/skills/videodb/SKILL.md"
+    },
+    {
+      "id": "visa-doc-translate",
+      "path": ".agentcodex/imports/ecc/skills/visa-doc-translate/SKILL.md"
+    },
+    {
+      "id": "workspace-surface-audit",
+      "path": ".agentcodex/imports/ecc/skills/workspace-surface-audit/SKILL.md"
+    },
+    {
+      "id": "x-api",
+      "path": ".agentcodex/imports/ecc/skills/x-api/SKILL.md"
+    }
+  ],
+  "rules": [
+    {
+      "ruleset": "common",
+      "name": "agents.md",
+      "path": ".agentcodex/imports/ecc/rules/common/agents.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "code-review.md",
+      "path": ".agentcodex/imports/ecc/rules/common/code-review.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/common/coding-style.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "development-workflow.md",
+      "path": ".agentcodex/imports/ecc/rules/common/development-workflow.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "git-workflow.md",
+      "path": ".agentcodex/imports/ecc/rules/common/git-workflow.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/common/hooks.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/common/patterns.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "performance.md",
+      "path": ".agentcodex/imports/ecc/rules/common/performance.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/common/security.md"
+    },
+    {
+      "ruleset": "common",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/common/testing.md"
+    },
+    {
+      "ruleset": "cpp",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/cpp/coding-style.md"
+    },
+    {
+      "ruleset": "cpp",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/cpp/hooks.md"
+    },
+    {
+      "ruleset": "cpp",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/cpp/patterns.md"
+    },
+    {
+      "ruleset": "cpp",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/cpp/security.md"
+    },
+    {
+      "ruleset": "cpp",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/cpp/testing.md"
+    },
+    {
+      "ruleset": "csharp",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/csharp/coding-style.md"
+    },
+    {
+      "ruleset": "csharp",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/csharp/hooks.md"
+    },
+    {
+      "ruleset": "csharp",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/csharp/patterns.md"
+    },
+    {
+      "ruleset": "csharp",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/csharp/security.md"
+    },
+    {
+      "ruleset": "csharp",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/csharp/testing.md"
+    },
+    {
+      "ruleset": "dart",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/dart/coding-style.md"
+    },
+    {
+      "ruleset": "dart",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/dart/hooks.md"
+    },
+    {
+      "ruleset": "dart",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/dart/patterns.md"
+    },
+    {
+      "ruleset": "dart",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/dart/security.md"
+    },
+    {
+      "ruleset": "dart",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/dart/testing.md"
+    },
+    {
+      "ruleset": "golang",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/golang/coding-style.md"
+    },
+    {
+      "ruleset": "golang",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/golang/hooks.md"
+    },
+    {
+      "ruleset": "golang",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/golang/patterns.md"
+    },
+    {
+      "ruleset": "golang",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/golang/security.md"
+    },
+    {
+      "ruleset": "golang",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/golang/testing.md"
+    },
+    {
+      "ruleset": "java",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/java/coding-style.md"
+    },
+    {
+      "ruleset": "java",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/java/hooks.md"
+    },
+    {
+      "ruleset": "java",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/java/patterns.md"
+    },
+    {
+      "ruleset": "java",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/java/security.md"
+    },
+    {
+      "ruleset": "java",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/java/testing.md"
+    },
+    {
+      "ruleset": "kotlin",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/kotlin/coding-style.md"
+    },
+    {
+      "ruleset": "kotlin",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/kotlin/hooks.md"
+    },
+    {
+      "ruleset": "kotlin",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/kotlin/patterns.md"
+    },
+    {
+      "ruleset": "kotlin",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/kotlin/security.md"
+    },
+    {
+      "ruleset": "kotlin",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/kotlin/testing.md"
+    },
+    {
+      "ruleset": "perl",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/perl/coding-style.md"
+    },
+    {
+      "ruleset": "perl",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/perl/hooks.md"
+    },
+    {
+      "ruleset": "perl",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/perl/patterns.md"
+    },
+    {
+      "ruleset": "perl",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/perl/security.md"
+    },
+    {
+      "ruleset": "perl",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/perl/testing.md"
+    },
+    {
+      "ruleset": "php",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/php/coding-style.md"
+    },
+    {
+      "ruleset": "php",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/php/hooks.md"
+    },
+    {
+      "ruleset": "php",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/php/patterns.md"
+    },
+    {
+      "ruleset": "php",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/php/security.md"
+    },
+    {
+      "ruleset": "php",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/php/testing.md"
+    },
+    {
+      "ruleset": "python",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/python/coding-style.md"
+    },
+    {
+      "ruleset": "python",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/python/hooks.md"
+    },
+    {
+      "ruleset": "python",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/python/patterns.md"
+    },
+    {
+      "ruleset": "python",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/python/security.md"
+    },
+    {
+      "ruleset": "python",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/python/testing.md"
+    },
+    {
+      "ruleset": "rust",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/rust/coding-style.md"
+    },
+    {
+      "ruleset": "rust",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/rust/hooks.md"
+    },
+    {
+      "ruleset": "rust",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/rust/patterns.md"
+    },
+    {
+      "ruleset": "rust",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/rust/security.md"
+    },
+    {
+      "ruleset": "rust",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/rust/testing.md"
+    },
+    {
+      "ruleset": "swift",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/swift/coding-style.md"
+    },
+    {
+      "ruleset": "swift",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/swift/hooks.md"
+    },
+    {
+      "ruleset": "swift",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/swift/patterns.md"
+    },
+    {
+      "ruleset": "swift",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/swift/security.md"
+    },
+    {
+      "ruleset": "swift",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/swift/testing.md"
+    },
+    {
+      "ruleset": "typescript",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/typescript/coding-style.md"
+    },
+    {
+      "ruleset": "typescript",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/typescript/hooks.md"
+    },
+    {
+      "ruleset": "typescript",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/typescript/patterns.md"
+    },
+    {
+      "ruleset": "typescript",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/typescript/security.md"
+    },
+    {
+      "ruleset": "typescript",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/typescript/testing.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/web/coding-style.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "design-quality.md",
+      "path": ".agentcodex/imports/ecc/rules/web/design-quality.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/web/hooks.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/web/patterns.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "performance.md",
+      "path": ".agentcodex/imports/ecc/rules/web/performance.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/web/security.md"
+    },
+    {
+      "ruleset": "web",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/web/testing.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "agents.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/agents.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "code-review.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/code-review.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "coding-style.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/coding-style.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "development-workflow.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/development-workflow.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "git-workflow.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/git-workflow.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "hooks.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/hooks.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "patterns.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/patterns.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "performance.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/performance.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "security.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/security.md"
+    },
+    {
+      "ruleset": "zh",
+      "name": "testing.md",
+      "path": ".agentcodex/imports/ecc/rules/zh/testing.md"
+    }
+  ],
+  "schemas": [
+    ".agentcodex/imports/ecc/schemas/ecc-install-config.schema.json",
+    ".agentcodex/imports/ecc/schemas/hooks.schema.json",
+    ".agentcodex/imports/ecc/schemas/install-components.schema.json",
+    ".agentcodex/imports/ecc/schemas/install-modules.schema.json",
+    ".agentcodex/imports/ecc/schemas/install-profiles.schema.json",
+    ".agentcodex/imports/ecc/schemas/install-state.schema.json",
+    ".agentcodex/imports/ecc/schemas/package-manager.schema.json",
+    ".agentcodex/imports/ecc/schemas/plugin.schema.json",
+    ".agentcodex/imports/ecc/schemas/provenance.schema.json",
+    ".agentcodex/imports/ecc/schemas/state-store.schema.json"
+  ],
+  "ci_validators": [
+    ".agentcodex/imports/ecc/scripts_ci/catalog.js",
+    ".agentcodex/imports/ecc/scripts_ci/check-unicode-safety.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-agents.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-commands.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-hooks.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-install-manifests.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-no-personal-paths.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-rules.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-skills.js",
+    ".agentcodex/imports/ecc/scripts_ci/validate-workflow-security.js"
+  ],
+  "docs": {
+    "english": [
+      ".agentcodex/imports/ecc/docs/ANTIGRAVITY-GUIDE.md",
+      ".agentcodex/imports/ecc/docs/ARCHITECTURE-IMPROVEMENTS.md",
+      ".agentcodex/imports/ecc/docs/COMMAND-AGENT-MAP.md",
+      ".agentcodex/imports/ecc/docs/ECC-2.0-REFERENCE-ARCHITECTURE.md",
+      ".agentcodex/imports/ecc/docs/ECC-2.0-SESSION-ADAPTER-DISCOVERY.md",
+      ".agentcodex/imports/ecc/docs/HERMES-OPENCLAW-MIGRATION.md",
+      ".agentcodex/imports/ecc/docs/HERMES-SETUP.md",
+      ".agentcodex/imports/ecc/docs/MANUAL-ADAPTATION-GUIDE.md",
+      ".agentcodex/imports/ecc/docs/MEGA-PLAN-REPO-PROMPTS-2026-03-12.md",
+      ".agentcodex/imports/ecc/docs/PHASE1-ISSUE-BUNDLE-2026-03-12.md",
+      ".agentcodex/imports/ecc/docs/PR-399-REVIEW-2026-03-12.md",
+      ".agentcodex/imports/ecc/docs/PR-QUEUE-TRIAGE-2026-03-13.md",
+      ".agentcodex/imports/ecc/docs/SELECTIVE-INSTALL-ARCHITECTURE.md",
+      ".agentcodex/imports/ecc/docs/SELECTIVE-INSTALL-DESIGN.md",
+      ".agentcodex/imports/ecc/docs/SESSION-ADAPTER-CONTRACT.md",
+      ".agentcodex/imports/ecc/docs/SKILL-DEVELOPMENT-GUIDE.md",
+      ".agentcodex/imports/ecc/docs/SKILL-PLACEMENT-POLICY.md",
+      ".agentcodex/imports/ecc/docs/TROUBLESHOOTING.md",
+      ".agentcodex/imports/ecc/docs/business/metrics-and-sponsorship.md",
+      ".agentcodex/imports/ecc/docs/business/social-launch-copy.md",
+      ".agentcodex/imports/ecc/docs/capability-surface-selection.md",
+      ".agentcodex/imports/ecc/docs/continuous-learning-v2-spec.md",
+      ".agentcodex/imports/ecc/docs/examples/product-capability-template.md",
+      ".agentcodex/imports/ecc/docs/examples/project-guidelines-template.md",
+      ".agentcodex/imports/ecc/docs/fixes/HOOK-FIX-20260421-ADDENDUM.md",
+      ".agentcodex/imports/ecc/docs/fixes/HOOK-FIX-20260421.md",
+      ".agentcodex/imports/ecc/docs/fixes/INSTALL-HOOK-WRAPPER-FIX-20260422.md",
+      ".agentcodex/imports/ecc/docs/fixes/PATCH-SETTINGS-SIMPLE-FIX-20260422.md",
+      ".agentcodex/imports/ecc/docs/hook-bug-workarounds.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/README.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/architect.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/planner.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/python-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/README.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/eval.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/evolve.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/instinct-export.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/instinct-import.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/instinct-status.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/learn.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/multi-backend.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/multi-execute.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/multi-frontend.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/multi-plan.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/multi-workflow.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/pm2.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/python-review.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/sessions.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/skill-create.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/update-codemaps.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/commands/verify.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/contexts/dev.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/contexts/research.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/contexts/review.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/examples/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/examples/user-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/plugins/README.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/README.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/agents.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/coding-style.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/git-workflow.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/hooks.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/patterns.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/performance.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/security.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/rules/testing.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/README.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/backend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/clickhouse-io/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/configure-ecc/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/continuous-learning/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/continuous-learning-v2/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/continuous-learning-v2/agents/observer.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/cpp-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/django-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/django-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/django-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/django-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/eval-harness/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/frontend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/golang-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/golang-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/iterative-retrieval/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/java-coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/jpa-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/nutrient-document-processing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/postgres-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/project-guidelines-example/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/python-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/python-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/security-review/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/security-review/cloud-infrastructure-security.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/security-scan/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/springboot-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/springboot-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/springboot-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/springboot-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/strategic-compact/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/tdd-workflow/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ja-JP/skills/verification-loop/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/README.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/TERMINOLOGY.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/architect.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/planner.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/eval.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/learn.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/plan.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/update-codemaps.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/commands/verify.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/examples/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/examples/django-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/examples/go-microservice-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/examples/rust-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/examples/saas-nextjs-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/examples/user-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/agents.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/coding-style.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/git-workflow.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/hooks.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/patterns.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/performance.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/security.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/rules/testing.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/backend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/clickhouse-io/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/continuous-learning/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/continuous-learning-v2/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/eval-harness/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/frontend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/golang-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/golang-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/iterative-retrieval/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/postgres-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/security-review/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/security-review/cloud-infrastructure-security.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/strategic-compact/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/tdd-workflow/SKILL.md",
+      ".agentcodex/imports/ecc/docs/ko-KR/skills/verification-loop/SKILL.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/README.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/TERMINOLOGY.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/architect.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/planner.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/eval.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/learn.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/plan.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/update-codemaps.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/commands/verify.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/examples/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/examples/django-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/examples/go-microservice-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/examples/rust-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/examples/saas-nextjs-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/examples/user-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/agents.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/coding-style.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/git-workflow.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/hooks.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/patterns.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/performance.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/security.md",
+      ".agentcodex/imports/ecc/docs/pt-BR/rules/testing.md",
+      ".agentcodex/imports/ecc/docs/releases/1.10.0/discussion-announcement.md",
+      ".agentcodex/imports/ecc/docs/releases/1.10.0/release-notes.md",
+      ".agentcodex/imports/ecc/docs/releases/1.10.0/x-thread.md",
+      ".agentcodex/imports/ecc/docs/releases/1.8.0/linkedin-post.md",
+      ".agentcodex/imports/ecc/docs/releases/1.8.0/reference-attribution.md",
+      ".agentcodex/imports/ecc/docs/releases/1.8.0/release-notes.md",
+      ".agentcodex/imports/ecc/docs/releases/1.8.0/x-quote-eval-skills.md",
+      ".agentcodex/imports/ecc/docs/releases/1.8.0/x-quote-plankton-deslop.md",
+      ".agentcodex/imports/ecc/docs/releases/1.8.0/x-thread.md",
+      ".agentcodex/imports/ecc/docs/skill-adaptation-policy.md",
+      ".agentcodex/imports/ecc/docs/token-optimization.md",
+      ".agentcodex/imports/ecc/docs/tr/AGENTS.md",
+      ".agentcodex/imports/ecc/docs/tr/CHANGELOG.md",
+      ".agentcodex/imports/ecc/docs/tr/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/tr/CODE_OF_CONDUCT.md",
+      ".agentcodex/imports/ecc/docs/tr/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs/tr/README.md",
+      ".agentcodex/imports/ecc/docs/tr/SECURITY.md",
+      ".agentcodex/imports/ecc/docs/tr/SPONSORING.md",
+      ".agentcodex/imports/ecc/docs/tr/SPONSORS.md",
+      ".agentcodex/imports/ecc/docs/tr/TERMINOLOGY.md",
+      ".agentcodex/imports/ecc/docs/tr/TROUBLESHOOTING.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/architect.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/chief-of-staff.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/cpp-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/cpp-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/docs-lookup.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/flutter-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/harness-optimizer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/java-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/java-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/kotlin-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/kotlin-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/loop-operator.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/planner.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/python-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/pytorch-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/rust-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/rust-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs/tr/agents/typescript-reviewer.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/eval.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/evolve.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/instinct-export.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/instinct-import.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/instinct-status.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/learn-eval.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/learn.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/multi-backend.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/multi-execute.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/multi-frontend.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/multi-plan.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/multi-workflow.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/plan.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/pm2.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/sessions.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/skill-create.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs/tr/commands/verify.md",
+      ".agentcodex/imports/ecc/docs/tr/contexts/dev.md",
+      ".agentcodex/imports/ecc/docs/tr/contexts/research.md",
+      ".agentcodex/imports/ecc/docs/tr/contexts/review.md",
+      ".agentcodex/imports/ecc/docs/tr/examples/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/tr/examples/README.md",
+      ".agentcodex/imports/ecc/docs/tr/examples/user-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/README.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/agents.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/coding-style.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/development-workflow.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/git-workflow.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/hooks.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/patterns.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/performance.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/security.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/common/testing.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/golang/coding-style.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/golang/hooks.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/golang/patterns.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/golang/security.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/golang/testing.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/python/coding-style.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/python/hooks.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/python/patterns.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/python/security.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/python/testing.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/typescript/coding-style.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/typescript/hooks.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/typescript/patterns.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/typescript/security.md",
+      ".agentcodex/imports/ecc/docs/tr/rules/typescript/testing.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/api-design/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/backend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/continuous-learning/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/continuous-learning-v2/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/database-migrations/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/deployment-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/django-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/docker-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/e2e-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/eval-harness/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/frontend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/golang-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/golang-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/jpa-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/kotlin-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/kotlin-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/laravel-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/laravel-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/laravel-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/laravel-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/nextjs-turbopack/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/postgres-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/python-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/python-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/rust-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/rust-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/security-review/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/springboot-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/springboot-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/springboot-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/springboot-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/tdd-workflow/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/skills/verification-loop/SKILL.md",
+      ".agentcodex/imports/ecc/docs/tr/the-longform-guide.md",
+      ".agentcodex/imports/ecc/docs/tr/the-security-guide.md",
+      ".agentcodex/imports/ecc/docs/tr/the-shortform-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/AGENTS.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/CHANGELOG.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/CODE_OF_CONDUCT.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/README.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/SECURITY.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/SPONSORING.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/SPONSORS.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/TROUBLESHOOTING.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/architect.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/chief-of-staff.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/cpp-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/cpp-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/docs-lookup.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/flutter-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/harness-optimizer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/java-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/java-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/kotlin-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/kotlin-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/loop-operator.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/planner.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/python-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/pytorch-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/rust-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/rust-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/agents/typescript-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/aside.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/claw.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/context-budget.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/cpp-build.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/cpp-review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/cpp-test.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/devfleet.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/docs.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/eval.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/evolve.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/gradle-build.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/harness-audit.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/instinct-export.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/instinct-import.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/instinct-status.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/kotlin-build.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/kotlin-review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/kotlin-test.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/learn-eval.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/learn.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/loop-start.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/loop-status.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/model-route.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/multi-backend.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/multi-execute.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/multi-frontend.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/multi-plan.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/multi-workflow.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/plan.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/pm2.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/projects.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/promote.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/prompt-optimize.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/prune.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/python-review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/quality-gate.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/resume-session.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/rules-distill.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/rust-build.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/rust-review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/rust-test.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/save-session.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/sessions.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/skill-create.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/skill-health.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/update-codemaps.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/commands/verify.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/contexts/dev.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/contexts/research.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/contexts/review.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/django-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/go-microservice-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/laravel-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/rust-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/saas-nextjs-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/examples/user-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/hooks/README.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/plugins/README.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/README.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/agents.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/development-workflow.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/git-workflow.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/performance.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/common/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/cpp/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/cpp/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/cpp/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/cpp/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/cpp/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/csharp/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/csharp/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/csharp/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/csharp/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/csharp/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/golang/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/golang/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/golang/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/golang/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/golang/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/java/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/java/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/java/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/java/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/java/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/kotlin/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/kotlin/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/kotlin/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/kotlin/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/kotlin/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/perl/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/perl/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/perl/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/perl/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/perl/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/php/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/php/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/php/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/php/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/php/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/python/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/python/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/python/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/python/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/python/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/rust/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/rust/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/rust/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/rust/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/rust/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/swift/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/swift/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/swift/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/swift/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/swift/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/typescript/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/typescript/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/typescript/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/typescript/security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/rules/typescript/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/agent-eval/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/agent-harness-construction/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/agentic-engineering/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/ai-first-engineering/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/ai-regression-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/android-clean-architecture/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/api-design/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/architecture-decision-records/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/article-writing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/autonomous-loops/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/backend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/blueprint/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/browser-qa/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/bun-runtime/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/carrier-relationship-management/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/claude-api/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/claude-devfleet/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/clickhouse-io/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/codebase-onboarding/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/compose-multiplatform-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/configure-ecc/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/content-engine/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/content-hash-cache-pattern/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/context-budget/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/continuous-agent-loop/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/continuous-learning/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/continuous-learning-v2/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/continuous-learning-v2/agents/observer.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/cost-aware-llm-pipeline/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/cpp-coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/cpp-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/crosspost/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/customs-trade-compliance/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/data-scraper-agent/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/database-migrations/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/deep-research/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/deployment-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/django-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/django-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/django-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/django-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/dmux-workflows/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/docker-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/documentation-lookup/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/e2e-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/energy-procurement/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/enterprise-agent-ops/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/eval-harness/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/exa-search/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/fal-ai-media/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/flutter-dart-code-review/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/foundation-models-on-device/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/frontend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/frontend-slides/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/frontend-slides/STYLE_PRESETS.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/golang-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/golang-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/inventory-demand-planning/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/investor-materials/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/investor-outreach/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/iterative-retrieval/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/java-coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/jpa-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/kotlin-coroutines-flows/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/kotlin-exposed-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/kotlin-ktor-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/kotlin-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/kotlin-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/laravel-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/laravel-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/laravel-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/laravel-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/liquid-glass-design/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/logistics-exception-management/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/market-research/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/mcp-server-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/nanoclaw-repl/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/nextjs-turbopack/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/nutrient-document-processing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/nuxt4-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/perl-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/perl-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/perl-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/plankton-code-quality/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/postgres-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/production-scheduling/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/prompt-optimizer/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/python-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/python-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/pytorch-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/quality-nonconformance/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/ralphinho-rfc-pipeline/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/regex-vs-llm-structured-text/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/returns-reverse-logistics/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/rules-distill/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/rust-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/rust-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/search-first/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/security-review/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/security-review/cloud-infrastructure-security.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/security-scan/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/skill-stocktake/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/springboot-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/springboot-security/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/springboot-tdd/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/springboot-verification/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/strategic-compact/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/swift-actor-persistence/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/swift-concurrency-6-2/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/swift-protocol-di-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/swiftui-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/tdd-workflow/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/team-builder/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/verification-loop/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/video-editing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/api-reference.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/capture-reference.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/capture.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/editor.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/generative.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/rtstream-reference.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/rtstream.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/search.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/streaming.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/videodb/reference/use-cases.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/visa-doc-translate/README.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/visa-doc-translate/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/skills/x-api/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/the-longform-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/the-openclaw-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/the-security-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-CN/the-shortform-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/README.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/TERMINOLOGY.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/architect.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/planner.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/eval.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/learn.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/plan.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/update-codemaps.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/commands/verify.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/agents.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/coding-style.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/git-workflow.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/hooks.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/patterns.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/performance.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/security.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/rules/testing.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/backend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/clickhouse-io/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/coding-standards/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/continuous-learning/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/continuous-learning-v2/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/eval-harness/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/frontend-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/golang-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/golang-testing/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/iterative-retrieval/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/postgres-patterns/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/project-guidelines-example/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/security-review/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/security-review/cloud-infrastructure-security.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/strategic-compact/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/tdd-workflow/SKILL.md",
+      ".agentcodex/imports/ecc/docs/zh-TW/skills/verification-loop/SKILL.md"
+    ],
+    "portuguese_brazil": [
+      ".agentcodex/imports/ecc/docs_pt_br/CONTRIBUTING.md",
+      ".agentcodex/imports/ecc/docs_pt_br/README.md",
+      ".agentcodex/imports/ecc/docs_pt_br/TERMINOLOGY.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/architect.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/build-error-resolver.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/code-reviewer.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/database-reviewer.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/doc-updater.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/e2e-runner.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/go-build-resolver.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/go-reviewer.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/planner.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/refactor-cleaner.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/security-reviewer.md",
+      ".agentcodex/imports/ecc/docs_pt_br/agents/tdd-guide.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/build-fix.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/checkpoint.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/code-review.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/e2e.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/eval.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/go-build.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/go-review.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/go-test.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/learn.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/orchestrate.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/plan.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/refactor-clean.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/setup-pm.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/tdd.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/test-coverage.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/update-codemaps.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/update-docs.md",
+      ".agentcodex/imports/ecc/docs_pt_br/commands/verify.md",
+      ".agentcodex/imports/ecc/docs_pt_br/examples/CLAUDE.md",
+      ".agentcodex/imports/ecc/docs_pt_br/examples/django-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs_pt_br/examples/go-microservice-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs_pt_br/examples/rust-api-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs_pt_br/examples/saas-nextjs-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs_pt_br/examples/user-CLAUDE.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/agents.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/coding-style.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/git-workflow.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/hooks.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/patterns.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/performance.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/security.md",
+      ".agentcodex/imports/ecc/docs_pt_br/rules/testing.md"
+    ]
+  },
+  "activation_policy": {
+    "default": "reference-only",
+    "no_duplicate_rule": "Do not duplicate active surfaces: if AgentCodex already has an active command or role with the same filename, keep the ECC source as upstream reference and do not copy it into docs/commands or docs/roles.",
+    "porting_rule": "Port only through an explicit AgentCodex procedure, role, profile, or validator change with tests.",
+    "runtime_rule": "Keep Claude/OpenCode hook or slash-command assumptions in the imported layer unless they are normalized to Codex file-based behavior."
+  }
+}

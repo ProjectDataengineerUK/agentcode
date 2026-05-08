@@ -1,0 +1,337 @@
+{
+  "version": "0.1.0",
+  "feature_scaffold_root": "example-project-standard",
+  "completion_rule": "Do not treat the project as complete until all required blocks are implemented or explicitly justified as not applicable.",
+  "blocks": [
+    {
+      "id": "contexto",
+      "phase": "define",
+      "required": true,
+      "role": "workflow-definer",
+      "artifacts": [
+        {
+          "path": "definition/problem.md",
+          "required_markers": ["problem statement", "why now", "consequences if ignored"]
+        },
+        {
+          "path": "definition/scope.md",
+          "required_markers": ["in scope", "out of scope", "assumptions", "constraints"]
+        },
+        {
+          "path": "definition/stakeholders.md",
+          "required_markers": ["business owner", "technical owner", "approvers", "downstream consumers"]
+        },
+        {
+          "path": "definition/domain.md",
+          "required_markers": ["business context", "core entities", "lifecycle", "domain events"]
+        },
+        {
+          "path": "definition/glossary.md",
+          "required_markers": ["Term", "Meaning"]
+        }
+      ]
+    },
+    {
+      "id": "arquitetura",
+      "phase": "design",
+      "required": true,
+      "role": "workflow-designer",
+      "artifacts": [
+        {
+          "path": "design/architecture.md",
+          "required_markers": ["overview", "major components", "boundaries", "tradeoffs"]
+        },
+        {
+          "path": "design/data-flow.md",
+          "required_markers": ["inputs", "transformations", "outputs", "failure paths"]
+        },
+        "design/system-diagram.md",
+        "design/decisions/README.md"
+      ]
+    },
+    {
+      "id": "dados",
+      "phase": "design",
+      "required": true,
+      "role": "schema-designer",
+      "artifacts": [
+        {
+          "path": "data/sources.md",
+          "required_markers": ["source", "owner", "refresh cadence", "trust level"]
+        },
+        {
+          "path": "data/storage.md",
+          "required_markers": ["storage systems", "formats", "partitioning", "retention"]
+        },
+        "data/schemas/README.md",
+        "data/models/README.md",
+        "data/transformations/README.md"
+      ]
+    },
+    {
+      "id": "governanca",
+      "phase": "design",
+      "required": true,
+      "role": "data-governance-architect",
+      "artifacts": [
+        {
+          "path": "controls/governance.md",
+          "required_markers": ["decision model", "review cadence", "exceptions"]
+        },
+        {
+          "path": "controls/ownership.md",
+          "required_markers": ["product owner", "technical owner", "data steward", "on-call owner"]
+        },
+        {
+          "path": "controls/classification.md",
+          "required_markers": ["data sensitivity", "criticality", "regulated data", "impact tier"]
+        },
+        {
+          "path": "controls/policies.md",
+          "required_markers": ["applicable policies", "retention", "review obligations", "policy exceptions"]
+        }
+      ]
+    },
+    {
+      "id": "lineage",
+      "phase": "design",
+      "required": true,
+      "role": "lineage-analyst",
+      "artifacts": [
+        {
+          "path": "metadata/lineage.md",
+          "required_markers": ["upstreams", "transformations", "downstreams", "critical dependencies"]
+        },
+        {
+          "path": "metadata/impact-analysis.md",
+          "required_markers": ["change scenarios", "affected consumers", "rollback implications", "mitigation plan"]
+        }
+      ]
+    },
+    {
+      "id": "execucao",
+      "phase": "build",
+      "required": true,
+      "role": "pipeline-architect",
+      "artifacts": [
+        {
+          "path": "execution/orchestration.md",
+          "required_markers": ["engine", "dependencies", "retries", "backfill strategy"]
+        },
+        {
+          "path": "execution/schedules.md",
+          "required_markers": ["cadence", "SLAs", "cutoff times", "ordering constraints"]
+        },
+        "execution/pipelines/README.md"
+      ]
+    },
+    {
+      "id": "validacao",
+      "phase": "build",
+      "required": true,
+      "role": "data-quality-analyst",
+      "artifacts": [
+        {
+          "path": "validation/data-quality.md",
+          "required_markers": ["dimensions", "checks", "thresholds", "failure handling"]
+        },
+        {
+          "path": "validation/rules.md",
+          "required_markers": ["invariants", "acceptance rules", "blocking failures", "review gates"]
+        },
+        "validation/tests/README.md"
+      ]
+    },
+    {
+      "id": "observabilidade",
+      "phase": "build",
+      "required": true,
+      "role": "data-observability-engineer",
+      "artifacts": [
+        {
+          "path": "operations/observability/metrics.md",
+          "required_markers": ["KPIs", "SLIs", "freshness", "throughput"]
+        },
+        {
+          "path": "operations/observability/alerts.md",
+          "required_markers": ["alert condition", "severity", "target", "suppression rules"]
+        },
+        {
+          "path": "operations/observability/dashboards.md",
+          "required_markers": ["dashboard", "owner", "question answered"]
+        },
+        {
+          "path": "operations/observability/logs.md",
+          "required_markers": ["required events", "correlation keys", "retention", "restricted fields"]
+        }
+      ]
+    },
+    {
+      "id": "monitoramento sentinela",
+      "phase": "build",
+      "required": true,
+      "role": "data-observability-engineer",
+      "artifacts": [
+        {
+          "path": "operations/sentinel/architecture.md",
+          "required_markers": ["watcher crew", "analyzer crew", "interpreter crew", "knowledge layer"]
+        },
+        {
+          "path": "operations/sentinel/watchers.md",
+          "required_markers": ["lambda watcher", "parser watcher", "s3 flow watcher", "pipeline watcher", "quality watcher", "medallion watcher"]
+        },
+        {
+          "path": "operations/sentinel/analyzers.md",
+          "required_markers": ["z-score detector", "trend regressor", "pattern matcher", "diff analyzer"]
+        },
+        {
+          "path": "operations/sentinel/interpreters.md",
+          "required_markers": ["context builder", "genai interpreter", "reporter", "dispatcher"]
+        },
+        {
+          "path": "operations/sentinel/knowledge.md",
+          "required_markers": ["explanations", "suggested actions", "severity", "confidence", "references", "kb auto-update"]
+        },
+        {
+          "path": "operations/sentinel/knowledge-feed.md",
+          "required_markers": ["log sources", "knowledge extraction rules", "review before kb update", "memory candidate flow"]
+        },
+        {
+          "path": "operations/sentinel/runbooks.md",
+          "required_markers": ["event-driven state", "autonomous agent team", "role + goal + tools", "escalation path"]
+        },
+        {
+          "path": "operations/sentinel/supervision.md",
+          "required_markers": ["human approval points", "supervision model", "blocked autonomous actions", "operator override"]
+        },
+        {
+          "path": "operations/sentinel/quarantine.md",
+          "required_markers": ["quarantine triggers", "containment actions", "release criteria", "audit trail"]
+        }
+      ]
+    },
+    {
+      "id": "access control",
+      "phase": "design",
+      "required": true,
+      "role": "platform-access-engineer",
+      "artifacts": [
+        {
+          "path": "security/access-control.md",
+          "required_markers": ["trust boundaries", "authn/authz model", "privileged paths", "approval flow"]
+        },
+        {
+          "path": "security/roles.md",
+          "required_markers": ["human roles", "service roles", "owners", "approvers"]
+        },
+        {
+          "path": "security/permissions.md",
+          "required_markers": ["resources", "grants", "least privilege notes", "segregation of duties"]
+        },
+        {
+          "path": "security/secrets.md",
+          "required_markers": ["secret locations", "rotation", "access path", "prohibited handling"]
+        }
+      ]
+    },
+    {
+      "id": "data contracts",
+      "phase": "design",
+      "required": true,
+      "role": "data-contracts-engineer",
+      "artifacts": [
+        {
+          "path": "contracts/compatibility.md",
+          "required_markers": ["compatibility model", "breaking change rules", "consumer impact process"]
+        },
+        {
+          "path": "contracts/versioning.md",
+          "required_markers": ["versioning scheme", "rollout policy", "deprecation window", "rollback policy"]
+        },
+        "contracts/schema-contracts/README.md",
+        "contracts/api-contracts/README.md"
+      ]
+    },
+    {
+      "id": "operacao",
+      "phase": "ship",
+      "required": true,
+      "role": "data-platform-engineer",
+      "artifacts": [
+        "integrations/README.md",
+        "kb/domain/README.md",
+        "kb/patterns/README.md",
+        "kb/decisions/README.md"
+      ]
+    },
+    {
+      "id": "deploy",
+      "phase": "ship",
+      "required": true,
+      "role": "terraform-specialist",
+      "artifacts": [
+        {
+          "path": "deploy/environments.md",
+          "required_markers": ["environments", "promotion path", "environment differences", "owners"]
+        },
+        {
+          "path": "deploy/ci-cd.md",
+          "required_markers": ["build stages", "approval gates", "deployment checks", "rollback path"]
+        },
+        "deploy/infra/README.md"
+      ]
+    },
+    {
+      "id": "custo",
+      "phase": "ship",
+      "required": true,
+      "role": "data-platform-engineer",
+      "artifacts": [
+        {
+          "path": "operations/cost/cost-model.md",
+          "required_markers": ["cost drivers", "volume assumptions", "platform assumptions", "environment differences"]
+        },
+        {
+          "path": "operations/cost/optimization.md",
+          "required_markers": [
+            "optimization levers",
+            "tradeoffs",
+            "review cadence",
+            "alert thresholds",
+            "model routing policy",
+            "automatic selection evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compliance",
+      "phase": "ship",
+      "required": true,
+      "role": "data-governance-architect",
+      "artifacts": [
+        {
+          "path": "compliance/regulations.md",
+          "required_markers": ["applicable regulations", "data residency", "retention obligations", "open questions"]
+        },
+        {
+          "path": "compliance/audit.md",
+          "required_markers": ["evidence required", "review cadence", "responsible owners", "known gaps"]
+        }
+      ]
+    },
+    {
+      "id": "agentes definidos (se houver)",
+      "phase": "design",
+      "required": false,
+      "role": "genai-architect",
+      "artifacts": [
+        "agents/NOT_APPLICABLE.md",
+        "agents/definitions/README.md",
+        "agents/tools/README.md",
+        "agents/prompts/README.md",
+        "agents/routing.md"
+      ]
+    }
+  ]
+}

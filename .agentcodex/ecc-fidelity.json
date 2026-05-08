@@ -1,0 +1,170 @@
+{
+  "version": "0.1.0",
+  "source": {
+    "name": "Everything-Claude-Code",
+    "root": ".agentcodex/imports/ecc",
+    "manifest": ".agentcodex/imports/manifest.json"
+  },
+  "preserved_surfaces": {
+    "agents_md": {
+      "required_files": [
+        ".agentcodex/imports/ecc/agents_md"
+      ],
+      "required_markers": [
+        "48 specialized agents",
+        "183 skills",
+        "79 commands",
+        "Workflow Surface Policy"
+      ]
+    },
+    "agents": {
+      "path": ".agentcodex/imports/ecc/agents",
+      "pattern": "*.md",
+      "min_files": 48
+    },
+    "commands": {
+      "path": ".agentcodex/imports/ecc/commands",
+      "pattern": "*.md",
+      "min_files": 79
+    },
+    "skills": {
+      "path": ".agentcodex/imports/ecc/skills",
+      "skill_entrypoint": "SKILL.md",
+      "min_skill_entrypoints": 183
+    },
+    "rules": {
+      "path": ".agentcodex/imports/ecc/rules",
+      "pattern": "*.md",
+      "exclude_names": [
+        "README.md"
+      ],
+      "min_files": 87
+    },
+    "contexts": {
+      "required_files": [
+        ".agentcodex/imports/ecc/contexts/dev.md",
+        ".agentcodex/imports/ecc/contexts/research.md",
+        ".agentcodex/imports/ecc/contexts/review.md"
+      ]
+    },
+    "codex_runtime_reference": {
+      "required_files": [
+        ".agentcodex/imports/ecc/codex/AGENTS.md",
+        ".agentcodex/imports/ecc/codex/config.toml",
+        ".agentcodex/imports/ecc/codex/agents/explorer.toml",
+        ".agentcodex/imports/ecc/codex/agents/reviewer.toml",
+        ".agentcodex/imports/ecc/codex/agents/docs-researcher.toml"
+      ]
+    },
+    "ci_validators": {
+      "required_files": [
+        ".agentcodex/imports/ecc/scripts_ci/catalog.js",
+        ".agentcodex/imports/ecc/scripts_ci/check-unicode-safety.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-agents.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-commands.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-hooks.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-install-manifests.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-no-personal-paths.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-rules.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-skills.js",
+        ".agentcodex/imports/ecc/scripts_ci/validate-workflow-security.js"
+      ]
+    },
+    "schemas": {
+      "path": ".agentcodex/imports/ecc/schemas",
+      "pattern": "*.json",
+      "min_files": 10
+    },
+    "manifests": {
+      "required_files": [
+        ".agentcodex/imports/ecc/manifests/install-components.json",
+        ".agentcodex/imports/ecc/manifests/install-modules.json",
+        ".agentcodex/imports/ecc/manifests/install-profiles.json"
+      ]
+    }
+  },
+  "active_adaptations": {
+    "codex_runtime": [
+      {
+        "path": ".codex/config.toml",
+        "required_markers": [
+          "multi_agent = true",
+          "agents.explorer",
+          "agents.reviewer",
+          "agents.domain_researcher"
+        ]
+      },
+      {
+        "path": ".codex/agents/explorer.toml",
+        "required_markers": [
+          "sandbox_mode = \"read-only\"",
+          "Trace actual files"
+        ]
+      },
+      {
+        "path": ".codex/agents/reviewer.toml",
+        "required_markers": [
+          "sandbox_mode = \"read-only\"",
+          "Review like an owner"
+        ]
+      },
+      {
+        "path": ".codex/agents/domain-researcher.toml",
+        "required_markers": [
+          "AgentSpec-derived model",
+          "Claude-only assumption"
+        ]
+      }
+    ],
+    "direct_role_matches": {
+      "min_matches": 13,
+      "roles": [
+        "architect.md",
+        "build-error-resolver.md",
+        "code-architect.md",
+        "code-reviewer.md",
+        "doc-updater.md",
+        "docs-lookup.md",
+        "performance-optimizer.md",
+        "planner.md",
+        "pr-test-analyzer.md",
+        "refactor-cleaner.md",
+        "security-reviewer.md",
+        "silent-failure-hunter.md",
+        "tdd-guide.md"
+      ]
+    },
+    "agentcodex_validation_stack": {
+      "required_files": [
+        "scripts/validate_agentcodex.py",
+        "scripts/check_bootstrapped_project.py",
+        "scripts/validate_plugin_manifest.py",
+        "scripts/package_plugin.py",
+        "scripts/control_plane_check.py",
+        "scripts/project_readiness_report.py",
+        "scripts/project_ship_gate.py",
+        "scripts/platform_health.py",
+        "scripts/maturity5_check.py",
+        ".agentcodex/scripts/validate_kb_contracts.py"
+      ]
+    },
+    "ported_ecc_validator_checks": {
+      "implemented_in": "scripts/validate_agentcodex.py",
+      "checks": [
+        "no-personal-paths",
+        "workflow-security",
+        "validate-rules",
+        "validate-skills",
+        "validate-commands"
+      ],
+      "test_file": ".agentcodex/tests/test_ecc_style_validators.py"
+    }
+  },
+  "intentional_differences": [
+    "AgentCodex treats ECC commands as raw reference material unless a command family is explicitly ported.",
+    "AgentCodex keeps project config lean and does not enable ECC's MCP-heavy defaults by default.",
+    "AgentCodex uses domain-researcher instead of ECC docs-researcher as the third project-local Codex agent.",
+    "AgentCodex keeps ECC skills preserved under imports until a first-class AgentCodex skill registry is defined.",
+    "AgentCodex maps ECC rules into project standards, maturity profiles, and validation gates before copying language rules into the active runtime."
+  ]
+}

@@ -1,0 +1,216 @@
+{
+  "version": "0.1.0",
+  "purpose": "Codex-native automatic model selection and token-consumption policy.",
+  "default_activity": "implementation",
+  "source_constraints": {
+    "instruction_surface": "AGENTS.md",
+    "state_surface": ".agentcodex/reports/model-routing/",
+    "do_not_import_claude_model_labels": true,
+    "do_not_use_claude_plugin_paths": true
+  },
+  "token_policy": {
+    "context_source": "scripts/session_controls.py",
+    "prefer_repo_files_over_chat_history": true,
+    "compact_when_context_status": [
+      "warning",
+      "critical"
+    ],
+    "retrieve_before_expand": true,
+    "record_every_automatic_selection": true
+  },
+  "model_tiers": {
+    "economy": {
+      "model": "gpt-5.4-mini",
+      "reasoning_effort": "low",
+      "use_for": "status, discovery, summaries, simple docs, deterministic low-risk edits"
+    },
+    "coding": {
+      "model": "gpt-5.3-codex",
+      "reasoning_effort": "medium",
+      "use_for": "implementation, tests, repo-native command work, bounded refactors"
+    },
+    "balanced": {
+      "model": "gpt-5.4",
+      "reasoning_effort": "medium",
+      "use_for": "workflow planning, domain synthesis, design, data-engineering decisions"
+    },
+    "frontier": {
+      "model": "gpt-5.5",
+      "reasoning_effort": "high",
+      "use_for": "high-risk review, security, architecture arbitration, ambiguous cross-system work"
+    }
+  },
+  "activities": {
+    "status": {
+      "tier": "economy",
+      "low_budget_tier": "economy",
+      "high_risk_tier": "balanced",
+      "keywords": [
+        "status",
+        "count",
+        "numero",
+        "quantos",
+        "listar"
+      ]
+    },
+    "explore": {
+      "tier": "economy",
+      "low_budget_tier": "economy",
+      "high_risk_tier": "balanced",
+      "keywords": [
+        "verificar",
+        "varrer",
+        "inspect",
+        "scan",
+        "descobrir"
+      ]
+    },
+    "brainstorm": {
+      "tier": "balanced",
+      "low_budget_tier": "economy",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "brainstorm",
+        "ideia",
+        "opcoes",
+        "escopo"
+      ]
+    },
+    "define": {
+      "tier": "balanced",
+      "low_budget_tier": "balanced",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "define",
+        "requisito",
+        "aceite",
+        "criterios"
+      ]
+    },
+    "design": {
+      "tier": "balanced",
+      "low_budget_tier": "balanced",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "design",
+        "arquitetura",
+        "modelo",
+        "contrato"
+      ]
+    },
+    "implementation": {
+      "tier": "coding",
+      "low_budget_tier": "coding",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "implemente",
+        "crie",
+        "corrija",
+        "build",
+        "codigo",
+        "teste"
+      ]
+    },
+    "review": {
+      "tier": "balanced",
+      "low_budget_tier": "balanced",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "review",
+        "revisar",
+        "aderencia",
+        "regressao"
+      ]
+    },
+    "security": {
+      "tier": "frontier",
+      "low_budget_tier": "balanced",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "seguranca",
+        "vulnerabilidade",
+        "compliance",
+        "audit",
+        "risco"
+      ]
+    },
+    "ship": {
+      "tier": "balanced",
+      "low_budget_tier": "balanced",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "ship",
+        "release",
+        "deploy",
+        "publicar"
+      ]
+    },
+    "judge": {
+      "tier": "frontier",
+      "low_budget_tier": "balanced",
+      "high_risk_tier": "frontier",
+      "keywords": [
+        "judge",
+        "segunda opiniao",
+        "arbitragem"
+      ]
+    }
+  },
+  "role_activity_overrides": {
+    "explorer": "explore",
+    "reviewer": "review",
+    "domain-researcher": "design",
+    "workflow-brainstormer": "brainstorm",
+    "workflow-definer": "define",
+    "workflow-designer": "design",
+    "workflow-builder": "implementation",
+    "ai-data-engineer": "design",
+    "pipeline-architect": "design",
+    "data-contracts-engineer": "design",
+    "schema-designer": "design",
+    "dbt-specialist": "implementation",
+    "spark-engineer": "implementation",
+    "data-quality-analyst": "review"
+  },
+  "default_role_activity": "design",
+  "role_suffix_fallbacks": {
+    "reviewer": "review",
+    "analyst": "review",
+    "architect": "design",
+    "designer": "design",
+    "engineer": "implementation",
+    "specialist": "implementation",
+    "researcher": "design"
+  },
+  "risk_escalation_keywords": {
+    "high": [
+      "security",
+      "seguranca",
+      "vulnerability",
+      "vulnerabilidade",
+      "compliance",
+      "production",
+      "producao",
+      "migration",
+      "migracao",
+      "delete",
+      "destructive",
+      "sudo"
+    ],
+    "medium": [
+      "refactor",
+      "multi-agent",
+      "workflow",
+      "contract",
+      "governance",
+      "governanca",
+      "lineage",
+      "cost",
+      "custo"
+    ]
+  },
+  "audit": {
+    "latest_selection_json": ".agentcodex/reports/model-routing/latest-selection.json",
+    "latest_selection_markdown": ".agentcodex/reports/model-routing/model-routing.md"
+  }
+}

@@ -1,0 +1,1387 @@
+version: 0.1.0
+roles:
+  - id: a11y-architect
+    category: specialist
+    doc: docs/roles/a11y-architect.md
+    kb_domains:
+      []
+    owns:
+      - a11y-architect
+    escalates_to:
+      - planner
+  - id: ai-data-engineer-cloud
+    category: specialist
+    doc: docs/roles/ai-data-engineer-cloud.md
+    kb_domains:
+      - ai-data-engineering
+    owns:
+      - ai-data-engineer-cloud
+    escalates_to:
+      - planner
+  - id: ai-data-engineer-gcp
+    category: specialist
+    doc: docs/roles/ai-data-engineer-gcp.md
+    kb_domains:
+      - gcp
+      - ai-data-engineering
+    owns:
+      - ai-data-engineer-gcp
+    escalates_to:
+      - gcp-data-architect
+      - terraform-specialist
+  - id: ai-data-engineer
+    category: specialist
+    doc: docs/roles/ai-data-engineer.md
+    kb_domains:
+      - ai-data-engineering
+      - data-quality
+      - streaming
+    owns:
+      - rag
+      - embedding-pipelines
+    escalates_to:
+      - streaming-engineer
+      - data-quality-analyst
+      - pipeline-architect
+  - id: ai-prompt-specialist-gcp
+    category: specialist
+    doc: docs/roles/ai-prompt-specialist-gcp.md
+    kb_domains:
+      - gcp
+      - genai
+    owns:
+      - ai-prompt-gcp
+    escalates_to:
+      - gcp-data-architect
+      - terraform-specialist
+  - id: ai-prompt-specialist
+    category: specialist
+    doc: docs/roles/ai-prompt-specialist.md
+    kb_domains:
+      - genai
+    owns:
+      - ai-prompt
+    escalates_to:
+      - llm-specialist
+      - prompt-crafter
+  - id: airflow-specialist
+    category: specialist
+    doc: docs/roles/airflow-specialist.md
+    kb_domains:
+      - airflow
+      - orchestration
+    owns:
+      - airflow
+      - dag-authoring
+    escalates_to:
+      - pipeline-architect
+  - id: architect
+    category: specialist
+    doc: docs/roles/architect.md
+    kb_domains:
+      []
+    owns:
+      - system-architecture
+    escalates_to:
+      - planner
+      - workflow-designer
+  - id: aws-data-architect
+    category: specialist
+    doc: docs/roles/aws-data-architect.md
+    kb_domains:
+      - aws
+      - terraform
+      - data-quality
+    owns:
+      - aws
+      - serverless-data-platforms
+    escalates_to:
+      - terraform-specialist
+      - data-quality-analyst
+  - id: aws-deployer
+    category: specialist
+    doc: docs/roles/aws-deployer.md
+    kb_domains:
+      - aws
+    owns:
+      - aws-deployer
+    escalates_to:
+      - aws-data-architect
+      - terraform-specialist
+  - id: aws-lambda-architect
+    category: specialist
+    doc: docs/roles/aws-lambda-architect.md
+    kb_domains:
+      - aws
+    owns:
+      - aws-lambda-architect
+    escalates_to:
+      - aws-data-architect
+      - terraform-specialist
+  - id: azure-ai-architect
+    category: specialist
+    doc: docs/roles/azure-ai-architect.md
+    kb_domains:
+      - azure
+      - rag
+      - mcp
+      - ai-data-engineering
+      - observability
+    owns:
+      - azure-ai-architecture
+      - azure-retrieval-design
+    escalates_to:
+      - genai-architect
+      - data-security-architect
+      - platform-access-engineer
+  - id: build-error-resolver
+    category: specialist
+    doc: docs/roles/build-error-resolver.md
+    kb_domains:
+      []
+    owns:
+      - build-repair
+    escalates_to:
+      - planner
+      - refactor-cleaner
+  - id: business-monitor
+    category: specialist
+    doc: docs/roles/business-monitor.md
+    kb_domains:
+      - observability
+      - data-quality
+      - orchestration
+    owns:
+      - business-monitoring
+      - alert-triage
+    escalates_to:
+      - data-observability-engineer
+      - sentinel-runtime-watcher
+      - data-quality-analyst
+  - id: chief-of-staff
+    category: specialist
+    doc: docs/roles/chief-of-staff.md
+    kb_domains:
+      []
+    owns:
+      - chief-of-staff
+    escalates_to:
+      - planner
+  - id: ci-cd-specialist
+    category: specialist
+    doc: docs/roles/ci-cd-specialist.md
+    kb_domains:
+      - orchestration
+    owns:
+      - ci-cd
+    escalates_to:
+      - pipeline-architect
+      - data-quality-analyst
+  - id: code-architect
+    category: specialist
+    doc: docs/roles/code-architect.md
+    kb_domains:
+      []
+    owns:
+      - implementation-architecture
+    escalates_to:
+      - planner
+      - workflow-designer
+  - id: code-documenter
+    category: specialist
+    doc: docs/roles/code-documenter.md
+    kb_domains:
+      []
+    owns:
+      - code-documentation
+    escalates_to:
+      - doc-updater
+      - codebase-explorer
+  - id: code-reviewer
+    category: specialist
+    doc: docs/roles/code-reviewer.md
+    kb_domains:
+      []
+    owns:
+      - code-review
+    escalates_to:
+      []
+  - id: code-simplifier
+    category: specialist
+    doc: docs/roles/code-simplifier.md
+    kb_domains:
+      []
+    owns:
+      - code-simplifier
+    escalates_to:
+      - planner
+  - id: codebase-explorer
+    category: specialist
+    doc: docs/roles/codebase-explorer.md
+    kb_domains:
+      []
+    owns:
+      - codebase-analysis
+    escalates_to:
+      - planner
+      - pipeline-architect
+  - id: comment-analyzer
+    category: specialist
+    doc: docs/roles/comment-analyzer.md
+    kb_domains:
+      []
+    owns:
+      - comment-analyzer
+    escalates_to:
+      - planner
+  - id: context-optimizer
+    category: specialist
+    doc: docs/roles/context-optimizer.md
+    kb_domains:
+      []
+    owns:
+      - context-optimization
+    escalates_to:
+      - workflow-iterator
+      - planner
+      - kb-architect
+  - id: conversation-analyzer
+    category: specialist
+    doc: docs/roles/conversation-analyzer.md
+    kb_domains:
+      []
+    owns:
+      - conversation-analyzer
+    escalates_to:
+      - planner
+  - id: cpp-build-resolver
+    category: specialist
+    doc: docs/roles/cpp-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - cpp-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: cpp-reviewer
+    category: specialist
+    doc: docs/roles/cpp-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - cpp-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: csharp-reviewer
+    category: specialist
+    doc: docs/roles/csharp-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - csharp-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: dart-build-resolver
+    category: specialist
+    doc: docs/roles/dart-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - dart-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: data-contracts-engineer
+    category: specialist
+    doc: docs/roles/data-contracts-engineer.md
+    kb_domains:
+      - data-quality
+      - data-modeling
+    owns:
+      - data-contracts
+      - sla-governance
+    escalates_to:
+      - data-quality-analyst
+      - schema-designer
+      - dbt-specialist
+  - id: data-governance-architect
+    category: specialist
+    doc: docs/roles/data-governance-architect.md
+    kb_domains:
+      - governance
+      - access-control
+      - data-contracts
+      - lineage
+      - observability
+    owns:
+      - governance-architecture
+      - control-design
+    escalates_to:
+      - data-security-architect
+      - schema-governance-engineer
+      - metadata-platform-engineer
+  - id: data-observability-engineer
+    category: specialist
+    doc: docs/roles/data-observability-engineer.md
+    kb_domains:
+      - observability
+      - data-quality
+      - orchestration
+      - lineage
+      - ai-data-engineering
+    owns:
+      - data-observability
+      - signal-design
+    escalates_to:
+      - silent-failure-hunter
+      - data-governance-architect
+  - id: data-platform-engineer
+    category: specialist
+    doc: docs/roles/data-platform-engineer.md
+    kb_domains:
+      - aws
+      - gcp
+      - lakehouse
+      - medallion
+      - terraform
+      - microsoft-fabric
+    owns:
+      - platform-selection
+      - cost-optimization
+    escalates_to:
+      - lakehouse-architect
+      - schema-designer
+      - pipeline-architect
+      - aws-data-architect
+      - gcp-data-architect
+  - id: data-quality-analyst
+    category: specialist
+    doc: docs/roles/data-quality-analyst.md
+    kb_domains:
+      - data-quality
+    owns:
+      - validation
+      - quality-gates
+    escalates_to:
+      []
+  - id: data-security-architect
+    category: specialist
+    doc: docs/roles/data-security-architect.md
+    kb_domains:
+      - access-control
+      - governance
+      - observability
+      - azure
+      - databricks
+      - snowflake
+    owns:
+      - data-security-architecture
+      - trust-boundaries
+    escalates_to:
+      - security-reviewer
+      - platform-access-engineer
+  - id: database-reviewer
+    category: specialist
+    doc: docs/roles/database-reviewer.md
+    kb_domains:
+      - data-modeling
+      - ai-data-engineering
+      - governance
+    owns:
+      - database-review
+    escalates_to:
+      - schema-designer
+      - data-contracts-engineer
+  - id: databricks-architect
+    category: specialist
+    doc: docs/roles/databricks-architect.md
+    kb_domains:
+      - databricks
+      - lakehouse
+      - medallion
+      - spark
+      - governance
+    owns:
+      - databricks-architecture
+      - unity-catalog-boundaries
+    escalates_to:
+      - lakeflow-architect
+      - spark-engineer
+      - data-platform-engineer
+  - id: dbt-specialist
+    category: specialist
+    doc: docs/roles/dbt-specialist.md
+    kb_domains:
+      - dbt
+      - data-modeling
+      - data-quality
+      - sql-patterns
+    owns:
+      - dbt
+      - analytics-models
+    escalates_to:
+      - schema-designer
+  - id: doc-updater
+    category: specialist
+    doc: docs/roles/doc-updater.md
+    kb_domains:
+      []
+    owns:
+      - documentation-maintenance
+    escalates_to:
+      - codebase-explorer
+  - id: docs-lookup
+    category: specialist
+    doc: docs/roles/docs-lookup.md
+    kb_domains:
+      []
+    owns:
+      - documentation-lookup
+    escalates_to:
+      - domain-researcher
+  - id: e2e-runner
+    category: specialist
+    doc: docs/roles/e2e-runner.md
+    kb_domains:
+      - data-quality
+    owns:
+      - e2e-runner
+    escalates_to:
+      - pipeline-architect
+      - data-quality-analyst
+  - id: fabric-ai-specialist
+    category: specialist
+    doc: docs/roles/fabric-ai-specialist.md
+    kb_domains:
+      - microsoft-fabric
+    owns:
+      - fabric-ai
+    escalates_to:
+      - fabric-architect
+      - data-platform-engineer
+  - id: fabric-architect
+    category: specialist
+    doc: docs/roles/fabric-architect.md
+    kb_domains:
+      - microsoft-fabric
+      - lakehouse
+      - medallion
+    owns:
+      - fabric
+      - workload-selection
+    escalates_to:
+      - medallion-architect
+      - pipeline-architect
+  - id: fabric-cicd-specialist
+    category: specialist
+    doc: docs/roles/fabric-cicd-specialist.md
+    kb_domains:
+      - microsoft-fabric
+    owns:
+      - fabric-cicd
+    escalates_to:
+      - fabric-architect
+      - data-platform-engineer
+  - id: fabric-logging-specialist
+    category: specialist
+    doc: docs/roles/fabric-logging-specialist.md
+    kb_domains:
+      - microsoft-fabric
+      - observability
+    owns:
+      - fabric-logging
+    escalates_to:
+      - fabric-architect
+      - data-platform-engineer
+  - id: fabric-pipeline-developer
+    category: specialist
+    doc: docs/roles/fabric-pipeline-developer.md
+    kb_domains:
+      - microsoft-fabric
+      - orchestration
+    owns:
+      - fabric-pipeline-developer
+    escalates_to:
+      - fabric-architect
+      - data-platform-engineer
+  - id: fabric-security-specialist
+    category: specialist
+    doc: docs/roles/fabric-security-specialist.md
+    kb_domains:
+      - microsoft-fabric
+      - access-control
+    owns:
+      - fabric-security
+    escalates_to:
+      - security-reviewer
+      - data-security-architect
+  - id: flutter-reviewer
+    category: specialist
+    doc: docs/roles/flutter-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - flutter-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: gan-evaluator
+    category: specialist
+    doc: docs/roles/gan-evaluator.md
+    kb_domains:
+      []
+    owns:
+      - gan-evaluator
+    escalates_to:
+      - planner
+  - id: gan-generator
+    category: specialist
+    doc: docs/roles/gan-generator.md
+    kb_domains:
+      []
+    owns:
+      - gan-generator
+    escalates_to:
+      - planner
+  - id: gan-planner
+    category: specialist
+    doc: docs/roles/gan-planner.md
+    kb_domains:
+      []
+    owns:
+      - gan-planner
+    escalates_to:
+      - planner
+  - id: gcp-data-architect
+    category: specialist
+    doc: docs/roles/gcp-data-architect.md
+    kb_domains:
+      - gcp
+      - terraform
+      - data-quality
+      - streaming
+    owns:
+      - gcp
+      - bigquery-architecture
+    escalates_to:
+      - terraform-specialist
+      - streaming-engineer
+  - id: genai-architect
+    category: specialist
+    doc: docs/roles/genai-architect.md
+    kb_domains:
+      - genai
+    owns:
+      - genai-architect
+    escalates_to:
+      - planner
+  - id: go-build-resolver
+    category: specialist
+    doc: docs/roles/go-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - go-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: go-reviewer
+    category: specialist
+    doc: docs/roles/go-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - go-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: harness-optimizer
+    category: specialist
+    doc: docs/roles/harness-optimizer.md
+    kb_domains:
+      []
+    owns:
+      - harness-optimizer
+    escalates_to:
+      - planner
+  - id: healthcare-reviewer
+    category: specialist
+    doc: docs/roles/healthcare-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - healthcare-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: java-build-resolver
+    category: specialist
+    doc: docs/roles/java-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - java-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: java-reviewer
+    category: specialist
+    doc: docs/roles/java-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - java-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: kb-architect
+    category: specialist
+    doc: docs/roles/kb-architect.md
+    kb_domains:
+      []
+    owns:
+      - kb-architecture
+    escalates_to:
+      - domain-researcher
+  - id: kotlin-build-resolver
+    category: specialist
+    doc: docs/roles/kotlin-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - kotlin-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: kotlin-reviewer
+    category: specialist
+    doc: docs/roles/kotlin-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - kotlin-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: lakeflow-architect
+    category: specialist
+    doc: docs/roles/lakeflow-architect.md
+    kb_domains:
+      - lakeflow
+      - lakehouse
+      - medallion
+      - spark
+    owns:
+      - lakeflow
+      - dlt-pipelines
+    escalates_to:
+      - spark-engineer
+      - medallion-architect
+  - id: lakeflow-expert
+    category: specialist
+    doc: docs/roles/lakeflow-expert.md
+    kb_domains:
+      - lakeflow
+    owns:
+      - lakeflow-expert
+    escalates_to:
+      - lakeflow-architect
+      - spark-engineer
+  - id: lakeflow-pipeline-builder
+    category: specialist
+    doc: docs/roles/lakeflow-pipeline-builder.md
+    kb_domains:
+      - lakeflow
+      - orchestration
+    owns:
+      - lakeflow-pipeline-builder
+    escalates_to:
+      - lakeflow-architect
+      - spark-engineer
+  - id: lakeflow-specialist
+    category: specialist
+    doc: docs/roles/lakeflow-specialist.md
+    kb_domains:
+      - lakeflow
+    owns:
+      - lakeflow
+    escalates_to:
+      - lakeflow-architect
+      - spark-engineer
+  - id: lakehouse-architect
+    category: specialist
+    doc: docs/roles/lakehouse-architect.md
+    kb_domains:
+      - lakehouse
+      - medallion
+      - data-modeling
+    owns:
+      - lakehouse
+      - storage-layout
+    escalates_to:
+      - schema-designer
+      - pipeline-architect
+  - id: lambda-builder
+    category: specialist
+    doc: docs/roles/lambda-builder.md
+    kb_domains:
+      - aws
+    owns:
+      - lambda-builder
+    escalates_to:
+      - aws-data-architect
+      - terraform-specialist
+  - id: lineage-analyst
+    category: specialist
+    doc: docs/roles/lineage-analyst.md
+    kb_domains:
+      - lineage
+      - orchestration
+      - data-contracts
+      - observability
+    owns:
+      - lineage-analysis
+      - impact-mapping
+    escalates_to:
+      - metadata-platform-engineer
+      - data-governance-architect
+  - id: llm-specialist
+    category: specialist
+    doc: docs/roles/llm-specialist.md
+    kb_domains:
+      - genai
+      - ai-data-engineering
+    owns:
+      - prompt-optimization
+      - structured-output
+    escalates_to:
+      - genai-architect
+      - prompt-crafter
+  - id: loop-operator
+    category: specialist
+    doc: docs/roles/loop-operator.md
+    kb_domains:
+      []
+    owns:
+      - loop-operator
+    escalates_to:
+      - planner
+  - id: medallion-architect
+    category: specialist
+    doc: docs/roles/medallion-architect.md
+    kb_domains:
+      - medallion
+      - lakehouse
+      - data-modeling
+    owns:
+      - medallion
+      - layered-pipelines
+    escalates_to:
+      - lakehouse-architect
+      - schema-designer
+  - id: meeting-analyst
+    category: specialist
+    doc: docs/roles/meeting-analyst.md
+    kb_domains:
+      - orchestration
+      - data-modeling
+      - data-quality
+    owns:
+      - meeting-analysis
+    escalates_to:
+      - planner
+      - workflow-definer
+      - pipeline-architect
+  - id: memory-architect
+    category: specialist
+    doc: docs/roles/memory-architect.md
+    kb_domains:
+      - genai
+      - ai-data-engineering
+      - mcp
+      - rag
+    owns:
+      - memory-architecture
+      - retrieval-design
+    escalates_to:
+      - memory-governance-engineer
+      - memory-observability-engineer
+      - genai-architect
+  - id: memory-governance-engineer
+    category: specialist
+    doc: docs/roles/memory-governance-engineer.md
+    kb_domains:
+      - governance
+      - access-control
+      - data-contracts
+      - observability
+    owns:
+      - memory-governance
+      - retention-policy
+    escalates_to:
+      - memory-architect
+      - data-governance-architect
+  - id: memory-observability-engineer
+    category: specialist
+    doc: docs/roles/memory-observability-engineer.md
+    kb_domains:
+      - observability
+      - genai
+      - ai-data-engineering
+      - governance
+    owns:
+      - memory-observability
+      - telemetry-design
+    escalates_to:
+      - memory-architect
+      - data-observability-engineer
+  - id: metadata-platform-engineer
+    category: specialist
+    doc: docs/roles/metadata-platform-engineer.md
+    kb_domains:
+      - lineage
+      - governance
+      - data-contracts
+    owns:
+      - metadata-architecture
+      - catalog-design
+    escalates_to:
+      - lineage-analyst
+      - data-governance-architect
+  - id: mosaic-ai-engineer
+    category: specialist
+    doc: docs/roles/mosaic-ai-engineer.md
+    kb_domains:
+      - databricks
+      - rag
+      - ai-data-engineering
+      - observability
+      - data-contracts
+    owns:
+      - mosaic-ai-implementation
+      - retrieval-serving-flows
+    escalates_to:
+      - databricks-architect
+      - genai-architect
+      - data-observability-engineer
+  - id: opensource-forker
+    category: specialist
+    doc: docs/roles/opensource-forker.md
+    kb_domains:
+      []
+    owns:
+      - opensource-forker
+    escalates_to:
+      - planner
+  - id: opensource-packager
+    category: specialist
+    doc: docs/roles/opensource-packager.md
+    kb_domains:
+      []
+    owns:
+      - opensource-packager
+    escalates_to:
+      - planner
+  - id: opensource-sanitizer
+    category: specialist
+    doc: docs/roles/opensource-sanitizer.md
+    kb_domains:
+      []
+    owns:
+      - opensource-sanitizer
+    escalates_to:
+      - planner
+  - id: performance-optimizer
+    category: specialist
+    doc: docs/roles/performance-optimizer.md
+    kb_domains:
+      []
+    owns:
+      - performance-analysis
+    escalates_to:
+      - code-architect
+      - planner
+  - id: pipeline-architect
+    category: specialist
+    doc: docs/roles/pipeline-architect.md
+    kb_domains:
+      - orchestration
+      - airflow
+    owns:
+      - orchestration
+      - dags
+    escalates_to:
+      - data-quality-analyst
+  - id: planner
+    category: specialist
+    doc: docs/roles/planner.md
+    kb_domains:
+      []
+    owns:
+      - planning
+    escalates_to:
+      - workflow-definer
+      - workflow-designer
+  - id: platform-access-engineer
+    category: specialist
+    doc: docs/roles/platform-access-engineer.md
+    kb_domains:
+      - access-control
+      - governance
+    owns:
+      - platform-access
+      - grant-boundaries
+    escalates_to:
+      - data-security-architect
+      - data-governance-architect
+  - id: pr-test-analyzer
+    category: specialist
+    doc: docs/roles/pr-test-analyzer.md
+    kb_domains:
+      []
+    owns:
+      - test-gap-analysis
+    escalates_to:
+      - test-generator
+      - tdd-guide
+      - code-reviewer
+  - id: prompt-crafter
+    category: specialist
+    doc: docs/roles/prompt-crafter.md
+    kb_domains:
+      []
+    owns:
+      - prompt-scoping
+    escalates_to:
+      - workflow-definer
+      - planner
+      - genai-architect
+  - id: python-developer
+    category: specialist
+    doc: docs/roles/python-developer.md
+    kb_domains:
+      []
+    owns:
+      - python-implementation
+    escalates_to:
+      - code-architect
+      - planner
+  - id: python-reviewer
+    category: specialist
+    doc: docs/roles/python-reviewer.md
+    kb_domains:
+      - governance
+      - ai-data-engineering
+    owns:
+      - python-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: pytorch-build-resolver
+    category: specialist
+    doc: docs/roles/pytorch-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - pytorch-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: qdrant-specialist
+    category: specialist
+    doc: docs/roles/qdrant-specialist.md
+    kb_domains:
+      - rag
+    owns:
+      - qdrant
+    escalates_to:
+      - planner
+  - id: refactor-cleaner
+    category: specialist
+    doc: docs/roles/refactor-cleaner.md
+    kb_domains:
+      []
+    owns:
+      - cleanup
+      - dead-code-removal
+    escalates_to:
+      - planner
+      - code-reviewer
+  - id: rust-build-resolver
+    category: specialist
+    doc: docs/roles/rust-build-resolver.md
+    kb_domains:
+      []
+    owns:
+      - rust-build-resolution
+    escalates_to:
+      - build-error-resolver
+      - code-reviewer
+  - id: rust-reviewer
+    category: specialist
+    doc: docs/roles/rust-reviewer.md
+    kb_domains:
+      - governance
+    owns:
+      - rust-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: schema-designer
+    category: specialist
+    doc: docs/roles/schema-designer.md
+    kb_domains:
+      - data-modeling
+      - sql-patterns
+    owns:
+      - schema
+      - dimensional-modeling
+    escalates_to:
+      []
+  - id: schema-governance-engineer
+    category: specialist
+    doc: docs/roles/schema-governance-engineer.md
+    kb_domains:
+      - data-contracts
+      - data-quality
+      - lineage
+      - dbt
+    owns:
+      - schema-governance
+      - compatibility-policy
+    escalates_to:
+      - schema-designer
+      - data-governance-architect
+  - id: security-reviewer
+    category: specialist
+    doc: docs/roles/security-reviewer.md
+    kb_domains:
+      - access-control
+      - governance
+    owns:
+      - security-review
+    escalates_to:
+      - code-reviewer
+      - reviewer
+  - id: semantic-modeler
+    category: specialist
+    doc: docs/roles/semantic-modeler.md
+    kb_domains:
+      - data-modeling
+      - sql-patterns
+      - microsoft-fabric
+      - databricks
+    owns:
+      - semantic-modeling
+      - metric-design
+      - business-metrics
+    escalates_to:
+      - schema-designer
+      - fabric-architect
+      - databricks-architect
+  - id: sentinel-analyzer
+    category: specialist
+    doc: docs/roles/sentinel-analyzer.md
+    kb_domains:
+      - observability
+      - lineage
+      - data-quality
+    owns:
+      - incident-analysis
+      - signal-diagnosis
+    escalates_to:
+      - sentinel-interpreter
+      - data-observability-engineer
+  - id: sentinel-interpreter
+    category: specialist
+    doc: docs/roles/sentinel-interpreter.md
+    kb_domains:
+      - observability
+      - governance
+      - lineage
+      - ai-data-engineering
+    owns:
+      - operational-interpretation
+      - action-recommendation
+    escalates_to:
+      - sentinel-supervisor
+      - kb-architect
+  - id: sentinel-runtime-watcher
+    category: specialist
+    doc: docs/roles/sentinel-runtime-watcher.md
+    kb_domains:
+      - observability
+      - orchestration
+      - data-quality
+      - lineage
+    owns:
+      - runtime-monitoring
+      - product-health-watching
+    escalates_to:
+      - data-observability-engineer
+      - sentinel-supervisor
+  - id: sentinel-security-watcher
+    category: specialist
+    doc: docs/roles/sentinel-security-watcher.md
+    kb_domains:
+      - access-control
+      - governance
+      - observability
+    owns:
+      - security-monitoring
+      - security-quarantine-triggers
+    escalates_to:
+      - data-security-architect
+      - sentinel-supervisor
+  - id: sentinel-supervisor
+    category: specialist
+    doc: docs/roles/sentinel-supervisor.md
+    kb_domains:
+      - observability
+      - governance
+      - access-control
+      - lineage
+    owns:
+      - sentinel-supervision
+      - quarantine-policy
+    escalates_to:
+      - data-observability-engineer
+      - data-security-architect
+      - data-governance-architect
+  - id: seo-specialist
+    category: specialist
+    doc: docs/roles/seo-specialist.md
+    kb_domains:
+      []
+    owns:
+      - seo
+    escalates_to:
+      - planner
+  - id: shell-script-specialist
+    category: specialist
+    doc: docs/roles/shell-script-specialist.md
+    kb_domains:
+      []
+    owns:
+      - shell-script
+    escalates_to:
+      - planner
+  - id: silent-failure-hunter
+    category: specialist
+    doc: docs/roles/silent-failure-hunter.md
+    kb_domains:
+      []
+    owns:
+      - silent-failure-hunter
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: snowflake-architect
+    category: specialist
+    doc: docs/roles/snowflake-architect.md
+    kb_domains:
+      []
+    owns:
+      - snowflake-architect
+    escalates_to:
+      - planner
+  - id: spark-engineer
+    category: specialist
+    doc: docs/roles/spark-engineer.md
+    kb_domains:
+      - spark
+    owns:
+      - spark
+      - batch-jobs
+    escalates_to:
+      - pipeline-architect
+  - id: spark-performance-analyzer
+    category: specialist
+    doc: docs/roles/spark-performance-analyzer.md
+    kb_domains:
+      - spark
+      - observability
+    owns:
+      - spark-performance-analyzer
+    escalates_to:
+      - spark-engineer
+      - pipeline-architect
+  - id: spark-specialist
+    category: specialist
+    doc: docs/roles/spark-specialist.md
+    kb_domains:
+      - spark
+    owns:
+      - spark
+    escalates_to:
+      - spark-engineer
+      - pipeline-architect
+  - id: spark-streaming-architect
+    category: specialist
+    doc: docs/roles/spark-streaming-architect.md
+    kb_domains:
+      - spark
+      - streaming
+    owns:
+      - spark-streaming-architect
+    escalates_to:
+      - spark-engineer
+      - pipeline-architect
+  - id: spark-troubleshooter
+    category: specialist
+    doc: docs/roles/spark-troubleshooter.md
+    kb_domains:
+      - spark
+      - observability
+    owns:
+      - spark-troubleshooter
+    escalates_to:
+      - spark-engineer
+      - pipeline-architect
+  - id: sql-optimizer
+    category: specialist
+    doc: docs/roles/sql-optimizer.md
+    kb_domains:
+      - sql-patterns
+      - data-modeling
+    owns:
+      - sql
+      - query-plans
+    escalates_to:
+      - schema-designer
+      - dbt-specialist
+  - id: streaming-engineer
+    category: specialist
+    doc: docs/roles/streaming-engineer.md
+    kb_domains:
+      - streaming
+      - spark
+    owns:
+      - streaming
+      - event-pipelines
+    escalates_to:
+      - pipeline-architect
+      - data-quality-analyst
+  - id: supabase-specialist
+    category: specialist
+    doc: docs/roles/supabase-specialist.md
+    kb_domains:
+      - data-modeling
+    owns:
+      - supabase
+    escalates_to:
+      - planner
+  - id: tdd-guide
+    category: specialist
+    doc: docs/roles/tdd-guide.md
+    kb_domains:
+      []
+    owns:
+      - tdd-guide
+    escalates_to:
+      - workflow-definer
+      - planner
+      - code-reviewer
+  - id: terraform-specialist
+    category: specialist
+    doc: docs/roles/terraform-specialist.md
+    kb_domains:
+      - terraform
+      - aws
+      - gcp
+    owns:
+      - terraform
+      - infrastructure-modules
+    escalates_to:
+      - aws-data-architect
+      - gcp-data-architect
+  - id: test-generator
+    category: specialist
+    doc: docs/roles/test-generator.md
+    kb_domains:
+      []
+    owns:
+      - test-generator
+    escalates_to:
+      - tdd-guide
+      - data-quality-analyst
+      - schema-designer
+  - id: type-design-analyzer
+    category: specialist
+    doc: docs/roles/type-design-analyzer.md
+    kb_domains:
+      []
+    owns:
+      - type-design-analyzer
+    escalates_to:
+      - planner
+  - id: typescript-reviewer
+    category: specialist
+    doc: docs/roles/typescript-reviewer.md
+    kb_domains:
+      - governance
+      - ai-data-engineering
+    owns:
+      - typescript-review
+    escalates_to:
+      - code-reviewer
+      - security-reviewer
+  - id: workflow-brainstormer
+    category: workflow
+    doc: docs/roles/workflow-brainstormer.md
+    kb_domains:
+      []
+    owns:
+      - brainstorm
+    escalates_to:
+      []
+  - id: workflow-builder
+    category: workflow
+    doc: docs/roles/workflow-builder.md
+    kb_domains:
+      []
+    owns:
+      - build
+    escalates_to:
+      - workflow-designer
+  - id: workflow-definer
+    category: workflow
+    doc: docs/roles/workflow-definer.md
+    kb_domains:
+      []
+    owns:
+      - define
+    escalates_to:
+      - workflow-brainstormer
+  - id: workflow-designer
+    category: workflow
+    doc: docs/roles/workflow-designer.md
+    kb_domains:
+      - orchestration
+      - data-modeling
+    owns:
+      - design
+    escalates_to:
+      - workflow-definer
+  - id: workflow-iterator
+    category: workflow
+    doc: docs/roles/workflow-iterator.md
+    kb_domains:
+      []
+    owns:
+      - iterate
+    escalates_to:
+      - workflow-definer
+      - workflow-designer
+  - id: workflow-shipper
+    category: workflow
+    doc: docs/roles/workflow-shipper.md
+    kb_domains:
+      []
+    owns:
+      - ship
+    escalates_to:
+      []

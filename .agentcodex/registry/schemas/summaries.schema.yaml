@@ -1,0 +1,29 @@
+version: 0.1.0
+kind: summary-markdown-schema
+purpose: define the minimum markdown contract for files under .agentcodex/cache/summaries/
+
+path_contract:
+  root: .agentcodex/cache/summaries/
+  pattern: <domain>/<source-id>/<summary-file>.md
+  summary_files:
+    - overview.md
+    - latest-notes.md
+    - integration-notes.md
+    - anti-patterns.md
+
+required_markdown:
+  top_level_heading: true
+  required_bullets:
+    - source_id
+  required_sections_by_file:
+    overview.md:
+      - "## Snapshot"
+      - "## Local Use"
+    latest-notes.md:
+      - "## Recent Signals"
+    integration-notes.md:
+      - "## Integration Guidance"
+      - "## Observed Surfaces"
+    anti-patterns.md:
+      - "## Avoid"
+

@@ -1,0 +1,673 @@
+{
+  "version": "0.1.0",
+  "source": {
+    "name": "data-agents",
+    "root": ".agentcodex/imports/data-agents",
+    "policy": "Expose Data Agents as a native AgentCodex extension registry. Do not duplicate active roles, commands, or KB pages; map to existing Codex-native surfaces when equivalent."
+  },
+  "counts": {
+    "agents": 12,
+    "commands": 6,
+    "skills": 44,
+    "kb_files": 92,
+    "mcp_servers": 13,
+    "hooks": 12,
+    "tests": 42,
+    "templates": 5,
+    "mapped_agents": 12,
+    "mapped_commands": 4
+  },
+  "agents": [
+    {
+      "id": "business-analyst",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/business-analyst.md",
+      "description": "Analista de Neg\u00f3cios. Use para: processar transcri\u00e7\u00f5es de reuni\u00f5es, briefings e documentos brutos de requisitos de neg\u00f3cio; extrair e priorizar tarefas (P0, P1, P2); gerar backlog estruturado pronto para /plan. Invoque quando: o usu\u00e1rio usar /brief, fornecer um transcript de reuni\u00e3o, ou precisar converter requisitos n\u00e3o estruturados em backlog t\u00e9cnico.",
+      "kb_domains": [],
+      "mcp_servers": [
+        "tavily",
+        "firecrawl"
+      ],
+      "target_agentcodex_role": "planner",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "business-monitor",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/business-monitor.md",
+      "description": "Agente interativo para an\u00e1lise de alertas emitidos pelo monitor aut\u00f4nomo. Use para: responder perguntas sobre alertas recebidos (estoque, vendas, inconsist\u00eancias, SLA), investigar causa raiz de anomalias, enriquecer contexto com estado atual da tabela, consultar hist\u00f3rico do alerta na mem\u00f3ria. Invoque quando: o usu\u00e1rio mencionar um alerta recebido, pedir status de monitoramento, ou usar `/monitor ask <pergunta>`. N\u00c3O \u00e9 o daemon \u2014 o ciclo aut\u00f4nomo roda em `scripts/monitor_daemon.py` (script standalone).",
+      "kb_domains": [
+        "data-quality"
+      ],
+      "mcp_servers": [
+        "databricks",
+        "fabric_sql",
+        "postgres",
+        "memory_mcp"
+      ],
+      "target_agentcodex_role": "business-monitor",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "data-quality-steward",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/data-quality-steward.md",
+      "description": "Especialista em Qualidade de Dados. Use para: valida\u00e7\u00e3o de dados com expectations no Spark, configura\u00e7\u00e3o de alertas de qualidade no Fabric Activator e Databricks, data profiling de tabelas novas ou modificadas, detec\u00e7\u00e3o de schema drift e data drift em pipelines, e defini\u00e7\u00e3o de contratos de SLA de dados. Invoque quando: o usu\u00e1rio mencionar qualidade, valida\u00e7\u00e3o, profiling, expectativas de dados, SLA, drift ou inconsist\u00eancias em tabelas.",
+      "kb_domains": [
+        "data-quality",
+        "databricks",
+        "fabric"
+      ],
+      "mcp_servers": [
+        "databricks",
+        "fabric",
+        "fabric_community",
+        "fabric_official",
+        "fabric_rti",
+        "postgres"
+      ],
+      "target_agentcodex_role": "data-quality-analyst",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "dbt-expert",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/dbt-expert.md",
+      "description": "Especialista em dbt Core. Use para: estrutura\u00e7\u00e3o e refatora\u00e7\u00e3o de projetos dbt, gera\u00e7\u00e3o de models SQL com refs e sources, configura\u00e7\u00e3o de testes de schema (not_null, unique, accepted_values, relationships), cria\u00e7\u00e3o de snapshots e seeds, documenta\u00e7\u00e3o via schema.yml e doc blocks, e boas pr\u00e1ticas de projeto dbt. Invoque quando o usu\u00e1rio mencionar: dbt, models, sources, refs, transforma\u00e7\u00f5es dbt, testes de schema, dbt run, dbt test, dbt build, dbt docs.",
+      "kb_domains": [
+        "sql-patterns"
+      ],
+      "mcp_servers": [
+        "context7",
+        "postgres"
+      ],
+      "target_agentcodex_role": "dbt-specialist",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "geral",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/geral.md",
+      "description": "Assistente conversacional para perguntas t\u00e9cnicas gerais de Engenharia de Dados, Databricks, Fabric, SQL, Spark, arquitetura de dados e boas pr\u00e1ticas. Use para: d\u00favidas conceituais, explica\u00e7\u00f5es, compara\u00e7\u00f5es de tecnologias, orienta\u00e7\u00f5es gerais, revis\u00f5es r\u00e1pidas de c\u00f3digo. Invoque quando: a pergunta for conceitual ou n\u00e3o exigir acesso a plataformas \u2014 sem necessidade de SQL, pipelines ou c\u00f3digo de produ\u00e7\u00e3o.",
+      "kb_domains": [],
+      "mcp_servers": [],
+      "target_agentcodex_role": "codebase-explorer",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "governance-auditor",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/governance-auditor.md",
+      "description": "Especialista em Governan\u00e7a de Dados. Use para: auditoria de acessos e permiss\u00f5es no Unity Catalog e Fabric, documenta\u00e7\u00e3o e consulta de linhagem de dados cross-platform, classifica\u00e7\u00e3o de dados PII e sens\u00edveis, verifica\u00e7\u00e3o de conformidade LGPD/GDPR em pipelines, e gera\u00e7\u00e3o de relat\u00f3rios de governan\u00e7a para stakeholders. Invoque quando: o usu\u00e1rio mencionar governan\u00e7a, linhagem, LGPD, GDPR, PII, acessos, permiss\u00f5es, conformidade ou auditoria de dados.",
+      "kb_domains": [
+        "governance",
+        "databricks",
+        "fabric"
+      ],
+      "mcp_servers": [
+        "databricks",
+        "fabric",
+        "fabric_community",
+        "fabric_official",
+        "tavily",
+        "postgres",
+        "memory_mcp"
+      ],
+      "target_agentcodex_role": "data-governance-architect",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "migration-expert",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/migration-expert.md",
+      "description": "Especialista em Migra\u00e7\u00e3o Cross-Platform. Use para: assessment de bancos relacionais (SQL Server, PostgreSQL), transpila\u00e7\u00e3o DDL/SQL para Spark SQL ou T-SQL Fabric, design de arquitetura Medallion p\u00f3s-migra\u00e7\u00e3o, reconcilia\u00e7\u00e3o origem-destino. Invoque quando: cliente quer migrar SQL Server ou PostgreSQL para Databricks ou Microsoft Fabric.",
+      "kb_domains": [
+        "migration",
+        "pipeline-design",
+        "databricks",
+        "fabric",
+        "sql-patterns",
+        "governance"
+      ],
+      "mcp_servers": [
+        "migration_source",
+        "databricks",
+        "fabric",
+        "fabric_sql",
+        "context7"
+      ],
+      "target_agentcodex_role": "lakehouse-architect",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "pipeline-architect",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/pipeline-architect.md",
+      "description": "Arquiteto de Pipelines de Dados. Use para: design e execu\u00e7\u00e3o de pipelines ETL/ELT cross-platform, orquestra\u00e7\u00e3o de Jobs Databricks e Data Factory Fabric, movimenta\u00e7\u00e3o de dados entre Databricks e Fabric via OneLake/ABFSS, monitoramento de execu\u00e7\u00f5es e tratamento de falhas em pipelines de dados. Invoque quando: a tarefa envolver construir, orquestrar ou monitorar pipelines de ponta a ponta \u2014 especialmente cross-platform entre Databricks e Fabric.",
+      "kb_domains": [
+        "pipeline-design",
+        "databricks",
+        "fabric"
+      ],
+      "mcp_servers": [
+        "databricks",
+        "databricks_genie",
+        "fabric",
+        "fabric_community",
+        "fabric_official",
+        "fabric_sql",
+        "fabric_rti",
+        "context7",
+        "github",
+        "firecrawl",
+        "memory_mcp"
+      ],
+      "target_agentcodex_role": "pipeline-architect",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "python-expert",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/python-expert.md",
+      "description": "Especialista em Python para Engenharia de Software e Engenharia de Dados. Use para: escrever, revisar e otimizar c\u00f3digo Python puro (n\u00e3o PySpark), design de pacotes e m\u00f3dulos, tipagem est\u00e1tica com mypy, testes com pytest, linting e formata\u00e7\u00e3o (ruff, black), padr\u00f5es de design Python (dataclasses, protocols, ABC, decorators, context managers), manipula\u00e7\u00e3o de dados com pandas/polars/numpy, scraping e I/O (httpx, aiohttp, boto3, fsspec), ingest\u00e3o e parsing de arquivos (CSV, JSON, Parquet, Avro, Excel), CLIs com Typer/Click, APIs com FastAPI/Flask, scripts de automa\u00e7\u00e3o e orquestra\u00e7\u00e3o leve, profiling e debug de performance Python. Invoque quando: a tarefa exigir c\u00f3digo Python puro ou biblioteca Python que n\u00e3o seja PySpark \u2014 para PySpark e Spark use spark-expert.",
+      "kb_domains": [
+        "python-patterns"
+      ],
+      "mcp_servers": [
+        "context7"
+      ],
+      "target_agentcodex_role": "python-developer",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "semantic-modeler",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/semantic-modeler.md",
+      "description": "Especialista em Modelagem Sem\u00e2ntica e Consumo Anal\u00edtico. Use para: design de modelos sem\u00e2nticos sobre tabelas Gold no Fabric Direct Lake, an\u00e1lise de Semantic Models existentes no Fabric, gera\u00e7\u00e3o de medidas DAX e m\u00e9tricas de neg\u00f3cio, cria\u00e7\u00e3o de Metric Views no Databricks para camada sem\u00e2ntica reutiliz\u00e1vel, recomenda\u00e7\u00f5es de otimiza\u00e7\u00e3o de tabelas Gold para consumo anal\u00edtico, e documenta\u00e7\u00e3o de m\u00e9tricas para o time de neg\u00f3cio. Invoque quando: o usu\u00e1rio mencionar DAX, Semantic Model, Direct Lake, Genie Space, m\u00e9tricas de neg\u00f3cio, camada sem\u00e2ntica ou consumo anal\u00edtico por Power BI.",
+      "kb_domains": [
+        "semantic-modeling",
+        "fabric",
+        "databricks"
+      ],
+      "mcp_servers": [
+        "databricks",
+        "databricks_genie",
+        "fabric",
+        "fabric_community",
+        "fabric_semantic",
+        "fabric_sql",
+        "context7"
+      ],
+      "target_agentcodex_role": "semantic-modeler",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "spark-expert",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/spark-expert.md",
+      "description": "Especialista em Python e Apache Spark. Use para: gera\u00e7\u00e3o de c\u00f3digo PySpark, Spark SQL e Spark Declarative Pipelines (DLT/LakeFlow), transforma\u00e7\u00f5es de dados com DataFrames, opera\u00e7\u00f5es Delta Lake (MERGE, OPTIMIZE, VACUUM, SCD1/SCD2), debug e otimiza\u00e7\u00e3o de c\u00f3digo Python/Spark existente, convers\u00e3o de pandas para PySpark, implementa\u00e7\u00e3o de padr\u00f5es ETL Bronze\u2192Silver\u2192Gold e Star Schema. Invoque quando: a tarefa exigir escrever ou corrigir c\u00f3digo PySpark, DLT, LakeFlow ou qualquer transforma\u00e7\u00e3o Spark \u2014 n\u00e3o para SQL puro.",
+      "kb_domains": [
+        "spark-patterns",
+        "pipeline-design",
+        "databricks"
+      ],
+      "mcp_servers": [
+        "context7"
+      ],
+      "target_agentcodex_role": "spark-specialist",
+      "activation": "mapped-to-native-role"
+    },
+    {
+      "id": "sql-expert",
+      "source_path": ".agentcodex/imports/data-agents/agents/registry/sql-expert.md",
+      "description": "Especialista em SQL e metadados de dados. Use para: descoberta de schemas e tabelas em Databricks ou Fabric, gera\u00e7\u00e3o e otimiza\u00e7\u00e3o de queries SQL (Spark SQL, T-SQL, KQL), an\u00e1lise explorat\u00f3ria via SQL, introspec\u00e7\u00e3o de cat\u00e1logos Unity Catalog e Fabric Lakehouses, queries KQL em Fabric Real-Time Intelligence (Eventhouse). Invoque quando: a tarefa envolver SQL puro, explora\u00e7\u00e3o de cat\u00e1logos, schema discovery ou queries KQL \u2014 sem necessidade de transforma\u00e7\u00f5es PySpark.",
+      "kb_domains": [
+        "sql-patterns",
+        "databricks",
+        "fabric"
+      ],
+      "mcp_servers": [
+        "databricks",
+        "databricks_genie",
+        "fabric",
+        "fabric_community",
+        "fabric_official",
+        "fabric_sql",
+        "fabric_rti",
+        "context7",
+        "postgres"
+      ],
+      "target_agentcodex_role": "sql-optimizer",
+      "activation": "mapped-to-native-role"
+    }
+  ],
+  "commands": [
+    {
+      "id": "geral",
+      "source_path": ".agentcodex/imports/data-agents/commands/geral.py",
+      "target_agentcodex_command": "status",
+      "activation": "mapped-to-native-command"
+    },
+    {
+      "id": "monitor",
+      "source_path": ".agentcodex/imports/data-agents/commands/monitor.py",
+      "target_agentcodex_command": "platform-health",
+      "activation": "mapped-to-native-command"
+    },
+    {
+      "id": "parser",
+      "source_path": ".agentcodex/imports/data-agents/commands/parser.py",
+      "target_agentcodex_command": null,
+      "activation": "reference-only"
+    },
+    {
+      "id": "party",
+      "source_path": ".agentcodex/imports/data-agents/commands/party.py",
+      "target_agentcodex_command": null,
+      "activation": "reference-only"
+    },
+    {
+      "id": "sessions",
+      "source_path": ".agentcodex/imports/data-agents/commands/sessions.py",
+      "target_agentcodex_command": "session-controls",
+      "activation": "mapped-to-native-command"
+    },
+    {
+      "id": "workflow",
+      "source_path": ".agentcodex/imports/data-agents/commands/workflow.py",
+      "target_agentcodex_command": "orchestrate-workflow",
+      "activation": "mapped-to-native-command"
+    }
+  ],
+  "skills": [
+    {
+      "id": "databricks/TEMPLATE",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/TEMPLATE/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-agent-bricks",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-agent-bricks/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-ai-functions",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-ai-functions/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-aibi-dashboards",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-aibi-dashboards/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-app-python",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-app-python/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-bundles",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-bundles/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-config",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-config/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-dbsql",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-dbsql/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-docs",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-docs/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-execution-compute",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-execution-compute/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-genie",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-genie/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-iceberg",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-iceberg/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-jobs",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-jobs/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-lakebase-autoscale",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-lakebase-autoscale/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-lakebase-provisioned",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-lakebase-provisioned/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-metric-views",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-metric-views/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-mlflow-evaluation",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-mlflow-evaluation/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-model-serving",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-model-serving/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-python-sdk",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-python-sdk/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-spark-declarative-pipelines",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-spark-declarative-pipelines/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-spark-structured-streaming",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-spark-structured-streaming/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-synthetic-data-gen",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-synthetic-data-gen/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-unity-catalog",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-unity-catalog/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-unstructured-pdf-generation",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-unstructured-pdf-generation/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-vector-search",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-vector-search/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/databricks-zerobus-ingest",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/databricks-zerobus-ingest/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "databricks/spark-python-data-source",
+      "source_path": ".agentcodex/imports/data-agents/skills/databricks/spark-python-data-source/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-cross-platform",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-cross-platform/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-data-factory",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-data-factory/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-deployment-pipelines",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-deployment-pipelines/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-direct-lake",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-direct-lake/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-eventhouse-rti",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-eventhouse-rti/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-git-integration",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-git-integration/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-medallion",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-medallion/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-monitoring-dmv",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-monitoring-dmv/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-notebook-manager",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-notebook-manager/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "fabric/fabric-workspace-manager",
+      "source_path": ".agentcodex/imports/data-agents/skills/fabric/fabric-workspace-manager/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "migration",
+      "source_path": ".agentcodex/imports/data-agents/skills/migration/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "patterns/data-quality",
+      "source_path": ".agentcodex/imports/data-agents/skills/patterns/data-quality/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "patterns/pipeline-design",
+      "source_path": ".agentcodex/imports/data-agents/skills/patterns/pipeline-design/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "patterns/spark-patterns",
+      "source_path": ".agentcodex/imports/data-agents/skills/patterns/spark-patterns/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "patterns/sql-generation",
+      "source_path": ".agentcodex/imports/data-agents/skills/patterns/sql-generation/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "patterns/star-schema-design",
+      "source_path": ".agentcodex/imports/data-agents/skills/patterns/star-schema-design/SKILL.md",
+      "activation": "reference-only"
+    },
+    {
+      "id": "python",
+      "source_path": ".agentcodex/imports/data-agents/skills/python/SKILL.md",
+      "activation": "reference-only"
+    }
+  ],
+  "kb_files": [
+    ".agentcodex/imports/data-agents/kb/README.md",
+    ".agentcodex/imports/data-agents/kb/collaboration-workflows.md",
+    ".agentcodex/imports/data-agents/kb/constitution.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/concepts/drift-detection.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/concepts/expectations-concepts.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/concepts/monitoring-concepts.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/concepts/profiling-rules.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/concepts/sla-concepts.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/index.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/patterns/alert-patterns.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/patterns/drift-detection-patterns.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/patterns/expectations-patterns.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/patterns/profiling-patterns.md",
+    ".agentcodex/imports/data-agents/kb/data-quality/patterns/sla-patterns.md",
+    ".agentcodex/imports/data-agents/kb/databricks/concepts/ai-ml-concepts.md",
+    ".agentcodex/imports/data-agents/kb/databricks/concepts/bundles-concepts.md",
+    ".agentcodex/imports/data-agents/kb/databricks/concepts/compute-concepts.md",
+    ".agentcodex/imports/data-agents/kb/databricks/concepts/jobs-concepts.md",
+    ".agentcodex/imports/data-agents/kb/databricks/concepts/unity-catalog-concepts.md",
+    ".agentcodex/imports/data-agents/kb/databricks/index.md",
+    ".agentcodex/imports/data-agents/kb/databricks/patterns/ai-ml-patterns.md",
+    ".agentcodex/imports/data-agents/kb/databricks/patterns/cicd-patterns.md",
+    ".agentcodex/imports/data-agents/kb/databricks/patterns/compute-patterns.md",
+    ".agentcodex/imports/data-agents/kb/databricks/patterns/unity-catalog-patterns.md",
+    ".agentcodex/imports/data-agents/kb/databricks/patterns/workflow-patterns.md",
+    ".agentcodex/imports/data-agents/kb/fabric/concepts/cross-platform-concepts.md",
+    ".agentcodex/imports/data-agents/kb/fabric/concepts/direct-lake-cross-reference.md",
+    ".agentcodex/imports/data-agents/kb/fabric/concepts/lakehouse-concepts.md",
+    ".agentcodex/imports/data-agents/kb/fabric/concepts/rti-concepts.md",
+    ".agentcodex/imports/data-agents/kb/fabric/index.md",
+    ".agentcodex/imports/data-agents/kb/fabric/patterns/data-factory-patterns.md",
+    ".agentcodex/imports/data-agents/kb/fabric/patterns/lakehouse-patterns.md",
+    ".agentcodex/imports/data-agents/kb/fabric/patterns/rti-patterns.md",
+    ".agentcodex/imports/data-agents/kb/fabric/patterns/shortcut-patterns.md",
+    ".agentcodex/imports/data-agents/kb/governance/concepts/access-control-concepts.md",
+    ".agentcodex/imports/data-agents/kb/governance/concepts/audit-concepts.md",
+    ".agentcodex/imports/data-agents/kb/governance/concepts/compliance-concepts.md",
+    ".agentcodex/imports/data-agents/kb/governance/concepts/lineage-concepts.md",
+    ".agentcodex/imports/data-agents/kb/governance/concepts/pii-concepts.md",
+    ".agentcodex/imports/data-agents/kb/governance/index.md",
+    ".agentcodex/imports/data-agents/kb/governance/patterns/access-control-patterns.md",
+    ".agentcodex/imports/data-agents/kb/governance/patterns/audit-procedures.md",
+    ".agentcodex/imports/data-agents/kb/governance/patterns/compliance-patterns.md",
+    ".agentcodex/imports/data-agents/kb/governance/patterns/lineage-patterns.md",
+    ".agentcodex/imports/data-agents/kb/governance/patterns/pii-patterns.md",
+    ".agentcodex/imports/data-agents/kb/migration/index.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/concepts/cross-platform-concepts.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/concepts/medallion-concepts.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/index.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/patterns/cross-platform-patterns.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/patterns/medallion-patterns.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/patterns/orchestration-cross-platform.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/patterns/orchestration-databricks.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/patterns/orchestration-fabric.md",
+    ".agentcodex/imports/data-agents/kb/pipeline-design/patterns/star-schema-cross-reference.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/concepts/concurrency.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/concepts/data-structures.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/concepts/testing-concepts.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/concepts/type-system.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/index.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/patterns/api-patterns.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/patterns/cli-patterns.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/patterns/data-io.md",
+    ".agentcodex/imports/data-agents/kb/python-patterns/patterns/packaging.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/concepts/dax-concepts.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/concepts/direct-lake-canonical.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/concepts/metric-views-concepts.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/concepts/semantic-model-concepts.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/index.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/patterns/dax-patterns.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/patterns/metric-views-patterns.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/patterns/reporting-patterns.md",
+    ".agentcodex/imports/data-agents/kb/semantic-modeling/patterns/semantic-model-patterns.md",
+    ".agentcodex/imports/data-agents/kb/shared/anti-patterns.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/concepts/delta-lake-concepts.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/concepts/performance-concepts.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/concepts/sdp-rules.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/concepts/streaming-concepts.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/index.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/patterns/delta-lake-patterns.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/patterns/lakeflow-patterns.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/patterns/performance-patterns.md",
+    ".agentcodex/imports/data-agents/kb/spark-patterns/patterns/streaming-patterns.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/concepts/ddl-concepts.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/concepts/dialect-concepts.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/concepts/query-concepts.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/concepts/star-schema-source-of-truth.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/index.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/patterns/ddl-patterns.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/patterns/dialect-patterns.md",
+    ".agentcodex/imports/data-agents/kb/sql-patterns/patterns/query-patterns.md",
+    ".agentcodex/imports/data-agents/kb/task_routing.md"
+  ],
+  "mcp_servers": [
+    "context7",
+    "databricks",
+    "databricks_genie",
+    "fabric",
+    "fabric_rti",
+    "fabric_semantic",
+    "fabric_sql",
+    "firecrawl",
+    "github",
+    "memory_mcp",
+    "migration_source",
+    "postgres",
+    "tavily"
+  ],
+  "hooks": [
+    ".agentcodex/imports/data-agents/hooks/__init__.py",
+    ".agentcodex/imports/data-agents/hooks/audit_hook.py",
+    ".agentcodex/imports/data-agents/hooks/checkpoint.py",
+    ".agentcodex/imports/data-agents/hooks/context_budget_hook.py",
+    ".agentcodex/imports/data-agents/hooks/cost_guard_hook.py",
+    ".agentcodex/imports/data-agents/hooks/memory_hook.py",
+    ".agentcodex/imports/data-agents/hooks/output_compressor_hook.py",
+    ".agentcodex/imports/data-agents/hooks/security_hook.py",
+    ".agentcodex/imports/data-agents/hooks/session_lifecycle.py",
+    ".agentcodex/imports/data-agents/hooks/session_logger.py",
+    ".agentcodex/imports/data-agents/hooks/transcript_hook.py",
+    ".agentcodex/imports/data-agents/hooks/workflow_tracker.py"
+  ],
+  "tests": [
+    ".agentcodex/imports/data-agents/tests/test_agent_preload.py",
+    ".agentcodex/imports/data-agents/tests/test_agents.py",
+    ".agentcodex/imports/data-agents/tests/test_bootstrap.py",
+    ".agentcodex/imports/data-agents/tests/test_checkpoint.py",
+    ".agentcodex/imports/data-agents/tests/test_commands.py",
+    ".agentcodex/imports/data-agents/tests/test_config_snapshot.py",
+    ".agentcodex/imports/data-agents/tests/test_context_budget_hook.py",
+    ".agentcodex/imports/data-agents/tests/test_databricks_genie_server.py",
+    ".agentcodex/imports/data-agents/tests/test_delegation.py",
+    ".agentcodex/imports/data-agents/tests/test_evals.py",
+    ".agentcodex/imports/data-agents/tests/test_exceptions.py",
+    ".agentcodex/imports/data-agents/tests/test_fabric_semantic_server.py",
+    ".agentcodex/imports/data-agents/tests/test_fabric_sql_server.py",
+    ".agentcodex/imports/data-agents/tests/test_functional.py",
+    ".agentcodex/imports/data-agents/tests/test_hooks.py",
+    ".agentcodex/imports/data-agents/tests/test_logging_config.py",
+    ".agentcodex/imports/data-agents/tests/test_mcp_configs.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_compiler.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_decay.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_extractor.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_hook.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_lint.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_lint_stale.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_retrieval.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_store.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_store_stale.py",
+    ".agentcodex/imports/data-agents/tests/test_memory_types.py",
+    ".agentcodex/imports/data-agents/tests/test_migration_source_server.py",
+    ".agentcodex/imports/data-agents/tests/test_mlflow_wrapper.py",
+    ".agentcodex/imports/data-agents/tests/test_monitor.py",
+    ".agentcodex/imports/data-agents/tests/test_native_skills.py",
+    ".agentcodex/imports/data-agents/tests/test_output_compressor.py",
+    ".agentcodex/imports/data-agents/tests/test_refresh_skills_batch.py",
+    ".agentcodex/imports/data-agents/tests/test_session_lifecycle.py",
+    ".agentcodex/imports/data-agents/tests/test_session_logger.py",
+    ".agentcodex/imports/data-agents/tests/test_sessions_command.py",
+    ".agentcodex/imports/data-agents/tests/test_settings.py",
+    ".agentcodex/imports/data-agents/tests/test_siftools_integration.py",
+    ".agentcodex/imports/data-agents/tests/test_summarizer.py",
+    ".agentcodex/imports/data-agents/tests/test_supervisor.py",
+    ".agentcodex/imports/data-agents/tests/test_transcript_hook.py",
+    ".agentcodex/imports/data-agents/tests/test_workflow.py"
+  ],
+  "templates": [
+    ".agentcodex/imports/data-agents/templates/README.md",
+    ".agentcodex/imports/data-agents/templates/backlog.md",
+    ".agentcodex/imports/data-agents/templates/cross-platform-spec.md",
+    ".agentcodex/imports/data-agents/templates/pipeline-spec.md",
+    ".agentcodex/imports/data-agents/templates/star-schema-spec.md"
+  ],
+  "activation_policy": {
+    "default": "reference-only",
+    "no_duplicate_rule": "Do not create a new AgentCodex role, command, or KB page when an equivalent native surface already exists. Record the mapping instead.",
+    "native_codex_rule": "Claude hooks, MCP tool names, and runtime-specific scripts remain raw source unless translated into file-based AgentCodex procedures, roles, reports, or validators.",
+    "porting_rule": "Promote only missing behavior that adds distinct operational value, with validation coverage when code changes are involved."
+  }
+}
