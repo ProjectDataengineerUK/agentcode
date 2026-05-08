@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "built_at": "2026-05-08",
+  "agentspec_version": "3.2.0",
+  "agentcode_owned": [
+    "agents/languages",
+    "agents/security",
+    "kb/databricks",
+    "kb/fabric",
+    "kb/governance",
+    "kb/doma-protocol",
+    "kb/semantic-modeling",
+    "kb/migration",
+    "kb/guardrails",
+    "kb/controls",
+    "kb/foundations",
+    "kb/integrations",
+    "kb/metadata",
+    "kb/operations",
+    "kb/orchestration",
+    "kb/patterns",
+    "kb/platforms",
+    "commands/data",
+    "hooks/mempalace_save.sh",
+    "hooks/mempalace_precompact.sh"
+  ]
+}
