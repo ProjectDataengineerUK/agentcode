@@ -4,6 +4,48 @@ agentcode is a Claude Code plugin that fuses agentspec + ECC + data-agents + age
 into a single installable plugin providing 117+ agents, 40+ KB domains, and cross-harness support
 for Claude Code, Cursor, and Codex.
 
+---
+
+## REGRAS INVIOLÁVEIS — Ler Antes de Qualquer Ação
+
+> Estas regras têm origem em incidentes reais com consequências sérias. Prioridade máxima.
+
+### Protocolo de Início de Sessão
+
+**ANTES de qualquer ação técnica** (código, deploy, terraform, schema, execução de job):
+
+```
+1. Ler memory/MEMORY.md (ou equivalente no projeto)
+2. Declarar ao usuário: o que já foi feito, o que está pendente, qual o estado atual
+3. Ações irreversíveis → confirmar com usuário mesmo que memória diga "pendente"
+4. Sem memória disponível → perguntar o estado antes de prosseguir
+```
+
+**Por quê:** Terraform apply foi executado sem verificar memórias → infraestrutura destruída.
+
+### Verificação de Execução (Anti Re-execução Cega)
+
+**ANTES de recomendar executar qualquer job, pipeline ou processo:**
+
+```bash
+# GCP Cloud Run Jobs:
+gcloud run jobs executions list --project {PROJECT_ID} --region {REGION} --limit 50
+
+# Databricks:
+SELECT job_name, status, start_time FROM system.lakeflow.job_run_timeline
+WHERE start_time >= CURRENT_TIMESTAMP - INTERVAL 7 DAYS ORDER BY start_time DESC;
+
+# Airflow: airflow dags list-runs -d {dag_id} --limit 10
+```
+
+**Só recomendar execução se:** última execução falhou, dados desatualizados além do SLO, ou nunca rodou.
+
+**Por quê:** Jobs Social, Emendas e Sanções foram declarados como "precisam rodar" quando já tinham sido executados com sucesso em 2026-05-07.
+
+> Detalhes completos: `kb/guardrails/constitution.md` §9 e §10
+
+---
+
 ## Mandatory Project Standard
 
 **Every project built with agentcode must satisfy the AgentCodex Project Standard.**

@@ -155,11 +155,93 @@
 
 ---
 
+## 9. Protocolo Obrigatório de Início de Sessão
+
+> **Origem:** Incidente real — infraestrutura destruída porque `terraform apply` foi executado sem verificar memórias de sessões anteriores. Regra inviolável a partir deste ponto.
+
+| # | Regra |
+|---|-------|
+| SS1 | **ANTES de qualquer ação técnica** (escrever código, executar comandos, aplicar infra, modificar arquivos), ler o arquivo de memória do projeto (`memory/MEMORY.md` ou equivalente). |
+| SS2 | **Declarar explicitamente** ao usuário o que foi encontrado na memória: o que já foi feito, o que está pendente, qual o estado atual do projeto. |
+| SS3 | **NUNCA iniciar** terraform, deploy, aplicação de schema ou qualquer ação destrutiva/irreversível sem confirmar contra a memória que esta ação não foi executada recentemente e com sucesso. |
+| SS4 | Se não houver memória disponível, **perguntar ao usuário** qual o estado atual antes de prosseguir com ações técnicas. |
+| SS5 | Ações **irreversíveis** (terraform destroy, DROP TABLE, DELETE sem WHERE, force-push, rm -rf) requerem confirmação explícita do usuário **mesmo que a memória diga que está pendente**. |
+
+### Checklist de Início de Sessão
+
+```
+Antes de qualquer ação técnica:
+  □ Li memory/MEMORY.md (ou equivalente)?
+  □ Identifiquei o que já foi feito com sucesso?
+  □ Identifiquei o que está genuinamente pendente?
+  □ Declarei o estado ao usuário?
+  □ Se a ação é irreversível: obtive confirmação explícita?
+```
+
+---
+
+## 10. Verificação de Execução (Anti Re-execução Cega)
+
+> **Origem:** Incidente real — jobs Social, Emendas e Sanções foram declarados como "precisam rodar" quando já tinham sido executados com **sucesso** em 2026-05-07. Recomendação incorreta causou confusão e retrabalho.
+
+**Regra:** Antes de recomendar executar qualquer job, pipeline, script ou processo batch, **verificar se já existe execução bem-sucedida recente**.
+
+| # | Regra |
+|---|-------|
+| EX1 | **NUNCA** recomende re-execução sem antes verificar o histórico de execuções da plataforma. |
+| EX2 | Recomendar execução SOMENTE se: (a) a última execução falhou, (b) os dados estão desatualizados além do SLO, ou (c) nunca rodou. |
+| EX3 | Se não conseguir verificar o histórico (sem acesso MCP/CLI), **declarar explicitamente**: "Não consegui verificar o histórico — por favor confirme se já rodou antes de executar." |
+| EX4 | Ao apresentar um job como "pendente", sempre incluir de onde veio essa informação (memória? análise de código? usuário disse?). |
+
+### Comandos de Verificação por Plataforma
+
+**Google Cloud Run Jobs:**
+```bash
+gcloud run jobs executions list \
+  --project {PROJECT_ID} \
+  --region {REGION} \
+  --limit 50
+# Verificar: SUCCEEDED recente? Se sim → NÃO re-executar sem justificativa.
+```
+
+**Databricks Jobs:**
+```sql
+SELECT job_name, status, start_time, end_time
+FROM system.lakeflow.job_run_timeline
+WHERE start_time >= CURRENT_TIMESTAMP - INTERVAL 7 DAYS
+  AND job_name LIKE '%{nome_do_job}%'
+ORDER BY start_time DESC
+LIMIT 10;
+```
+
+**Fabric Data Factory Pipelines:**
+```
+Fabric Portal → Data Factory → Activity runs → filtrar por pipeline name + últimas 24-72h
+```
+
+**Airflow DAGs:**
+```bash
+airflow dags list-runs -d {dag_id} --limit 10
+```
+
+### Decisão de Re-execução
+
+```
+Verificar histórico → encontrou execução recente?
+  ├── SIM + SUCCEEDED + dados atuais  → NÃO executar. Informar ao usuário.
+  ├── SIM + FAILED                    → Diagnosticar causa antes de re-executar.
+  ├── SIM + SUCCEEDED + dados velhos  → Perguntar ao usuário se quer atualizar.
+  └── NÃO (nunca rodou)               → Pode recomendar execução.
+```
+
+---
+
 ## Aplicação e Referência
 
 - O Supervisor deve carregar este arquivo como contexto base antes de planejar tarefas complexas.
 - Agentes especialistas devem ser instruídos a respeitar a Constituição via seus prompts.
 - Violações da Constituição devem ser detectadas na fase de Síntese (Passo 4) e corrigidas
   antes de apresentar resultados ao usuário.
+- **Seções §9 e §10 são as mais críticas** — violações causaram incidentes reais de destruição de infraestrutura e retrabalho. Prioridade máxima de aplicação.
 - Este documento é versionado junto com o projeto e deve ser atualizado quando novas regras
   críticas forem identificadas pelo time.
