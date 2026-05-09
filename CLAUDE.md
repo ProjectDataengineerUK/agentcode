@@ -98,10 +98,11 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 │   ├── operations/             (AGENTCODE — agentcodex)
 │   ├── orchestration/          (AGENTCODE — agentcodex)
 │   ├── patterns/               (AGENTCODE — agentcodex)
-│   └── platforms/              (AGENTCODE — agentcodex)
+│   ├── platforms/              (AGENTCODE — agentcodex)
+│   └── snowflake/              (AGENTCODE — Snowflake KB domain)
 ├── commands/
 │   ├── [6 agentspec subdirs]   (OWNED)
-│   └── data/                   (AGENTCODE — 5 data commands)
+│   └── data/                   (AGENTCODE — 7 data commands)
 ├── skills/         (5 — agentspec OWNED)
 ├── sdd/            (agentspec OWNED)
 └── hooks/
@@ -117,6 +118,8 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 |---------|-------|---------|
 | `/sql` | `@databricks-sql-expert` | Databricks SQL / Fabric T-SQL / KQL |
 | `/spark` | `@databricks-spark-expert` | PySpark, DLT, LakeFlow |
+| `/snowflake` | `@snowflake-*` specialists | Snowflake pipelines, SQL, governance, cost |
+| `/cortex` | `@snowflake-cortex-expert` | Cortex Analyst (NL→SQL), Cortex Search, AI_* |
 | `/pipeline` | `@fabric-pipeline-expert` | Pipeline design and orchestration |
 | `/workflow` | `@doma-supervisor` | Multi-domain DOMA orchestration |
 | `/party` | `@doma-supervisor` | Multi-perspective parallel analysis |

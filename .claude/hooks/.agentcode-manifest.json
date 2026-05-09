@@ -20,6 +20,7 @@
     "kb/orchestration",
     "kb/patterns",
     "kb/platforms",
+    "kb/snowflake",
     "commands/data",
     "hooks/mempalace_save.sh",
     "hooks/mempalace_precompact.sh"
