@@ -36,6 +36,16 @@ cp -r .cursor /path/to/your/project/  # optional — Cursor support
 
 ### Data Engineering (Databricks + Fabric)
 
+### Diagram Generation MCP Servers
+
+| MCP Server | Use for |
+|------------|---------|
+| `diagrams-mcp-server` | Generating cloud architecture diagrams with official AWS/Azure/GCP icons using mingrammer/diagrams, Mermaid, and PlantUML engines |
+| `Draw.io MCP` | Creating and editing diagrams visually via draw.io interface with XML/CSV/Mermaid support |
+| `mcp-diagrams` | Alternative for infrastructure and architecture diagrams via MCP with simple commands |
+
+### Data Engineering (Databricks + Fabric)
+
 | Agent | Use for |
 |-------|---------|
 | `@databricks-sql-expert` | Spark SQL, Unity Catalog, T-SQL, KQL |
