@@ -39,6 +39,9 @@ check_count "agents/languages (ECC)" "$lang_count" 46
 de_count=$(find "$CLAUDE/agents/data-engineering" -name "*.md" 2>/dev/null | wc -l)
 check_count "agents/data-engineering" "$de_count" 24
 
+legal_count=$(find "$CLAUDE/agents/legal" -name "*.md" 2>/dev/null | wc -l)
+check_count "agents/legal" "$legal_count" 14
+
 # KB domain counts
 kb_domain_count=$(find "$CLAUDE/kb" -maxdepth 1 -type d 2>/dev/null | tail -n +2 | wc -l)
 check_count "KB domains" "$kb_domain_count" 31
@@ -47,14 +50,19 @@ check_count "KB domains" "$kb_domain_count" 31
 echo ""
 check_exists "hooks.json" "$CLAUDE/hooks/hooks.json"
 check_exists "hooks-agentspec-base.json" "$CLAUDE/hooks/hooks-agentspec-base.json"
+check_exists "mempalace_setup.sh" "$CLAUDE/hooks/mempalace_setup.sh"
 check_exists "mempalace_save.sh" "$CLAUDE/hooks/mempalace_save.sh"
 check_exists "mempalace_precompact.sh" "$CLAUDE/hooks/mempalace_precompact.sh"
 check_exists ".agentcode-manifest.json" "$CLAUDE/hooks/.agentcode-manifest.json"
 check_exists "guardrails/constitution.md" "$CLAUDE/kb/guardrails/constitution.md"
 check_exists "commands/data/" "$CLAUDE/commands/data"
+check_exists "commands/legal/" "$CLAUDE/commands/legal"
 check_exists "skills/" "$CLAUDE/skills"
 check_exists ".codex/" "$ROOT/.codex"
 check_exists ".cursor/" "$ROOT/.cursor"
+check_exists ".gemini/" "$ROOT/.gemini"
+check_exists ".kiro/" "$ROOT/.kiro"
+check_exists ".gitignore" "$ROOT/.gitignore"
 check_exists "scripts/update-agentspec.sh" "$ROOT/scripts/update-agentspec.sh"
 check_exists "CLAUDE.md" "$ROOT/CLAUDE.md"
 

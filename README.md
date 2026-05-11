@@ -68,6 +68,35 @@ See agentspec documentation for the full list.
 Language and framework reviewers from ECC, prefixed with `ecc-`.
 Examples: `ecc-python-reviewer`, `ecc-typescript-reviewer`, `ecc-code-reviewer`.
 
+### Legal Specialists (14 agents)
+
+| Agent | Use for |
+|-------|---------|
+| `@maestro` | Multi-agent legal orchestration |
+| `@pesquisador-legislativo` | Federal/state/municipal legislation research |
+| `@analista-processual` | Case analysis via DataJud |
+| `@especialista-civel` | Civil law and procedure |
+| `@especialista-trabalhista` | Labor law and procedure |
+| `@especialista-criminal` | Criminal law and procedure |
+| `@especialista-tributario` | Tax law |
+| `@especialista-empresarial` | Corporate/business law |
+| `@especialista-constitucional` | Constitutional law |
+| `@agente-stf` | STF jurisprudence and procedures |
+| `@agente-stj` | STJ jurisprudence and procedures |
+| `@agente-tst` | TST jurisprudence and procedures |
+| `@validador` | Legal citation validation |
+| `@redator` | Legal document drafting |
+
+### Legal Commands
+
+```
+/consultar-lei          — Federal legislation query
+/pesquisar-jurisprudencia — Court jurisprudence search
+/analisar-processo      — Case data analysis
+/redigir                — Legal document drafting
+/validar                — Citation validation
+```
+
 ## Updating agentspec Components
 
 ```bash

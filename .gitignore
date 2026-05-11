@@ -1,0 +1,24 @@
+# agentcode — gitignore
+# ======================
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# Generated logs and temp files
+*.log
+.tmp

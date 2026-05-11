@@ -56,10 +56,31 @@ Format: `[date] agentspec-version | description`
 
 ---
 
+## [2026-05-11] — v1.1.0 — Legal specialist agents + KB
+
+### Novo
+- **14 agentes jurídicos**: maestro, pesquisador-legislativo, analista-processual, 5 especialistas (civel, trabalhista, criminal, tributario, empresarial, constitucional), agente-stf, agente-stj, agente-tst, validador, redator
+- **KB legal**: 4 subdomínios (conceitos, legislacao, jurisprudencia, procedimentos)
+- **MCPs jurídicos**: configurações de referência para DataJud, legislação, tribunais, diários
+- **Comandos**: `/consultar-lei`, `/pesquisar-jurisprudencia`, `/analisar-processo`
+
+## [2026-05-11] — v1.0.1 — mempalace nativo + bug fixes
+
+### Fixes
+- **hooks.json**: Migrado de inline `mempalace save` para scripts `.sh` dedicados (session tracking, auto-mine)
+- **mempalace_setup.sh**: Novo — auto-instala mempalace via pip/uv no SessionStart (background, não bloqueia)
+- **CLAUDE.md**: Corrigida documentação da integração mempalace (estava incorreta)
+- **.agentcode-manifest.json**: Adicionado `mempalace_setup.sh` como AGENTCODE-owned
+- **.gitignore**: Adicionado (faltava — mempalace state, __pycache__, etc.)
+- **Cross-harness**: Adicionados `.gemini/` e `.kiro/` (mencionados no brainstorm mas ausentes)
+
+---
+
 ## Update History
 
 | Date | Action | agentspec version | Notes |
 |------|--------|------------------|-------|
+| 2026-05-11 | Bug fixes + mempalace nativo | 3.2.0 | hooks, setup, docs |
 | 2026-05-08 | Initial build | 3.2.0 | — |
 
 ---

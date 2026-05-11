@@ -81,7 +81,8 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 │   ├── test/             (3 — agentspec OWNED)
 │   ├── workflow/         (6 — agentspec OWNED)
 │   ├── languages/        (46 — ECC agents, ecc- prefixed, AGENTCODE)
-│   └── security/         (2 — ECC security agents, AGENTCODE)
+│   ├── security/         (2 — ECC security agents, AGENTCODE)
+│   └── legal/            (14 — legal specialist agents, AGENTCODE)
 ├── kb/
 │   ├── [25 agentspec domains]  (OWNED)
 │   ├── databricks/             (AGENTCODE — data-agents)
@@ -99,17 +100,20 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 │   ├── orchestration/          (AGENTCODE — agentcodex)
 │   ├── patterns/               (AGENTCODE — agentcodex)
 │   ├── platforms/              (AGENTCODE — agentcodex)
-│   └── snowflake/              (AGENTCODE — Snowflake KB domain)
+│   ├── snowflake/              (AGENTCODE — Snowflake KB domain)
+│   └── legal/                  (AGENTCODE — legal KB domain)
 ├── commands/
 │   ├── [6 agentspec subdirs]   (OWNED)
-│   └── data/                   (AGENTCODE — 7 data commands)
+│   ├── data/                   (AGENTCODE — 7 data commands)
+│   └── legal/                  (AGENTCODE — 5 legal commands)
 ├── skills/         (5 — agentspec OWNED)
 ├── sdd/            (agentspec OWNED)
 └── hooks/
     ├── hooks.json             (MERGED: agentspec base + mempalace)
     ├── hooks-agentspec-base.json  (base for update re-merge)
-    ├── mempalace_save.sh      (AGENTCODE — mempalace)
-    └── mempalace_precompact.sh (AGENTCODE — mempalace)
+    ├── mempalace_setup.sh     (AGENTCODE — auto-install via pip/uv)
+    ├── mempalace_save.sh      (AGENTCODE — periodic save every 15 exchanges)
+    └── mempalace_precompact.sh (AGENTCODE — emergency save before compaction)
 ```
 
 ## Data Commands
@@ -179,12 +183,19 @@ or any other AGENTCODE-owned path.
 | AGENTCODE | agentcode extensions | Never — script skips these |
 | SHARED | agents/data-engineering/ | Partial — only agentspec files updated |
 
-## mempalace Integration
+## mempalace Integration (nativo)
 
-If `mempalace` is installed (`command -v mempalace`):
-- `hooks/hooks.json` auto-runs `mempalace_save.sh` on session Stop
-- `hooks/hooks.json` auto-runs `mempalace_precompact.sh` on PreCompact
-- If mempalace is not installed, hooks exit silently (no error)
+O mempalace é **auto-instalado** na primeira sessão via SessionStart hook:
+
+| Hook | Script | Função |
+|------|--------|--------|
+| `SessionStart` | `mempalace_setup.sh` | Auto-instala via pip/uv (background, não bloqueia) |
+| `Stop` | `mempalace_save.sh` | Salva memória a cada 15 trocas + auto-mine do transcript |
+| `PreCompact` | `mempalace_precompact.sh` | Salva ANTES da compactação de contexto |
+
+**Auto-install**: tenta `uv pip install mempalace` → `pip3 install mempalace` → `pip install mempalace`. Falha silenciosa se não houver Python/pip — hooks continuam funcionando sem memória.
+
+**Verificação**: `command -v mempalace > /dev/null 2>&1` guarda todos os hooks.
 
 ## Cross-Harness Support
 
