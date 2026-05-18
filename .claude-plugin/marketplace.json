@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "agentcode-local",
+  "description": "Local agentcode plugin marketplace",
+  "owner": {
+    "name": "Jonatas Lima da Costa",
+    "email": "jonataslimac@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "agentcode",
+      "description": "Unified Claude Code plugin — 136+ agents, 42+ KB domains, legal/data/cloud specialists, mempalace auto-save",
+      "author": {
+        "name": "Jonatas Lima da Costa"
+      },
+      "category": "productivity",
+      "source": {
+        "source": "local",
+        "path": "."
+      }
+    }
+  ]
+}

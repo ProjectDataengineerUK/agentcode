@@ -69,7 +69,7 @@ check_exists "CLAUDE.md" "$ROOT/CLAUDE.md"
 
 # hooks.json validity
 echo ""
-PYTHON_CMD="python"
+PYTHON_CMD="$(command -v python3 || command -v python)"
 if "$PYTHON_CMD" -m json.tool "$CLAUDE/hooks/hooks.json" > /dev/null 2>&1; then
   echo "  ✔ hooks.json is valid JSON"
 else
