@@ -159,6 +159,9 @@ else
     EXCHANGE_COUNT=0
 fi
 
+# Validate as integer to prevent arithmetic errors if python output is unexpected
+[[ "$EXCHANGE_COUNT" =~ ^[0-9]+$ ]] || EXCHANGE_COUNT=0
+
 # Track last save point for this session
 LAST_SAVE_FILE="$STATE_DIR/${SESSION_ID}_last_save"
 LAST_SAVE=0

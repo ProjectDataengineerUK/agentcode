@@ -13,23 +13,61 @@ data-agents, agentcodex, and mempalace into a single installable plugin.
 | agentcodex | 8 unique KB domains (controls, foundations, integrations, metadata, operations, orchestration, patterns, platforms) | ~40 files |
 | mempalace | Auto-save hooks for session memory persistence | 2 scripts |
 
-**Total: 119+ agents, 31+ KB domains**
+**Total: 136+ agents, 42+ KB domains**
 
 ## Installation
 
-### As a Claude Code plugin
+> `claude plugin install .` **não funciona** para diretórios locais — o CLI só suporta fontes git.
+> Use uma das opções abaixo.
+
+### Opção A — Global (todos os projetos)
+
+Copia os agentes/kb/commands para `~/.claude/`, ativando em qualquer sessão:
 
 ```bash
 cd agentcode
-claude plugin install .
+cp -r .claude/agents   ~/.claude/
+cp -r .claude/commands ~/.claude/
+cp -r .claude/kb       ~/.claude/
+cp -r .claude/skills   ~/.claude/
 ```
 
-### Manual (copy to project)
+Para registrar os hooks de mempalace no Claude Code global, adicione em `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "SessionStart": [{"hooks": [{"type": "command", "command": "bash ~/.claude/hooks/mempalace_setup.sh || true"}]}],
+    "Stop":         [{"hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash ~/.claude/hooks/mempalace_save.sh || true"}]}],
+    "PreCompact":   [{"hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash ~/.claude/hooks/mempalace_precompact.sh || true"}]}]
+  }
+}
+```
+
+Copie também os scripts de hook:
 
 ```bash
-cp -r .claude /path/to/your/project/
-cp -r .codex /path/to/your/project/   # optional — Codex support
-cp -r .cursor /path/to/your/project/  # optional — Cursor support
+mkdir -p ~/.claude/hooks
+cp .claude/hooks/mempalace_*.sh ~/.claude/hooks/
+```
+
+### Opção B — Por projeto (este diretório apenas)
+
+O Claude Code carrega `.claude/` automaticamente quando você abre uma sessão dentro do projeto.
+Não é necessário instalar nada — basta clonar o repositório e abrir `claude` aqui.
+
+```bash
+git clone <repo-url> agentcode
+cd agentcode
+claude   # agentes e KB carregados automaticamente
+```
+
+### Opção C — Copiar para outro projeto
+
+```bash
+cp -r .claude /path/to/seu/projeto/
+cp -r .codex  /path/to/seu/projeto/   # opcional — suporte Codex
+cp -r .cursor /path/to/seu/projeto/   # opcional — suporte Cursor
 ```
 
 ## Key Agents

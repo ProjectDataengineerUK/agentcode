@@ -145,6 +145,8 @@ if [[ -f "$AGENTSPEC_HOOKS" ]]; then
   else
     cp "$AGENTSPEC_HOOKS" "$AGENTCODE_TARGET/hooks/hooks-agentspec-base.json"
     # Merge: read agentspec hooks + add mempalace entries
+    # IMPORTANT: export before the heredoc so os.environ is populated inside Python
+    export AGENTCODE_TARGET
     python3 - <<'PYEOF'
 import json, sys, os
 
@@ -156,15 +158,20 @@ with open(base_path) as f:
 
 hooks = merged.setdefault("hooks", {})
 
+mempalace_setup = {
+    "matcher": "",
+    "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_setup.sh\" || true"}]
+}
 mempalace_stop = {
     "matcher": "",
-    "hooks": [{"type": "command", "command": "if command -v mempalace &> /dev/null; then bash \"$(dirname \"$0\")/mempalace_save.sh\"; fi"}]
+    "hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_save.sh\" || true"}]
 }
 mempalace_precompact = {
     "matcher": "",
-    "hooks": [{"type": "command", "command": "if command -v mempalace &> /dev/null; then bash \"$(dirname \"$0\")/mempalace_precompact.sh\"; fi"}]
+    "hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_precompact.sh\" || true"}]
 }
 
+hooks.setdefault("SessionStart", []).append(mempalace_setup)
 hooks.setdefault("Stop", []).append(mempalace_stop)
 hooks.setdefault("PreCompact", []).append(mempalace_precompact)
 
@@ -172,7 +179,6 @@ with open(out_path, "w") as f:
     json.dump(merged, f, indent=2)
 print("  ✔ hooks.json merged")
 PYEOF
-    export AGENTCODE_TARGET
   fi
 else
   echo "  ⚠ agentspec hooks/hooks.json not found"

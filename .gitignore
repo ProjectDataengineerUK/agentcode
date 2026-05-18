@@ -22,3 +22,16 @@ node_modules/
 # Generated logs and temp files
 *.log
 .tmp
+
+# Secrets and credentials — never commit these
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+credentials.yaml
+secrets.json
+secrets.yaml
+service-account*.json

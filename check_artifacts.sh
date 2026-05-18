@@ -71,7 +71,7 @@ for artifact in "${artifacts[@]}"; do
         echo "✓ $artifact"
     else
         echo "✗ $artifact"
-        ((missing++))
+        missing=$((missing + 1))
     fi
 done
 
