@@ -82,13 +82,16 @@ try:
 except (FileNotFoundError, json.JSONDecodeError):
     cfg = {}
 
+import shlex
+
 def hook(cmd):
     return {"hooks": [{"type": "command", "command": cmd}]}
 
+qhooks = shlex.quote(hooks_dir)
 cfg["hooks"] = {
-    "SessionStart": [hook(f'bash "{hooks_dir}/mempalace_setup.sh" || true')],
-    "Stop":         [hook(f'command -v mempalace > /dev/null 2>&1 && bash "{hooks_dir}/mempalace_save.sh" || true')],
-    "PreCompact":   [hook(f'command -v mempalace > /dev/null 2>&1 && bash "{hooks_dir}/mempalace_precompact.sh" || true')],
+    "SessionStart": [hook(f'bash {qhooks}/mempalace_setup.sh || true')],
+    "Stop":         [hook(f'command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_save.sh || true')],
+    "PreCompact":   [hook(f'command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_precompact.sh || true')],
 }
 
 with open(settings_path, "w") as f:
@@ -115,14 +118,18 @@ read_head() { head -"${2:-30}" "$PROJECT_DIR/$1" 2>/dev/null || true; }
 # ── Nome do projeto ──
 PROJ_NAME=""
 if has_file "pyproject.toml"; then
-    PROJ_NAME=$(python3 -c "
+    PROJ_NAME=$(python3 - <<'PYEOF' 2>/dev/null
 import re
-content = open('$PROJECT_DIR/pyproject.toml').read()
+content = open('pyproject.toml').read()
 m = re.search(r'name\s*=\s*[\"\'](.*?)[\"\']', content)
 print(m.group(1) if m else '')
-" 2>/dev/null)
+PYEOF
+)
 elif has_file "package.json"; then
-    PROJ_NAME=$(python3 -c "import json; d=json.load(open('$PROJECT_DIR/package.json')); print(d.get('name',''))" 2>/dev/null)
+    PROJ_NAME=$(python3 - <<'PYEOF' 2>/dev/null
+import json; d=json.load(open('package.json')); print(d.get('name',''))
+PYEOF
+)
 elif has_file "Cargo.toml"; then
     PROJ_NAME=$(grep -m1 '^name' "$PROJECT_DIR/Cargo.toml" 2>/dev/null | sed 's/name = "//' | tr -d '"' || true)
 elif has_file "go.mod"; then
