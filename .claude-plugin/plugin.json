@@ -1,8 +1,12 @@
 {
   "name": "agentcode",
+  "version": "1.0.0",
   "description": "Unified Claude Code plugin — 136+ agents, 42+ KB domains, legal/data/cloud specialists, mempalace auto-save",
   "author": {
     "name": "Jonatas Lima da Costa",
     "email": "jonataslimac@gmail.com"
-  }
+  },
+  "repository": "https://github.com/ProjectDataengineerUK/agentcode",
+  "homepage": "https://github.com/ProjectDataengineerUK/agentcode",
+  "keywords": ["agents", "data-engineering", "legal", "cloud", "databricks", "fabric", "snowflake", "llm", "mempalace"]
 }

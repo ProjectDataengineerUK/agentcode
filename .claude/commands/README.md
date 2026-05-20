@@ -1,6 +1,6 @@
 # AgentSpec Commands
 
-**31 slash commands** for the SDD workflow, data engineering, visualization, and developer productivity.
+**32 slash commands** for the SDD workflow, data engineering, visualization, and developer productivity.
 
 ## Workflow Commands (7)
 
@@ -29,10 +29,11 @@
 
 See [data-engineering/](data-engineering/) for detailed usage.
 
-## Core Commands (5)
+## Core Commands (6)
 
 | Command | Description |
 |---------|-------------|
+| `/start` | Initialize agentcode — installs hooks, scans all files, generates CLAUDE.md |
 | `/status` | Project status report (health, SDD state, recommendations) |
 | `/meeting` | Meeting transcript analysis |
 | `/memory` | Save session insights |
