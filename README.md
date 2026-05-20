@@ -17,10 +17,18 @@ data-agents, agentcodex, and mempalace into a single installable plugin.
 
 ## Installation
 
-> `claude plugin install .` **não funciona** para diretórios locais — o CLI só suporta fontes git.
-> Use uma das opções abaixo.
+### Opção A — Marketplace (recomendado)
 
-### Opção A — Global (todos os projetos)
+Instala globalmente via Claude Code marketplace em dois comandos:
+
+```bash
+claude plugin marketplace add ProjectDataengineerUK/agentcode
+claude plugin install agentcode
+```
+
+Após instalar, abra qualquer sessão Claude Code — os 136+ agentes, KB e commands estarão disponíveis automaticamente.
+
+### Opção B — Global manual (todos os projetos)
 
 Copia os agentes/kb/commands para `~/.claude/`, ativando em qualquer sessão:
 
@@ -51,7 +59,7 @@ mkdir -p ~/.claude/hooks
 cp .claude/hooks/mempalace_*.sh ~/.claude/hooks/
 ```
 
-### Opção B — Por projeto (este diretório apenas)
+### Opção C — Por projeto (este diretório apenas)
 
 O Claude Code carrega `.claude/` automaticamente quando você abre uma sessão dentro do projeto.
 Não é necessário instalar nada — basta clonar o repositório e abrir `claude` aqui.
@@ -62,7 +70,7 @@ cd agentcode
 claude   # agentes e KB carregados automaticamente
 ```
 
-### Opção C — Copiar para outro projeto
+### Opção D — Copiar para outro projeto
 
 ```bash
 cp -r .claude /path/to/seu/projeto/
