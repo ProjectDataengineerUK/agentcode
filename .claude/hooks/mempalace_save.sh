@@ -93,13 +93,15 @@ data = json.load(sys.stdin)
 sid = data.get('session_id', 'unknown')
 sha_raw = data.get('stop_hook_active', False)
 tp = data.get('transcript_path', '')
-# Shell-safe output — only allow alphanumeric, underscore, hyphen, slash, dot, tilde
-safe = lambda s: re.sub(r'[^a-zA-Z0-9_/.\-~]', '', str(s))
+# session_id must not contain / (path separator not valid in session IDs)
+safe_id   = lambda s: re.sub(r'[^a-zA-Z0-9_.\-~]', '', str(s))
+# transcript_path may contain / but nothing else unusual
+safe_path = lambda s: re.sub(r'[^a-zA-Z0-9_/.\-~]', '', str(s))
 # Coerce stop_hook_active to strict boolean string
 sha = 'True' if sha_raw is True or str(sha_raw).lower() in ('true', '1', 'yes') else 'False'
-print(safe(sid))
+print(safe_id(sid))
 print(sha)
-print(safe(tp))
+print(safe_path(tp))
 " 2>/dev/null)
 SESSION_ID="${_mempal_parsed[0]:-unknown}"
 STOP_HOOK_ACTIVE="${_mempal_parsed[1]:-False}"

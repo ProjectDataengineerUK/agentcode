@@ -45,7 +45,7 @@ info "Registrando hooks em $SETTINGS ..."
 
 # Lê settings atual (ou cria objeto vazio) e injeta os hooks
 python3 - "$SETTINGS" "$DEST/hooks" <<'PYEOF'
-import json, sys, os
+import json, sys, os, shlex
 
 settings_path = sys.argv[1]
 hooks_dir = sys.argv[2]
@@ -62,9 +62,10 @@ hooks = settings.setdefault("hooks", {})
 def make_hook(cmd):
     return {"hooks": [{"type": "command", "command": cmd}]}
 
-hooks["SessionStart"] = [make_hook(f"bash \"{hooks_dir}/mempalace_setup.sh\" || true")]
-hooks["Stop"]         = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash \"{hooks_dir}/mempalace_save.sh\" || true")]
-hooks["PreCompact"]   = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash \"{hooks_dir}/mempalace_precompact.sh\" || true")]
+qhooks = shlex.quote(hooks_dir)
+hooks["SessionStart"] = [make_hook(f"bash {qhooks}/mempalace_setup.sh || true")]
+hooks["Stop"]         = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_save.sh || true")]
+hooks["PreCompact"]   = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_precompact.sh || true")]
 
 with open(settings_path, "w") as f:
     json.dump(settings, f, indent=2)
