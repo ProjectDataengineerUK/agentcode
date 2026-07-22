@@ -106,7 +106,10 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 │   ├── [6 agentspec subdirs]   (OWNED)
 │   ├── data/                   (AGENTCODE — 7 data commands)
 │   └── legal/                  (AGENTCODE — 5 legal commands)
-├── skills/         (16 — agentspec OWNED: 6 sdd-* por fase, component-model, kb-build, github-cr-*, +5 base)
+├── skills/         (32 — 16 agentspec OWNED + 16 ECC AGENTCODE: python-testing, fastapi-patterns,
+│                    postgres-patterns, api-design, backend-patterns, database-migrations, docker-patterns,
+│                    tdd-workflow, verification-loop, error-handling, security-review, deployment-patterns,
+│                    eval-harness, cost-aware-llm-pipeline, mcp-server-patterns, python-patterns)
 ├── tools/          (spec-linter + spec-judge — agentspec OWNED)
 ├── sdd/            (agentspec OWNED)
 └── hooks/
