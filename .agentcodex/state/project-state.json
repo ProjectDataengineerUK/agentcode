@@ -1,0 +1,101 @@
+{
+  "architecture": {},
+  "databricks_readiness": {
+    "last_report": ".agentcodex/reports/databricks-readiness.md",
+    "sections": {
+      "apps": {
+        "checks": [
+          {
+            "check": "app-manifest",
+            "detail": "app.yaml not found",
+            "status": "warn"
+          }
+        ],
+        "status": "warn"
+      },
+      "boundary": {
+        "checks": [
+          {
+            "check": "governance-runtime-boundary",
+            "detail": "no obvious governance/runtime mixing detected in resource files",
+            "status": "pass"
+          },
+          {
+            "check": "runtime-principal-explicit",
+            "detail": "no explicit runtime principal marker found",
+            "status": "warn"
+          }
+        ],
+        "status": "warn"
+      },
+      "bundles": {
+        "checks": [
+          {
+            "check": "bundle-file",
+            "detail": "databricks.yml or bundle.yml not found",
+            "status": "warn"
+          }
+        ],
+        "status": "warn"
+      },
+      "environment": {
+        "checks": [
+          {
+            "check": "databricks-cli",
+            "detail": "databricks CLI found in PATH",
+            "status": "pass"
+          },
+          {
+            "check": "databricks-host",
+            "detail": "DATABRICKS_HOST is not set",
+            "status": "warn"
+          },
+          {
+            "check": "databricks-auth",
+            "detail": "Databricks token or OAuth client variables not found",
+            "status": "warn"
+          }
+        ],
+        "status": "warn"
+      },
+      "governance": {
+        "checks": [
+          {
+            "check": "uc-three-level-names",
+            "detail": "no explicit catalog.schema.object reference found",
+            "status": "warn"
+          },
+          {
+            "check": "uc-parent-grants",
+            "detail": "no clear USE CATALOG and USE SCHEMA grant hints found",
+            "status": "warn"
+          },
+          {
+            "check": "uc-volumes-vs-dbfs",
+            "detail": "no DBFS-first anti-pattern detected",
+            "status": "pass"
+          }
+        ],
+        "status": "warn"
+      },
+      "jobs": {
+        "checks": [
+          {
+            "check": "jobs-resources",
+            "detail": "no Databricks resource yml files found for jobs review",
+            "status": "warn"
+          }
+        ],
+        "status": "warn"
+      }
+    }
+  },
+  "evidence": {},
+  "history": [],
+  "preflight": {
+    "last_report": ".agentcodex/reports/preflight-report.md",
+    "stacks": {}
+  },
+  "reconciliation": {},
+  "updated_at": "2026-07-22T23:23:19.261715+00:00"
+}

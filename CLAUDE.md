@@ -154,6 +154,21 @@ The `.agentcodex/` directory contains the AgentCodex project management framewor
 └── registry/                      ← Domain, source, and schema registry
 ```
 
+### AgentCodex CLI Tooling
+
+The `.agentcodex/commands/*.md` procedures execute via the Python dispatcher
+(synced from upstream ProjectDataengineerUK/agentcodex — 68 scripts, stdlib-only):
+
+```bash
+python3 scripts/agentcodex.py preflight [dir]             # 15-block readiness check
+python3 scripts/agentcodex.py databricks-readiness [dir]  # env/bundles/apps/governance/jobs/boundary
+python3 scripts/agentcodex.py stack-detect [dir]          # detect project stack
+python3 scripts/agentcodex.py start                       # scaffold + maturity report
+python3 scripts/agentcodex.py                             # full usage (64 commands)
+```
+
+Reports land in `.agentcodex/reports/`, canonical state in `.agentcodex/state/project-state.json`.
+
 ### Sentinel System
 
 The AgentCodex Project Standard requires a **Sentinel monitoring layer** in every project:
