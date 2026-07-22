@@ -26,7 +26,7 @@ Scans the entire project and generates `CLAUDE.md` with real context: stack, str
 ```bash
 if [ ! -d .git ]; then
   echo "⚠ Repositório sem git. Inicializando..."
-  git init -b main
+  git init -b main 2>/dev/null || git init   # -b exige git >= 2.28
   # .gitignore mínimo antes de qualquer commit (evita vazar segredos/artefatos)
   [ -f .gitignore ] || printf '%s\n' '.env' '*.tfvars' '__pycache__/' '.venv/' 'node_modules/' > .gitignore
 fi
@@ -60,23 +60,27 @@ try:
     cfg = json.load(open(path))
 except:
     cfg = {}
-def hook(cmd, timeout=None):
+events = cfg.setdefault("hooks", {})
+def add(event, cmd, timeout=None):
+    # não-destrutivo: preserva hooks existentes, só acrescenta se ausente
+    entries = events.setdefault(event, [])
+    existing = {h.get("command") for e in entries for h in e.get("hooks", [])}
+    if cmd in existing:
+        return
     h = {"type": "command", "command": cmd}
     if timeout: h["timeout"] = timeout
-    return {"hooks": [h]}
+    entries.append({"hooks": [h]})
 def have(name):
     return os.path.exists(os.path.join(hooks, name))
-cfg["hooks"] = {
-    "SessionStart": [hook(f'bash "{hooks}/mempalace_setup.sh" || true')],
-    "Stop":         [hook(f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_save.sh" || true')],
-    "PreCompact":   [hook(f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_precompact.sh" || true')],
-}
+add("SessionStart", f'bash "{hooks}/mempalace_setup.sh" || true')
+add("Stop",         f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_save.sh" || true')
+add("PreCompact",   f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_precompact.sh" || true')
 if have("sync_context_reminder.sh"):
-    cfg["hooks"]["Stop"].append(hook(f'bash "{hooks}/sync_context_reminder.sh" || true', 15))
+    add("Stop", f'bash "{hooks}/sync_context_reminder.sh" || true', 15)
 if have("lesson_timing.sh"):
-    cfg["hooks"]["PreToolUse"] = [hook(f'bash "{hooks}/lesson_timing.sh" || true', 10)]
+    add("PreToolUse", f'bash "{hooks}/lesson_timing.sh" || true', 10)
 if have("lesson_capture.sh"):
-    cfg["hooks"]["PostToolUse"] = [hook(f'bash "{hooks}/lesson_capture.sh" || true', 15)]
+    add("PostToolUse", f'bash "{hooks}/lesson_capture.sh" || true', 15)
 json.dump(cfg, open(path, "w"), indent=2)
 PY
 echo "hooks OK"

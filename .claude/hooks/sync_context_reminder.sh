@@ -35,29 +35,32 @@ SDD_DIR="$PROJ/.claude/sdd"
 # Sem CLAUDE.md ou sem SDD → nada a comparar
 { [ -f "$CLAUDE_MD" ] && [ -d "$SDD_DIR" ]; } || { echo "{}"; exit 0; }
 
-# Artefato SDD de entrega mais recente
-NEWEST=$(find "$SDD_DIR" \( -name "SHIPPED_*.md" -o -name "BUILD_REPORT_*.md" \) \
-    -newer "$CLAUDE_MD" -printf "%T@ %p\n" 2>/dev/null | sort -rn | head -1)
-[ -z "$NEWEST" ] && { echo "{}"; exit 0; }
+# Artefato SDD de entrega mais recente (POSIX: -printf é GNU-only e quebraria
+# no macOS — usar find -newer + ls -t para ordenar)
+NEWEST_FILE=$(find "$SDD_DIR" \( -name "SHIPPED_*.md" -o -name "BUILD_REPORT_*.md" \) \
+    -newer "$CLAUDE_MD" 2>/dev/null | head -50 | tr '\n' '\0' | xargs -0 ls -t 2>/dev/null | head -1)
+[ -z "$NEWEST_FILE" ] && { echo "{}"; exit 0; }
 
-NEWEST_FILE="${NEWEST#* }"
-
-# Anti-nag: já lembramos sobre este artefato?
-PROJ_HASH=$(echo -n "$PROJ" | md5sum | cut -c1-12)
+# Anti-nag: já lembramos sobre este artefato? (cksum é POSIX; md5sum é GNU-only)
+PROJ_HASH=$(printf '%s' "$PROJ" | cksum | tr ' ' '_')
 MARK_FILE="$STATE_DIR/syncctx_${PROJ_HASH}"
 LAST_MARK=$(cat "$MARK_FILE" 2>/dev/null)
 [ "$LAST_MARK" = "$NEWEST_FILE" ] && { echo "{}"; exit 0; }
 
 echo "$NEWEST_FILE" > "$MARK_FILE"
 
-python3 - "$NEWEST_FILE" <<'PYEOF'
-import json, sys
-artifact = sys.argv[1]
+# A reason mostra só o caminho relativo saneado (nome de arquivo vem do repo —
+# não ecoar bytes arbitrários para dentro da mensagem de sistema)
+python3 - "$NEWEST_FILE" "$PROJ" <<'PYEOF'
+import json, re, sys
+artifact, proj = sys.argv[1], sys.argv[2]
+rel = artifact[len(proj):].lstrip("/") if artifact.startswith(proj) else artifact
+rel = re.sub(r"[^a-zA-Z0-9_./\- ]", "", rel)[:120]
 print(json.dumps({
     "decision": "block",
     "reason": (
         "CLAUDE.md drift detectado: o artefato SDD mais recente "
-        f"({artifact}) é mais novo que o CLAUDE.md do projeto. "
+        f"({rel}) é mais novo que o CLAUDE.md do projeto. "
         "O projeto mudou sem atualizar o contexto — rode /sync-context "
         "(ou atualize o CLAUDE.md manualmente) antes de encerrar. "
         "Este lembrete dispara apenas uma vez por artefato."

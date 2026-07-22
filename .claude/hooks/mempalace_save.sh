@@ -207,17 +207,21 @@ if [ "$SINCE_LAST" -ge "$SAVE_INTERVAL" ] && [ "$EXCHANGE_COUNT" -gt 0 ]; then
     fi
 
     # 3. LESSON_LEARNED buffer (written by lesson_capture.sh on PostToolUse
-    #    triggers: error/slow_op — ported from data-agents v2.1.0). Mine it
-    #    so captured lessons become persistent memory, then archive the
-    #    session buffer so lessons are not re-mined on the next checkpoint.
-    LESSONS_DIR="$HOME/.mempalace/lessons"
-    LESSONS_FILE="$LESSONS_DIR/${SESSION_ID}.jsonl"
+    #    triggers: error/slow_op — ported from data-agents v2.1.0). Mine ONLY
+    #    the buffer/ subdir — timing/ markers and already-mined archive/ live
+    #    outside it, so the miner never re-ingests junk or duplicates. After a
+    #    successful mine, the session buffer moves to archive/.
+    LESSONS_BUFFER="$HOME/.mempalace/lessons/buffer"
+    LESSONS_ARCHIVE="$HOME/.mempalace/lessons/archive"
+    LESSONS_FILE="$LESSONS_BUFFER/${SESSION_ID}.jsonl"
     if [ -s "$LESSONS_FILE" ]; then
-        mempalace mine "$LESSONS_DIR" --mode projects \
-            >> "$STATE_DIR/hook.log" 2>&1 && \
-        mkdir -p "$LESSONS_DIR/archive" && \
-        mv "$LESSONS_FILE" "$LESSONS_DIR/archive/${SESSION_ID}_$(date +%s).jsonl" \
-            >> "$STATE_DIR/hook.log" 2>&1 &
+        {
+            mempalace mine "$LESSONS_BUFFER" --mode projects \
+                >> "$STATE_DIR/hook.log" 2>&1 && \
+            mkdir -p "$LESSONS_ARCHIVE" && \
+            mv "$LESSONS_FILE" "$LESSONS_ARCHIVE/${SESSION_ID}_$(date +%s).jsonl" \
+                >> "$STATE_DIR/hook.log" 2>&1
+        } &
     fi
 
     # MEMPAL_VERBOSE toggle:

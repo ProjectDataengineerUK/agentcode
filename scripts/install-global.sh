@@ -64,19 +64,28 @@ def make_hook(cmd):
     return {"hooks": [{"type": "command", "command": cmd}]}
 
 qhooks = shlex.quote(hooks_dir)
-hooks["SessionStart"] = [make_hook(f"bash {qhooks}/mempalace_setup.sh || true")]
-hooks["Stop"]         = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_save.sh || true")]
-hooks["PreCompact"]   = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_precompact.sh || true")]
+
+def add_hook(event, cmd):
+    """Idempotente e não-destrutivo: preserva hooks existentes do usuário,
+    só acrescenta se o comando ainda não estiver registrado no evento."""
+    entries = hooks.setdefault(event, [])
+    existing = {h.get("command") for e in entries for h in e.get("hooks", [])}
+    if cmd not in existing:
+        entries.append(make_hook(cmd))
 
 def have(name):
     return os.path.exists(os.path.join(hooks_dir, name))
 
+add_hook("SessionStart", f"bash {qhooks}/mempalace_setup.sh || true")
+add_hook("Stop",         f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_save.sh || true")
+add_hook("PreCompact",   f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_precompact.sh || true")
+
 if have("sync_context_reminder.sh"):
-    hooks["Stop"].append(make_hook(f"bash {qhooks}/sync_context_reminder.sh || true"))
+    add_hook("Stop", f"bash {qhooks}/sync_context_reminder.sh || true")
 if have("lesson_timing.sh"):
-    hooks["PreToolUse"] = [make_hook(f"bash {qhooks}/lesson_timing.sh || true")]
+    add_hook("PreToolUse", f"bash {qhooks}/lesson_timing.sh || true")
 if have("lesson_capture.sh"):
-    hooks["PostToolUse"] = [make_hook(f"bash {qhooks}/lesson_capture.sh || true")]
+    add_hook("PostToolUse", f"bash {qhooks}/lesson_capture.sh || true")
 
 with open(settings_path, "w") as f:
     json.dump(settings, f, indent=2)
