@@ -30,6 +30,12 @@ This project incorporates work from the following open-source projects located i
 - 8 unique KB domains (controls, foundations, integrations, metadata, operations, orchestration, patterns, platforms)
 - Located in: `../agentcodex/`
 
+## premium-presentations
+- `premium-presentations` skill (HTML slide decks: themes, Mermaid, presenter mode, PDF/OG export)
+- 3 commands: `/present-architecture`, `/present-postmortem`, `/present-pr`
+- Located in: `../premium-presentations/`
+- Upstream: https://github.com/bruno-rv/premium-presentations (MIT)
+
 ## mempalace
 - Auto-save hooks for session memory persistence
 - Located in: `../mempalace/`
