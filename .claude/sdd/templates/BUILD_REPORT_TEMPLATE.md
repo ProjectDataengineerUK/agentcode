@@ -108,6 +108,20 @@
 
 ---
 
+## Autonomous Decisions
+
+The build phase runs autonomously — it never pauses to ask the user. Every
+decision fork reached during the build was resolved by choosing the safest
+documented default. This section is the post-run review log: each row is a
+fork the build resolved on its own. An empty table means the build hit zero
+ambiguity (DESIGN fully pre-decided everything).
+
+| # | Decision Point | Options Considered | Chose | Rationale |
+|---|----------------|--------------------|-------|-----------|
+| 1 | {What was ambiguous} | {Option A vs Option B} | {Chosen option} | {Why it is the safest / smallest-correct-change default} |
+
+---
+
 ## Deviations from Design
 
 | Deviation | Reason | Impact |

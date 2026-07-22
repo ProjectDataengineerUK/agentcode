@@ -106,7 +106,8 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 │   ├── [6 agentspec subdirs]   (OWNED)
 │   ├── data/                   (AGENTCODE — 7 data commands)
 │   └── legal/                  (AGENTCODE — 5 legal commands)
-├── skills/         (5 — agentspec OWNED)
+├── skills/         (16 — agentspec OWNED: 6 sdd-* por fase, component-model, kb-build, github-cr-*, +5 base)
+├── tools/          (spec-linter + spec-judge — agentspec OWNED)
 ├── sdd/            (agentspec OWNED)
 └── hooks/
     ├── hooks.json             (MERGED: agentspec base + mempalace)

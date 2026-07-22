@@ -39,76 +39,21 @@ Phase 3: /build    → Code + .claude/sdd/reports/BUILD_REPORT_{FEATURE}.md (THI
 Phase 4: /ship     → .claude/sdd/archive/{FEATURE}/SHIPPED_{DATE}.md
 ```
 
-The `/build` command executes the implementation, generating tasks on-the-fly from the file manifest.
-
 ---
 
-## What This Command Does
+## What Happens
 
-1. **Parse** - Extract file manifest from DESIGN
-2. **Prioritize** - Order files by dependencies
-3. **Execute** - Create each file with verification
-4. **Validate** - Run tests after each significant change
-5. **Report** - Generate build report
+Load `${CLAUDE_PLUGIN_ROOT}/skills/sdd-build/SKILL.md` and follow it under the build-agent's
+non-negotiable policies — decide-never-ask and halt-only-on-CRITICAL-risk, both
+defined in `${CLAUDE_PLUGIN_ROOT}/agents/workflow/build-agent.md`. The skill owns the
+methodology for Steps 1-6; Step 7 is command-only.
 
----
-
-## Process
-
-### Step 1: Load Context
-
-```markdown
-Read(.claude/sdd/features/DESIGN_{FEATURE}.md)
-Read(.claude/sdd/features/DEFINE_{FEATURE}.md)
-Read(CLAUDE.md)
-```
-
-### Step 2: Extract Tasks from File Manifest
-
-Convert the file manifest to a task list:
-
-```markdown
-From DESIGN file manifest:
-| File | Action | Purpose |
-
-Generate:
-- [ ] Create/Modify {file1}
-- [ ] Create/Modify {file2}
-- [ ] ...
-```
-
-### Step 3: Order by Dependencies
-
-Analyze imports and dependencies to determine execution order.
-
-### Step 4: Execute Each Task
-
-For each file:
-
-1. **Write** - Create the file following code patterns from DESIGN
-2. **Verify** - Run verification command (lint, type check, import test)
-3. **Mark Complete** - Update progress
-
-### Step 5: Run Full Validation
-
-After all files created:
-
-```bash
-# Lint check
-ruff check .
-
-# Type check (if applicable)
-mypy .
-
-# Run tests
-pytest
-```
-
-### Step 6: Generate Build Report
-
-```markdown
-Write(.claude/sdd/reports/BUILD_REPORT_{FEATURE}.md)
-```
+1. **Load Context** — DESIGN, DEFINE, CLAUDE.md
+2. **Extract Tasks** — convert the file manifest to a task list
+3. **Order by Dependencies** — determine execution order
+4. **Execute Each Task** — write or delegate, verify, retry (max 3)
+5. **Run Full Validation** — lint, types, tests across the codebase
+6. **Generate Build Report** — write BUILD_REPORT and update upstream statuses
 
 ### Step 7: Optional Judge Pass (`--judge`)
 
@@ -183,66 +128,10 @@ python3 ${CLAUDE_PLUGIN_ROOT:-.}/scripts/judge.py \
 
 ---
 
-## Execution Loop
-
-The build agent follows this loop for each task:
-
-```text
-┌─────────────────────────────────────────────────────┐
-│                    EXECUTE TASK                      │
-├─────────────────────────────────────────────────────┤
-│  1. Read task from manifest                         │
-│  2. Write code following DESIGN patterns            │
-│  3. Run verification command                        │
-│     └─ If FAIL → Fix and retry (max 3)             │
-│  4. Mark task complete                              │
-│  5. Move to next task                               │
-└─────────────────────────────────────────────────────┘
-```
-
----
-
-## Quality Gate
-
-Before marking complete, verify:
-
-```text
-[ ] All files from manifest created
-[ ] All verification commands pass
-[ ] Lint check passes
-[ ] Tests pass (if applicable)
-[ ] No TODO comments left in code
-[ ] Build report generated
-```
-
----
-
-## Tips
-
-1. **Follow the DESIGN** - Don't improvise, use the code patterns
-2. **Verify Incrementally** - Test after each file, not at the end
-3. **Fix Forward** - If something breaks, fix it immediately
-4. **Self-Contained** - Each file should be independently functional
-5. **No Comments** - Code should be self-documenting
-
----
-
-## Handling Issues During Build
-
-If you encounter issues:
-
-| Issue | Action |
-|-------|--------|
-| Missing requirement | Use `/iterate` to update DEFINE |
-| Architecture problem | Use `/iterate` to update DESIGN |
-| Simple bug | Fix immediately and continue |
-| Major blocker | Stop and report in build report |
-
----
-
 ## References
 
-- Agent: `${CLAUDE_PLUGIN_ROOT}/agents/workflow/build-agent.md`
+- Skill (methodology): `${CLAUDE_PLUGIN_ROOT}/skills/sdd-build/SKILL.md`
+- Agent (executor + policies): `${CLAUDE_PLUGIN_ROOT}/agents/workflow/build-agent.md`
 - Template: `${CLAUDE_PLUGIN_ROOT}/sdd/templates/BUILD_REPORT_TEMPLATE.md`
 - Contracts: `${CLAUDE_PLUGIN_ROOT}/sdd/architecture/WORKFLOW_CONTRACTS.yaml`
 - Next Phase: `${CLAUDE_PLUGIN_ROOT}/commands/workflow/ship.md`

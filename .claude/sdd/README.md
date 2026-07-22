@@ -13,7 +13,7 @@
 | **Project** | AgentSpec - Spec-Driven Development Framework |
 | **Tagline** | Spec-Driven Development for Data Engineering |
 | **Business Problem** | Gap between unstructured "vibe coding" and stale traditional specifications |
-| **Solution** | 5-phase workflow with 58 specialized AI agents, 23 KB domains, and 30 commands |
+| **Solution** | 5-phase workflow with 58 specialized AI agents, 24 KB domains, and 31 commands |
 | **Target Audience** | Data engineering teams using Claude Code |
 | **License** | MIT |
 
@@ -119,7 +119,7 @@ Traditional specs produce a task list. AgentSpec produces a **team assignment**.
                            +-------------------------------------+
                            |         ${CLAUDE_PLUGIN_ROOT}/kb/                 |
                            |  +------------------------------+   |
-                           |  |  23 curated KB domains       |   |
+                           |  |  24 curated KB domains       |   |
                            |  |  (dbt, Spark, Airflow, ...)  |   |
                            |  +------------------------------+   |
                            +------------------+------------------+
@@ -317,7 +317,7 @@ Design phase matches agents using these keywords:
 
 ## Knowledge Base Integration
 
-AgentSpec integrates deeply with 23 curated Knowledge Base domains:
+AgentSpec integrates deeply with 24 curated Knowledge Base domains:
 
 ### Available Domains
 
@@ -375,7 +375,7 @@ ${CLAUDE_PLUGIN_ROOT}/kb/{domain}/
 
 ## Commands & Artifacts
 
-### All Commands (21)
+### All Commands (31)
 
 #### SDD Workflow (7)
 
@@ -545,7 +545,7 @@ ${CLAUDE_PLUGIN_ROOT}/kb/{domain}/
 | Dimension | Without AgentSpec | With AgentSpec |
 |-----------|-------------------|----------------|
 | File placement | Random/guessed | Explicit in Technical Context |
-| Pattern consistency | Varies | KB-grounded (23 domains) |
+| Pattern consistency | Varies | KB-grounded (24 domains) |
 | Code ownership | Unclear | Agent attribution (58 agents) |
 | Traceability | None | Full artifact chain |
 | Specialist expertise | None | Automatic matching |
@@ -756,7 +756,7 @@ SCHEMA GOVERNANCE
 | Templates | `${CLAUDE_PLUGIN_ROOT}/sdd/templates/` |
 | Archive | `.claude/sdd/archive/` |
 | Agents (58) | `${CLAUDE_PLUGIN_ROOT}/agents/` |
-| Knowledge Base (23) | `${CLAUDE_PLUGIN_ROOT}/kb/` |
+| Knowledge Base (24) | `${CLAUDE_PLUGIN_ROOT}/kb/` |
 | SDD Commands | `${CLAUDE_PLUGIN_ROOT}/commands/workflow/` |
 | DE Commands | `${CLAUDE_PLUGIN_ROOT}/commands/data-engineering/` |
 | Core Commands | `${CLAUDE_PLUGIN_ROOT}/commands/core/` |

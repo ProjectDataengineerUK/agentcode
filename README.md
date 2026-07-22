@@ -7,7 +7,7 @@ data-agents, agentcodex, and mempalace into a single installable plugin.
 
 | Source | What it brings | Count |
 |--------|---------------|-------|
-| agentspec | Core workflow, cloud, data-engineering agents + 25 KB domains + 33 commands + 5 skills + SDD | ~290 files |
+| agentspec | Core workflow, cloud, data-engineering agents + 25 KB domains + 33 commands + 16 skills + spec-linter/spec-judge + SDD | ~340 files |
 | ECC | 46 language-specialist agents + 2 security agents + .cursor + .codex | 48 agents + 66 files |
 | data-agents | Databricks/Fabric specialized agents + 7 KB domains (databricks, fabric, governance, doma-protocol, semantic-modeling, migration, guardrails) | 9 agents + ~53 files |
 | agentcodex | 8 unique KB domains (controls, foundations, integrations, metadata, operations, orchestration, patterns, platforms) | ~40 files |
