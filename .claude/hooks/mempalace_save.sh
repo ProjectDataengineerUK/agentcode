@@ -206,6 +206,20 @@ if [ "$SINCE_LAST" -ge "$SAVE_INTERVAL" ] && [ "$EXCHANGE_COUNT" -gt 0 ]; then
             >> "$STATE_DIR/hook.log" 2>&1 &
     fi
 
+    # 3. LESSON_LEARNED buffer (written by lesson_capture.sh on PostToolUse
+    #    triggers: error/slow_op — ported from data-agents v2.1.0). Mine it
+    #    so captured lessons become persistent memory, then archive the
+    #    session buffer so lessons are not re-mined on the next checkpoint.
+    LESSONS_DIR="$HOME/.mempalace/lessons"
+    LESSONS_FILE="$LESSONS_DIR/${SESSION_ID}.jsonl"
+    if [ -s "$LESSONS_FILE" ]; then
+        mempalace mine "$LESSONS_DIR" --mode projects \
+            >> "$STATE_DIR/hook.log" 2>&1 && \
+        mkdir -p "$LESSONS_DIR/archive" && \
+        mv "$LESSONS_FILE" "$LESSONS_DIR/archive/${SESSION_ID}_$(date +%s).jsonl" \
+            >> "$STATE_DIR/hook.log" 2>&1 &
+    fi
+
     # MEMPAL_VERBOSE toggle:
     #   true  = developer mode — block and show diaries/code in chat
     #   false = silent mode (default) — save in background, no chat clutter

@@ -194,8 +194,10 @@ O mempalace é **auto-instalado** na primeira sessão via SessionStart hook:
 | Hook | Script | Função |
 |------|--------|--------|
 | `SessionStart` | `mempalace_setup.sh` | Auto-instala via pip/uv (background, não bloqueia) |
-| `Stop` | `mempalace_save.sh` | Salva memória a cada 15 trocas + auto-mine do transcript |
+| `Stop` | `mempalace_save.sh` | Salva memória a cada 15 trocas + auto-mine do transcript + mina lições capturadas |
 | `PreCompact` | `mempalace_precompact.sh` | Salva ANTES da compactação de contexto |
+| `PreToolUse` | `lesson_timing.sh` | Registra t0 de cada tool call (detecção de slow_op) |
+| `PostToolUse` | `lesson_capture.sh` | LESSON_LEARNED (portado do data-agents v2.1.0): captura lições em triggers `error`/`slow_op` para `~/.mempalace/lessons/`, cap de 50/sessão |
 
 **Auto-install**: tenta `uv pip install mempalace` → `pip3 install mempalace` → `pip install mempalace`. Falha silenciosa se não houver Python/pip — hooks continuam funcionando sem memória.
 

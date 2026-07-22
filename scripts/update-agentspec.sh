@@ -185,9 +185,20 @@ mempalace_precompact = {
     "hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_precompact.sh\" || true"}]
 }
 
+lesson_timing = {
+    "matcher": "",
+    "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lesson_timing.sh\" || true", "timeout": 10}]
+}
+lesson_capture = {
+    "matcher": "",
+    "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lesson_capture.sh\" || true", "timeout": 15}]
+}
+
 hooks.setdefault("SessionStart", []).append(mempalace_setup)
 hooks.setdefault("Stop", []).append(mempalace_stop)
 hooks.setdefault("PreCompact", []).append(mempalace_precompact)
+hooks.setdefault("PreToolUse", []).append(lesson_timing)
+hooks.setdefault("PostToolUse", []).append(lesson_capture)
 
 with open(out_path, "w") as f:
     json.dump(merged, f, indent=2)
