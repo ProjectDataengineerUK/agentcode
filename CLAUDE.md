@@ -44,6 +44,14 @@ WHERE start_time >= CURRENT_TIMESTAMP - INTERVAL 7 DAYS ORDER BY start_time DESC
 
 > Detalhes completos: `kb/guardrails/constitution.md` §9 e §10
 
+### Honestidade Técnica (TODO-VALIDAR)
+
+Incerteza técnica é sinalizada com `TODO-VALIDAR` **na linha exata** — nunca escondida,
+nunca em aviso genérico. Fórmulas determinísticas públicas não levam TODO. Evidência
+verificada que contraria preferência do usuário é apresentada, nunca contornada em silêncio.
+
+> Detalhes: `kb/guardrails/constitution.md` §11 · Terraform: `kb/guardrails/terraform-anti-hallucination.md` · Incidentes conhecidos: `kb/databricks/patterns/known-incidents.md`
+
 ---
 
 ## Mandatory Project Standard

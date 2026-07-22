@@ -28,6 +28,8 @@ mcp_validated: "2026-04-15"
 | `patterns/unity-catalog-patterns.md` | SQL de GRANT/REVOKE, Volumes, lineage queries                        |
 | `patterns/compute-patterns.md`       | YAML de cluster, seleção por carga, auto-termination                 |
 | `patterns/workflow-patterns.md`      | YAML de Jobs multi-task, retry, idempotency_token                   |
+| `patterns/known-incidents.md`        | 9 incidentes reais de produção (Spark Connect, cast, grants, Kafka) com causa raiz e correção |
+| `patterns/kafka-schema-registry-patterns.md` | Streaming Avro+Schema Registry: client lazy em UDF, DLQ try/except, BACKWARD, Debezium, ODCS→Avro |
 | `patterns/cicd-patterns.md`          | databricks.yml completo, CI/CD pipelines, `bundle deploy`           |
 | `patterns/ai-ml-patterns.md`         | mlflow.log_*, Model Serving YAML, Vector Search Python              |
 

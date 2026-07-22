@@ -236,6 +236,27 @@ Verificar histórico → encontrou execução recente?
 
 ---
 
+## 11. Protocolo de Honestidade Técnica (TODO-VALIDAR)
+
+> **Origem:** Disciplina consolidada em 4 fases de build reais (InsuranceLakehousePlatform, 2026-07)
+> após pedido explícito do usuário ("não alucina"). Evitou que um `terraform apply` real rodasse
+> sobre sintaxe não verificada.
+
+**Regra:** Incerteza técnica é **sinalizada, nunca escondida** — e sinalizada com precisão cirúrgica.
+
+| # | Regra |
+|---|-------|
+| HV1 | Configuração/API/SDK que não pôde ser verificada nesta sessão → marcar `TODO-VALIDAR` **na linha exata**, não um aviso genérico no topo do arquivo. Deixa claro exatamente qual linha precisa de atenção. |
+| HV2 | Algoritmos matemáticos públicos e determinísticos (dígito verificador de CPF, checksums, fórmulas fechadas) → implementar **com confiança total, sem TODO**. A disciplina se aplica a APIs externas incertas, não a fórmulas documentadas. |
+| HV3 | Quando evidência verificada contraria a preferência do usuário → apresentar **a evidência** (saída de schema, erro reproduzido), nunca mudar de rumo silenciosamente. |
+| HV4 | Nunca apresentar configuração não verificada como fato consolidado. "Não tenho certeza sobre isso, vou marcar como TODO-VALIDAR" é a resposta correta. |
+| HV5 | Ao introduzir nova regra de validação, **grep no repositório por dados sintéticos de teste** de fases anteriores que a nova regra passaria a rejeitar — testar só o código novo isoladamente não basta. |
+
+**Ferramentas de verificação por domínio:** Terraform → `kb/guardrails/terraform-anti-hallucination.md`.
+Incidentes Databricks/Spark/Kafka já mapeados → `kb/databricks/patterns/known-incidents.md`.
+
+---
+
 ## Aplicação e Referência
 
 - O Supervisor deve carregar este arquivo como contexto base antes de planejar tarefas complexas.
