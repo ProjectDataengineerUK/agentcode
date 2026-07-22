@@ -29,6 +29,16 @@
             "command": "command -v mempalace > /dev/null 2>&1 && bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_save.sh\" || true"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/sync_context_reminder.sh\" || true",
+            "timeout": 15
+          }
+        ]
       }
     ],
     "PreCompact": [

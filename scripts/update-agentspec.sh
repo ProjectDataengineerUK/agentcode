@@ -185,6 +185,10 @@ mempalace_precompact = {
     "hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_precompact.sh\" || true"}]
 }
 
+sync_context_reminder = {
+    "matcher": "",
+    "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/sync_context_reminder.sh\" || true", "timeout": 15}]
+}
 lesson_timing = {
     "matcher": "",
     "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lesson_timing.sh\" || true", "timeout": 10}]
@@ -196,6 +200,7 @@ lesson_capture = {
 
 hooks.setdefault("SessionStart", []).append(mempalace_setup)
 hooks.setdefault("Stop", []).append(mempalace_stop)
+hooks.setdefault("Stop", []).append(sync_context_reminder)
 hooks.setdefault("PreCompact", []).append(mempalace_precompact)
 hooks.setdefault("PreToolUse", []).append(lesson_timing)
 hooks.setdefault("PostToolUse", []).append(lesson_capture)

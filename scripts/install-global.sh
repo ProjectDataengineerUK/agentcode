@@ -30,13 +30,14 @@ for component in agents commands kb skills; do
     fi
 done
 
-# Instalar hooks de mempalace
-info "Copiando hooks de mempalace..."
+# Instalar hooks (mempalace + lesson capture + drift de contexto)
+info "Copiando hooks..."
 mkdir -p "$DEST/hooks"
-cp "$SOURCE/hooks/mempalace_setup.sh" "$DEST/hooks/"
-cp "$SOURCE/hooks/mempalace_save.sh" "$DEST/hooks/"
-cp "$SOURCE/hooks/mempalace_precompact.sh" "$DEST/hooks/"
-chmod +x "$DEST/hooks/mempalace_"*.sh
+for h in mempalace_setup.sh mempalace_save.sh mempalace_precompact.sh \
+         lesson_timing.sh lesson_capture.sh sync_context_reminder.sh; do
+  [ -f "$SOURCE/hooks/$h" ] && cp "$SOURCE/hooks/$h" "$DEST/hooks/"
+done
+chmod +x "$DEST/hooks/"*.sh
 ok "Hooks copiados"
 
 # Registrar hooks no settings.json global
@@ -66,6 +67,16 @@ qhooks = shlex.quote(hooks_dir)
 hooks["SessionStart"] = [make_hook(f"bash {qhooks}/mempalace_setup.sh || true")]
 hooks["Stop"]         = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_save.sh || true")]
 hooks["PreCompact"]   = [make_hook(f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_precompact.sh || true")]
+
+def have(name):
+    return os.path.exists(os.path.join(hooks_dir, name))
+
+if have("sync_context_reminder.sh"):
+    hooks["Stop"].append(make_hook(f"bash {qhooks}/sync_context_reminder.sh || true"))
+if have("lesson_timing.sh"):
+    hooks["PreToolUse"] = [make_hook(f"bash {qhooks}/lesson_timing.sh || true")]
+if have("lesson_capture.sh"):
+    hooks["PostToolUse"] = [make_hook(f"bash {qhooks}/lesson_capture.sh || true")]
 
 with open(settings_path, "w") as f:
     json.dump(settings, f, indent=2)

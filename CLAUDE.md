@@ -50,7 +50,7 @@ Incerteza técnica é sinalizada com `TODO-VALIDAR` **na linha exata** — nunca
 nunca em aviso genérico. Fórmulas determinísticas públicas não levam TODO. Evidência
 verificada que contraria preferência do usuário é apresentada, nunca contornada em silêncio.
 
-> Detalhes: `kb/guardrails/constitution.md` §11 · Terraform: `kb/guardrails/terraform-anti-hallucination.md` · Incidentes conhecidos: `kb/databricks/patterns/known-incidents.md`
+> Detalhes: `kb/guardrails/constitution.md` §11 · Terraform: `kb/guardrails/terraform-anti-hallucination.md` · Incidentes conhecidos: `kb/databricks/patterns/known-incidents.md` · Lições Python/FastAPI/SQLAlchemy/LangChain: `kb/python/patterns/project-lessons.md`
 
 ---
 
@@ -223,6 +223,7 @@ O mempalace é **auto-instalado** na primeira sessão via SessionStart hook:
 | `PreCompact` | `mempalace_precompact.sh` | Salva ANTES da compactação de contexto |
 | `PreToolUse` | `lesson_timing.sh` | Registra t0 de cada tool call (detecção de slow_op) |
 | `PostToolUse` | `lesson_capture.sh` | LESSON_LEARNED (portado do data-agents v2.1.0): captura lições em triggers `error`/`slow_op` para `~/.mempalace/lessons/`, cap de 50/sessão |
+| `Stop` | `sync_context_reminder.sh` | Detecta drift: SHIPPED/BUILD_REPORT mais novo que CLAUDE.md → pede `/sync-context` (1x por artefato) |
 
 **Auto-install**: tenta `uv pip install mempalace` → `pip3 install mempalace` → `pip install mempalace`. Falha silenciosa se não houver Python/pip — hooks continuam funcionando sem memória.
 

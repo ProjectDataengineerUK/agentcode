@@ -11,9 +11,9 @@ data-agents, agentcodex, and mempalace into a single installable plugin.
 | ECC | 46 language-specialist agents + 2 security agents + .cursor + .codex | 48 agents + 66 files |
 | data-agents | Databricks/Fabric specialized agents + 7 KB domains (databricks, fabric, governance, doma-protocol, semantic-modeling, migration, guardrails) | 9 agents + ~53 files |
 | agentcodex | 8 unique KB domains (controls, foundations, integrations, metadata, operations, orchestration, patterns, platforms) | ~40 files |
-| mempalace | Auto-save hooks for session memory persistence | 2 scripts |
+| mempalace | Auto-save hooks + LESSON_LEARNED capture + drift de contexto | 6 hooks |
 
-**Total: 136+ agents, 42+ KB domains**
+**Total: 136+ agents, 42+ KB domains, 33 skills, 68 CLI tools (agentcodex), spec-linter**
 
 ## Installation
 
@@ -40,23 +40,28 @@ cp -r .claude/kb       ~/.claude/
 cp -r .claude/skills   ~/.claude/
 ```
 
-Para registrar os hooks de mempalace no Claude Code global, adicione em `~/.claude/settings.json`:
+Para registrar os hooks no Claude Code global (mempalace + captura de lições + drift de contexto), adicione em `~/.claude/settings.json`:
 
 ```json
 {
   "hooks": {
     "SessionStart": [{"hooks": [{"type": "command", "command": "bash ~/.claude/hooks/mempalace_setup.sh || true"}]}],
-    "Stop":         [{"hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash ~/.claude/hooks/mempalace_save.sh || true"}]}],
-    "PreCompact":   [{"hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash ~/.claude/hooks/mempalace_precompact.sh || true"}]}]
+    "Stop": [
+      {"hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash ~/.claude/hooks/mempalace_save.sh || true"}]},
+      {"hooks": [{"type": "command", "command": "bash ~/.claude/hooks/sync_context_reminder.sh || true"}]}
+    ],
+    "PreCompact":  [{"hooks": [{"type": "command", "command": "command -v mempalace > /dev/null 2>&1 && bash ~/.claude/hooks/mempalace_precompact.sh || true"}]}],
+    "PreToolUse":  [{"hooks": [{"type": "command", "command": "bash ~/.claude/hooks/lesson_timing.sh || true"}]}],
+    "PostToolUse": [{"hooks": [{"type": "command", "command": "bash ~/.claude/hooks/lesson_capture.sh || true"}]}]
   }
 }
 ```
 
-Copie também os scripts de hook:
+Copie também os scripts de hook (ou rode `scripts/install-global.sh`, que faz tudo):
 
 ```bash
 mkdir -p ~/.claude/hooks
-cp .claude/hooks/mempalace_*.sh ~/.claude/hooks/
+cp .claude/hooks/*.sh ~/.claude/hooks/
 ```
 
 ### Opção C — Por projeto (este diretório apenas)

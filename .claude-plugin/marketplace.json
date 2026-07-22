@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "agentcode",
-      "description": "Unified Claude Code plugin — 136+ agents, 42+ KB domains, legal/data/cloud specialists, mempalace auto-save",
+      "description": "Unified Claude Code plugin — 136+ agents, 42+ KB domains, 33 skills, spec-linter, agentcodex CLI (68 tools), legal/data/cloud specialists, mempalace auto-save + LESSON_LEARNED capture",
       "author": {
         "name": "Jonatas Lima da Costa"
       },

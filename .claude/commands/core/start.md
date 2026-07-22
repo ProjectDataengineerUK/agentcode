@@ -18,6 +18,24 @@ Scans the entire project and generates `CLAUDE.md` with real context: stack, str
 
 ## Execution
 
+### Step 0 — Git check (obrigatório antes de qualquer artefato)
+
+> **Origem:** InsuranceLakehousePlatform chegou à Fase 4 sem `git init` — código de
+> aplicação e padrões de credenciais acumulados sem histórico desde a Fase 1.
+
+```bash
+if [ ! -d .git ]; then
+  echo "⚠ Repositório sem git. Inicializando..."
+  git init -b main
+  # .gitignore mínimo antes de qualquer commit (evita vazar segredos/artefatos)
+  [ -f .gitignore ] || printf '%s\n' '.env' '*.tfvars' '__pycache__/' '.venv/' 'node_modules/' > .gitignore
+fi
+git rev-parse --is-inside-work-tree && echo "git OK"
+```
+
+Se o `git init` foi executado agora, avisar o usuário e recomendar o primeiro commit
+antes de gerar artefatos do projeto.
+
 ### Step 1 — Install agentcode hooks in this project
 
 Run this bash command to set up `.claude/hooks/` and `settings.json`:
@@ -27,7 +45,8 @@ GLOBAL="$HOME/.claude"
 LOCAL=".claude"
 mkdir -p "$LOCAL/hooks"
 
-for h in mempalace_setup.sh mempalace_save.sh mempalace_precompact.sh; do
+for h in mempalace_setup.sh mempalace_save.sh mempalace_precompact.sh \
+         lesson_timing.sh lesson_capture.sh sync_context_reminder.sh; do
   if [[ -f "$GLOBAL/hooks/$h" ]]; then
     cp "$GLOBAL/hooks/$h" "$LOCAL/hooks/"
     chmod +x "$LOCAL/hooks/$h"
@@ -41,13 +60,23 @@ try:
     cfg = json.load(open(path))
 except:
     cfg = {}
-def hook(cmd):
-    return {"hooks": [{"type": "command", "command": cmd}]}
+def hook(cmd, timeout=None):
+    h = {"type": "command", "command": cmd}
+    if timeout: h["timeout"] = timeout
+    return {"hooks": [h]}
+def have(name):
+    return os.path.exists(os.path.join(hooks, name))
 cfg["hooks"] = {
     "SessionStart": [hook(f'bash "{hooks}/mempalace_setup.sh" || true')],
     "Stop":         [hook(f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_save.sh" || true')],
     "PreCompact":   [hook(f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_precompact.sh" || true')],
 }
+if have("sync_context_reminder.sh"):
+    cfg["hooks"]["Stop"].append(hook(f'bash "{hooks}/sync_context_reminder.sh" || true', 15))
+if have("lesson_timing.sh"):
+    cfg["hooks"]["PreToolUse"] = [hook(f'bash "{hooks}/lesson_timing.sh" || true', 10)]
+if have("lesson_capture.sh"):
+    cfg["hooks"]["PostToolUse"] = [hook(f'bash "{hooks}/lesson_capture.sh" || true', 15)]
 json.dump(cfg, open(path, "w"), indent=2)
 PY
 echo "hooks OK"
