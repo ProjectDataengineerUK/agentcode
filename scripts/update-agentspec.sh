@@ -198,7 +198,13 @@ lesson_capture = {
     "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lesson_capture.sh\" || true", "timeout": 15}]
 }
 
+lesson_recall = {
+    "matcher": "",
+    "hooks": [{"type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lesson_recall.sh\" || true", "timeout": 15}]
+}
+
 hooks.setdefault("SessionStart", []).append(mempalace_setup)
+hooks.setdefault("SessionStart", []).append(lesson_recall)
 hooks.setdefault("Stop", []).append(mempalace_stop)
 hooks.setdefault("Stop", []).append(sync_context_reminder)
 hooks.setdefault("PreCompact", []).append(mempalace_precompact)

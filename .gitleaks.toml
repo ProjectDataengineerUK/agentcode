@@ -1,0 +1,21 @@
+# gitleaks config — agentcode
+# Extends the default ruleset; allowlists doc/KB examples that intentionally
+# show placeholder credentials (redaction tests, KB patterns).
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Exemplos intencionais em docs, KBs e testes de redação"
+paths = [
+  '''tests/test_hooks\.sh''',
+  '''\.claude/kb/.*\.md''',
+  '''\.claude/skills/.*\.md''',
+  '''CHANGELOG\.md''',
+]
+regexes = [
+  '''REDACTED''',
+  '''sk_live_0123456789abcdef00''',
+  '''ghp_AAAAbbbbCCCCddddEEEE1234''',
+  '''hunter2''',
+]

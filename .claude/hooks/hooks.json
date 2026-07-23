@@ -18,6 +18,16 @@
             "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/mempalace_setup.sh\" || true"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/lesson_recall.sh\" || true",
+            "timeout": 15
+          }
+        ]
       }
     ],
     "Stop": [

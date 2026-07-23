@@ -80,6 +80,8 @@ add_hook("SessionStart", f"bash {qhooks}/mempalace_setup.sh || true")
 add_hook("Stop",         f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_save.sh || true")
 add_hook("PreCompact",   f"command -v mempalace > /dev/null 2>&1 && bash {qhooks}/mempalace_precompact.sh || true")
 
+if have("lesson_recall.sh"):
+    add_hook("SessionStart", f"bash {qhooks}/lesson_recall.sh || true")
 if have("sync_context_reminder.sh"):
     add_hook("Stop", f"bash {qhooks}/sync_context_reminder.sh || true")
 if have("lesson_timing.sh"):

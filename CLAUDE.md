@@ -83,7 +83,7 @@ For high DataOps + LLMOps maturity projects, start from `.agentcodex/maturity/ma
 │   ├── architect/        (8 — agentspec OWNED)
 │   ├── cloud/            (10 — agentspec OWNED)
 │   ├── data-engineering/ (24 — 15 agentspec + 9 agentcode extensions)
-│   ├── dev/              (4 — agentspec OWNED)
+│   ├── dev/              (5 — 4 agentspec OWNED + interview-coach AGENTCODE)
 │   ├── platform/         (6 — agentspec OWNED)
 │   ├── python/           (6 — agentspec OWNED)
 │   ├── test/             (3 — agentspec OWNED)
@@ -224,6 +224,11 @@ O mempalace é **auto-instalado** na primeira sessão via SessionStart hook:
 | `PreToolUse` | `lesson_timing.sh` | Registra t0 de cada tool call (detecção de slow_op) |
 | `PostToolUse` | `lesson_capture.sh` | LESSON_LEARNED (portado do data-agents v2.1.0): captura lições em triggers `error`/`slow_op` para `~/.mempalace/lessons/`, cap de 50/sessão |
 | `Stop` | `sync_context_reminder.sh` | Detecta drift: SHIPPED/BUILD_REPORT mais novo que CLAUDE.md → pede `/sync-context` (1x por artefato) |
+| `SessionStart` | `lesson_recall.sh` | Injeta as lições recentes (30d, dedup, recorrentes primeiro) como contexto — funciona sem mempalace |
+
+Comandos relacionados: `/lessons` (ver/gerenciar lições), `/health` (auto-diagnóstico do plugin),
+`/kb-search` (busca nos KBs). Manutenção: `scripts/update-references.sh [--pull]` sincroniza os
+6 repos de referência; `tests/test_hooks.sh` roda a regressão dos hooks (também no CI).
 
 **Auto-install**: tenta `uv pip install mempalace` → `pip3 install mempalace` → `pip install mempalace`. Falha silenciosa se não houver Python/pip — hooks continuam funcionando sem memória.
 

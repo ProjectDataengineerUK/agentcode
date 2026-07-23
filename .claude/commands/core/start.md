@@ -46,7 +46,7 @@ LOCAL=".claude"
 mkdir -p "$LOCAL/hooks"
 
 for h in mempalace_setup.sh mempalace_save.sh mempalace_precompact.sh \
-         lesson_timing.sh lesson_capture.sh sync_context_reminder.sh; do
+         lesson_timing.sh lesson_capture.sh lesson_recall.sh sync_context_reminder.sh; do
   if [[ -f "$GLOBAL/hooks/$h" ]]; then
     cp "$GLOBAL/hooks/$h" "$LOCAL/hooks/"
     chmod +x "$LOCAL/hooks/$h"
@@ -75,6 +75,8 @@ def have(name):
 add("SessionStart", f'bash "{hooks}/mempalace_setup.sh" || true')
 add("Stop",         f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_save.sh" || true')
 add("PreCompact",   f'command -v mempalace > /dev/null 2>&1 && bash "{hooks}/mempalace_precompact.sh" || true')
+if have("lesson_recall.sh"):
+    add("SessionStart", f'bash "{hooks}/lesson_recall.sh" || true', 15)
 if have("sync_context_reminder.sh"):
     add("Stop", f'bash "{hooks}/sync_context_reminder.sh" || true', 15)
 if have("lesson_timing.sh"):

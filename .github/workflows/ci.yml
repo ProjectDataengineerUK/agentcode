@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    name: Build validation + hook tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Shell syntax (bash -n)
+        run: |
+          find .claude/hooks scripts tests -name "*.sh" -print0 | xargs -0 -n1 bash -n
+
+      - name: JSON validity (hooks, plugin, agentcodex configs)
+        run: |
+          python3 - <<'PY'
+          import json, glob, sys
+          bad = []
+          for p in (glob.glob(".claude/hooks/*.json")
+                    + glob.glob(".claude-plugin/*.json")
+                    + glob.glob(".agentcodex/*.json")):
+              try:
+                  json.load(open(p))
+              except Exception as e:
+                  bad.append(f"{p}: {e}")
+          if bad:
+              print("\n".join(bad)); sys.exit(1)
+          print("all JSON valid")
+          PY
+
+      - name: Plugin build validation
+        run: bash scripts/validate-build.sh
+
+      - name: Hook regression suite
+        run: bash tests/test_hooks.sh
+
+      - name: Hook references resolve
+        run: |
+          python3 - <<'PY'
+          import json, os, re, sys
+          d = json.load(open(".claude/hooks/hooks.json"))
+          missing = []
+          for entries in d["hooks"].values():
+              for e in entries:
+                  for h in e["hooks"]:
+                      for m in re.findall(r"\$\{CLAUDE_PLUGIN_ROOT\}/([^\"\s]+)", h["command"]):
+                          if not os.path.exists(".claude/" + m):
+                              missing.append(m)
+          if missing:
+              print("missing hook targets:", missing); sys.exit(1)
+          print("all hook references resolve")
+          PY
+
+  gitleaks:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

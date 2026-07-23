@@ -37,8 +37,12 @@ SDD_DIR="$PROJ/.claude/sdd"
 
 # Artefato SDD de entrega mais recente (POSIX: -printf é GNU-only e quebraria
 # no macOS — usar find -newer + ls -t para ordenar)
-NEWEST_FILE=$(find "$SDD_DIR" \( -name "SHIPPED_*.md" -o -name "BUILD_REPORT_*.md" \) \
-    -newer "$CLAUDE_MD" 2>/dev/null | head -50 | tr '\n' '\0' | xargs -0 ls -t 2>/dev/null | head -1)
+CANDIDATES=$(find "$SDD_DIR" \( -name "SHIPPED_*.md" -o -name "BUILD_REPORT_*.md" \) \
+    -newer "$CLAUDE_MD" 2>/dev/null | head -50)
+# Guarda de vazio ANTES do xargs: sem ela, `xargs -0 ls -t` sem argumentos
+# listaria o cwd e produziria um falso positivo de drift.
+[ -z "$CANDIDATES" ] && { echo "{}"; exit 0; }
+NEWEST_FILE=$(printf '%s\n' "$CANDIDATES" | tr '\n' '\0' | xargs -0 ls -t 2>/dev/null | head -1)
 [ -z "$NEWEST_FILE" ] && { echo "{}"; exit 0; }
 
 # Anti-nag: já lembramos sobre este artefato? (cksum é POSIX; md5sum é GNU-only)

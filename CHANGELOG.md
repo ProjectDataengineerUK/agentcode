@@ -5,6 +5,40 @@ Format: `[date] agentspec-version | description`
 
 ---
 
+## [2026-07-22] — v1.1.0 — Reference Sync + Lessons System + Audit
+
+### Added
+- **agentspec v3.2+ sync**: 11 novas skills (6 `sdd-*` por fase, component-model,
+  kb-build, github-cr-*), `tools/spec-linter` + `spec-judge`, build autônomo
+- **16 skills ECC** (upstream affaan-m/everything-claude-code): python-testing,
+  fastapi-patterns, postgres-patterns, api-design, eval-harness, e mais
+- **premium-presentations** (bruno-rv, MIT): skill de decks HTML + `/present-*`
+- **Sistema LESSON_LEARNED** (portado do data-agents v2.1.0): hooks
+  `lesson_timing.sh`/`lesson_capture.sh` (captura em triggers error/slow_op,
+  redação de segredos) + `lesson_recall.sh` (injeção no SessionStart) + `/lessons`
+- **agentcodex CLI tooling**: 68 scripts + dispatcher — `/preflight`,
+  `/databricks-readiness`, `/stack-detect` executáveis
+- **KBs de lições reais**: `known-incidents.md` (9 incidentes de produção),
+  `kafka-schema-registry-patterns.md`, `terraform-anti-hallucination.md`,
+  `project-lessons.md` (19 padrões Python), constituição §11 (TODO-VALIDAR)
+- **Hook anti-drift** `sync_context_reminder.sh`: SHIPPED/BUILD_REPORT mais novo
+  que CLAUDE.md → pede `/sync-context`
+- **/start Step 0**: git init + .gitignore obrigatórios antes de artefatos
+- **CI (GitHub Actions)**: validate-build, testes de hooks, bash -n, JSON,
+  referências de hooks, gitleaks
+- **tests/test_hooks.sh**: suite de regressão (18 cenários)
+- **scripts/update-references.sh**: sincronização dos 6 repos de referência
+
+### Fixed (auditoria de segurança/lógica)
+- lesson_capture: E2BIG com payloads >128KB perdia lições (input via temp file)
+- Layout lessons/{buffer,timing,archive} — miner não re-ingere lixo/duplicatas
+- install-global e /start não sobrescrevem mais hooks existentes do usuário
+- sync_context_reminder: portabilidade macOS (find/cksum POSIX), caminho saneado
+  na reason, guarda de vazio no xargs (falso positivo de drift)
+- Redação de segredos na evidência de lições (connection strings, tokens, PEM)
+
+---
+
 ## [2026-05-08] — v1.0.0 — Initial Build
 
 ### Sources merged
